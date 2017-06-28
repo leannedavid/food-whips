@@ -1,5 +1,10 @@
 package com.example.android.foodwhips;
+/*
 
+Tasked with creating basic layout for homepage
+
+
+*/
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.AsyncTask;
