@@ -21,20 +21,21 @@ public final class NetworkUtils {
 
     /* Query parameters here */
     private final static String QUERY_PARAM_APP_ID = "_app_id";
-    private final static String appid = " insert app id here ";
+    private final static String appid = "ad09ae93";
 
     private final static String QUERY_PARAM_APPKEY = "_app_key";
-    private final static String appkey = " insert app key here ";
+    private final static String appkey = "14a1b2916b6c7d43e8a059c3d1950be3";
 
     /* Need to add something to accept third / multiple parameters */
     private final static String QUERY_PARAM_NAME = "q";
-    private final static String param_query = "onion+soup";
+   // private final static String param_query = "";
 
-    public static URL buildUrl() {
+    public static URL buildUrl(String search) {
+        search.replaceAll("\\s+","+");
         Uri builtUri = Uri.parse(NEWS_BASE_URL).buildUpon().
                 appendQueryParameter(QUERY_PARAM_APP_ID, appid).
                 appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
-                appendQueryParameter(QUERY_PARAM_NAME, param_query).
+                appendQueryParameter(QUERY_PARAM_NAME, search).
                 build();
 
         URL url = null;
