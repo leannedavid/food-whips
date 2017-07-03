@@ -1,101 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:outlineProvider="bounds">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <!-- Made edits here-->
+        <EditText
+            android:id="@+id/search_text"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/colorPrimary"
-            android:outlineProvider="bounds">
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:background="@color/white"
+            android:hint="@string/search_hint"
+            android:layout_weight="40"/>
 
-            <android.support.v4.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-
-            <EditText
-                android:id="@+id/search_text"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:inputType="text"
-                android:background="@color/white"
-                android:maxLines="1"
-                android:text="Search recipes"
-                android:layout_weight="40"/>
-
-            <Button
-                android:id="@+id/search_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search"/>
-
-            <android.support.v4.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/popular_tab"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Popular"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:onClick="onClickTab1"
-                android:clickable="true"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="#000000"
-                android:background="@drawable/back"/>
-            <TextView
-                android:id="@+id/new_tab"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="New"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:onClick="onClickTab2"
-                android:clickable="true"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="#000000"
-                android:background="@drawable/back"/>
-            <TextView
-                android:id="@+id/favorites_tab"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Favorites"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:onClick="onClickTab3"
-                android:clickable="true"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="#000000"
-                android:background="@drawable/back"/>
+            android:minHeight="18dp"
+            android:textColor="@color/white"
+            android:text="@string/search_text"/>
 
-        </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/food_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </ScrollView>
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/popular_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/popular_text"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:onClick="onClickTab1"
+            android:clickable="true"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@drawable/back"/>
+        <TextView
+            android:id="@+id/new_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/new_text"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:onClick="onClickTab2"
+            android:clickable="true"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@drawable/back"/>
+        <TextView
+            android:id="@+id/favorites_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/favorites_text"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:onClick="onClickTab3"
+            android:clickable="true"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@drawable/back"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/food_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
+</LinearLayout>
 

@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">food-whips</string>
+    <string name="app_name">FOOD WHIPS</string>
+    <string name="random_text">Random</string>
+    <string name="search_text">Search</string>
+    <string name="search_hint">Search a recipe here.</string>
 
-    <string name="action_refresh">Refresh</string>
+    <string name="search_recipe_placeholder">Enter a recipe.</string>
+
+    <string name="popular_text">popular</string>
+    <string name="new_text">new</string>
+    <string name="favorites_text">favorites</string>
 </resources>
