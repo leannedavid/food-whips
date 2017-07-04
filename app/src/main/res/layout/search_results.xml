@@ -8,49 +8,53 @@
         android:id="@+id/recipe_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:src="@drawable/template"
+        android:padding="10dp"
         />
 
     <TextView
         android:id="@+id/recipe_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="14sp"/>
+        android:paddingLeft="10dp"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/recipe_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:paddingLeft="18sp"
+        android:paddingBottom="18sp"
+        android:textSize="13sp"
         />
-
-    <TextView
-        android:id="@+id/recipe_source"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="10sp"/>
 
     <TextView
         android:id="@+id/recipe_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="10sp"/>
+        android:paddingLeft="18sp"
+        android:textSize="13sp"/>
 
     <TextView
         android:id="@+id/recipe_courses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="10sp"/>
+        android:paddingLeft="18sp"
+        android:textSize="13sp"/>
 
     <TextView
         android:id="@+id/recipe_cuisines"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="10sp"/>
+        android:paddingLeft="18sp"
+        android:textSize="13sp"
+        android:paddingBottom="10dp" />
+
+
+    <!-- Equivalent of <hr/> separator for each article -->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="15dp"
+        android:background="@color/white"/>
 
 </LinearLayout>
