@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/recipe_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/img_width"
+        android:layout_height="@dimen/img_height"
         android:src="@drawable/template"
         android:padding="10dp"
         />
@@ -29,31 +29,30 @@
             android:id="@+id/recipe_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="20dp"
-            android:textSize="13sp"
+            android:drawablePadding="@dimen/search_results_padding"
+            android:textSize="@dimen/search_results_details"
             />
 
         <TextView
             android:id="@+id/recipe_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="20dp"
-            android:textSize="13sp"/>
+            android:drawablePadding="@dimen/search_results_padding"
+            android:textSize="@dimen/search_results_details"/>
 
         <TextView
             android:id="@+id/recipe_courses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="20dp"
-            android:textSize="13sp"/>
+            android:drawablePadding="@dimen/search_results_padding"
+            android:textSize="@dimen/search_results_details"/>
 
         <TextView
             android:id="@+id/recipe_cuisines"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="20dp"
-            android:textSize="13sp"
-            android:maxLines="2"
+            android:drawablePadding="@dimen/search_results_padding"
+            android:textSize="@dimen/search_results_details"
             android:paddingBottom="10dp" />
     </LinearLayout>
 

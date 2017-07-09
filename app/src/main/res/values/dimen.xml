@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="img_width">140dp</dimen>
+    <dimen name="img_height">140dp</dimen>
+    <dimen name="search_results_details">13sp</dimen>
+    <dimen name="search_results_padding">20dp</dimen>
+
+</resources>

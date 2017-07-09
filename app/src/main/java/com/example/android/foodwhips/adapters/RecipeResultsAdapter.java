@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.android.foodwhips.R;
 import com.example.android.foodwhips.models.Recipe;
+import com.example.android.foodwhips.utilities.ConversionUtils;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -54,7 +55,6 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
         RecipeHolder holder = new RecipeHolder(view);
 
         return holder;
-
     }
 
     //Displays the data info of an article at specified position given
@@ -68,35 +68,6 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
     public int getItemCount() {
         return recipeList.size();
     }
-
-
-    public String secondsToHrsMins(String timeInSecs){
-        String finalTime = "";
-        int time = Integer.parseInt(timeInSecs);
-        time = Math.round(time/60);
-        finalTime = Integer.toString(time) + " minutes";
-
-        if(time > 60){
-            int hr = time / 60;
-            int min = (time % 60);
-
-            finalTime = Integer.toString(hr) +
-                    (hr > 1 ? " hours and " : " hour and ") +
-                    Integer.toString(min) +
-                    (min > 1 ? " minutes" : " minute");
-        }
-        return finalTime;
-    }
-
-    public String starRating(String rating){
-        String stars = "";
-        for(int i = 0; i < Integer.parseInt(rating); i++){
-            stars += "★";
-        }
-
-        return stars;
-    }
-
 
     public class RecipeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView mFoodImage;
@@ -118,7 +89,6 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
             mCuisinesText = (TextView) view.findViewById(R.id.recipe_cuisines);
 
             view.setOnClickListener(this);
-
         }
 
         public void bind(int position) {
@@ -126,8 +96,8 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
 
             new FetchImageTask(mFoodImage).execute(recipe.getImg());
             mRecipeNameText.setText(recipe.getRecipeName().toUpperCase());
-            mRatingText.setText("Rating: " + starRating(recipe.getRating()));
-            mTimeTakenText.setText("Time: " + secondsToHrsMins(recipe.getTimeInSecs()));
+            mRatingText.setText("Rating: " + ConversionUtils.starRating(recipe.getRating()));
+            mTimeTakenText.setText("Time: " + ConversionUtils.secondsToHrsMins(recipe.getTimeInSecs()));
 
             if (recipe.isCoursesEmpty() == false) {
                 mCoursesText.setText("Course(s): " + recipe.printCourses());
@@ -143,8 +113,6 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
             int pos = getAdapterPosition();
             listener.onRecipeClick(pos);
         }
-
-
 
         private class FetchImageTask extends AsyncTask<String, Void, Bitmap> {
             ImageView image;
@@ -171,6 +139,5 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
                 image.setImageBitmap(img);
             }
         }
-
     }
 }

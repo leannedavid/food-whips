@@ -36,8 +36,6 @@ import java.util.ArrayList;
 import static com.example.android.foodwhips.R.drawable.back;
 
 public class MainActivity extends AppCompatActivity {
-
-    private TextView mFoodTextView;
     private TextView mEditView;
     private TextView mTab1;
     private TextView mTab2;
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(startAdapter);
 
-
         bar = (ProgressBar) findViewById(R.id.progressBar);
 
         mButtonSearch = (Button)findViewById(R.id.search_button);
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         mTab1 = (TextView)findViewById(R.id.popular_tab);
         mTab2 = (TextView)findViewById(R.id.new_tab);
         mTab3 = (TextView)findViewById(R.id.favorites_tab);
-        //mFoodTextView = (TextView) findViewById(R.id.food_data);
+
         mButtonSearch.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -96,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute(){
             bar.setVisibility(View.VISIBLE);
         }
-
 
         @Override
         protected ArrayList<Recipe> doInBackground(String... params) {
@@ -133,8 +129,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
