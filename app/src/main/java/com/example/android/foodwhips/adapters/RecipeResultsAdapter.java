@@ -1,16 +1,22 @@
 package com.example.android.foodwhips.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.annotation.IntDef;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.foodwhips.R;
 import com.example.android.foodwhips.models.Recipe;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -64,11 +70,22 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
     }
 
 
-    public String secondstoMins(String timeinSecs){
-        int time = Integer.parseInt(timeinSecs);
+    public String secondsToHrsMins(String timeInSecs){
+        String finalTime = "";
+        int time = Integer.parseInt(timeInSecs);
         time = Math.round(time/60);
+        finalTime = Integer.toString(time) + " minutes";
 
-        return Integer.toString(time);
+        if(time > 60){
+            int hr = time / 60;
+            int min = (time % 60);
+
+            finalTime = Integer.toString(hr) +
+                    (hr > 1 ? " hours and " : " hour and ") +
+                    Integer.toString(min) +
+                    (min > 1 ? " minutes" : " minute");
+        }
+        return finalTime;
     }
 
     public String starRating(String rating){
@@ -82,6 +99,7 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
 
 
     public class RecipeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView mFoodImage;
         TextView mRecipeNameText;
         TextView mRatingText;
         TextView mTimeTakenText;
@@ -92,6 +110,7 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
             super(view);
 
             //Getting references of the id's
+            mFoodImage = (ImageView) view.findViewById(R.id.recipe_image);
             mRecipeNameText = (TextView) view.findViewById(R.id.recipe_name);
             mRatingText = (TextView) view.findViewById(R.id.recipe_rating);
             mTimeTakenText = (TextView) view.findViewById(R.id.recipe_time);
@@ -105,9 +124,10 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
         public void bind(int position) {
             Recipe recipe = recipeList.get(position);
 
+            new FetchImageTask(mFoodImage).execute(recipe.getImg());
             mRecipeNameText.setText(recipe.getRecipeName().toUpperCase());
             mRatingText.setText("Rating: " + starRating(recipe.getRating()));
-            mTimeTakenText.setText("Time: " + secondstoMins(recipe.getTimeInSecs()) + " minutes");
+            mTimeTakenText.setText("Time: " + secondsToHrsMins(recipe.getTimeInSecs()));
 
             if (recipe.isCoursesEmpty() == false) {
                 mCoursesText.setText("Course(s): " + recipe.printCourses());
@@ -123,5 +143,34 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
             int pos = getAdapterPosition();
             listener.onRecipeClick(pos);
         }
+
+
+
+        private class FetchImageTask extends AsyncTask<String, Void, Bitmap> {
+            ImageView image;
+
+            public FetchImageTask(ImageView mImage) {
+                this.image = mImage;
+            }
+
+            @Override
+            protected Bitmap doInBackground(String... urls){
+                String img_url = urls[0];
+                Bitmap icon = null;
+                try{
+                    InputStream in = new URL(img_url).openStream();
+                    icon = BitmapFactory.decodeStream(in);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                return icon;
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap img){
+                image.setImageBitmap(img);
+            }
+        }
+
     }
 }

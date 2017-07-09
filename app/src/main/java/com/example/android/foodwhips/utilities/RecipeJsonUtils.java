@@ -65,7 +65,6 @@ public class RecipeJsonUtils {
 
             //RECIPE COURSES
             ArrayList<String> coursesArrayList = new ArrayList<>();
-            //int coursesLength = (courses != null ? courses.length() : 0);
 
             if(attributes.has(RECIPE_COURSES)) {
                 JSONArray courses = attributes.getJSONArray(RECIPE_COURSES);
@@ -75,11 +74,8 @@ public class RecipeJsonUtils {
             }
             String[] coursesList = coursesArrayList.toArray(new String[coursesArrayList.size()]);
 
-
-
             //RECIPE CUISINES
             ArrayList<String> cuisineArrayList = new ArrayList<>();
-            //int cuisinesLength = (cuisines != null ? cuisines.length() : 0);
 
             if(attributes.has(RECIPE_CUISINES)) {
                 JSONArray cuisines = attributes.getJSONArray(RECIPE_CUISINES);
@@ -89,8 +85,8 @@ public class RecipeJsonUtils {
             }
             String[] cuisineList = cuisineArrayList.toArray(new String[cuisineArrayList.size()]);
 
-
-            Recipe recipe = new Recipe(img, source, ingredientsList, id, name, timeTaken, rating, coursesList, cuisineList);
+            Recipe recipe = new Recipe(img, source, ingredientsList, id, name, timeTaken, rating,
+                    coursesList, cuisineList);
 
             recipeResults.add(recipe);
         }

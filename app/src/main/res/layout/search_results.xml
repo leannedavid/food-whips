@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -12,49 +12,49 @@
         android:padding="10dp"
         />
 
-    <TextView
-        android:id="@+id/recipe_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:textSize="20dp"/>
-
-    <TextView
-        android:id="@+id/recipe_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="18sp"
-        android:paddingBottom="18sp"
-        android:textSize="13sp"
-        />
-
-    <TextView
-        android:id="@+id/recipe_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="18sp"
-        android:textSize="13sp"/>
-
-    <TextView
-        android:id="@+id/recipe_courses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="18sp"
-        android:textSize="13sp"/>
-
-    <TextView
-        android:id="@+id/recipe_cuisines"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="18sp"
-        android:textSize="13sp"
-        android:paddingBottom="10dp" />
-
-
-    <!-- Equivalent of <hr/> separator for each article -->
-    <View
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="15dp"
-        android:background="@color/white"/>
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/recipe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:paddingTop="7dp"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/recipe_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/recipe_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/recipe_courses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/recipe_cuisines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:textSize="13sp"
+            android:maxLines="2"
+            android:paddingBottom="10dp" />
+    </LinearLayout>
 
 </LinearLayout>
