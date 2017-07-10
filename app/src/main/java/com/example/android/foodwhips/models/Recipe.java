@@ -7,14 +7,17 @@ package com.example.android.foodwhips.models;
 public class Recipe {
     private String img;
     private String sourceDisplayName;
-    private String ingredients[];
+    private String[] ingredients;
     private String id;
     private String recipeName;
     private String timeInSecs;
     private String rating;
+    private String[] courses;
+    private String[] cuisines;
+
 
     public Recipe(String img, String sourceDisplayName, String[] ingredients, String id,
-                  String recipeName, String timeInSecs, String rating) {
+                  String recipeName, String timeInSecs, String rating, String[] courses, String[] cuisines) {
         this.img = img;
         this.sourceDisplayName = sourceDisplayName;
         this.ingredients = ingredients;
@@ -22,6 +25,8 @@ public class Recipe {
         this.recipeName = recipeName;
         this.timeInSecs = timeInSecs;
         this.rating = rating;
+        this.courses = courses;
+        this.cuisines = cuisines;
     }
 
     public String getImg() {
@@ -42,6 +47,14 @@ public class Recipe {
 
     public String[] getIngredients() {
         return ingredients;
+    }
+
+    public String printIngredients() {
+        String list = "";
+        for(int i = 0; i < ingredients.length; i++){
+            list += ingredients[i] + (i < ingredients.length - 1 ? ", " : "");
+        }
+        return list;
     }
 
     public void setIngredients(String[] ingredients) {
@@ -78,5 +91,48 @@ public class Recipe {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public String[] getCourses() {
+        return courses;
+    }
+
+    public void setCourses() {
+        this.courses = courses;
+    }
+
+    public String printCourses(){
+        String list = "";
+        for(int i = 0; i < courses.length; i++){
+            list += courses[i] + (i < courses.length - 1 ? ", " : "");
+        }
+        return list;
+    }
+
+    public boolean isCoursesEmpty(){
+        if (courses == null || courses.length == 0) { return true; }
+        return false;
+    }
+
+    public String[] getCuisines(){
+        return cuisines;
+    }
+
+
+    public void setCuisines(){
+        this.cuisines = cuisines;
+    }
+
+    public String printCuisines() {
+        String list = "";
+        for(int i = 0; i < cuisines.length; i++){
+            list += cuisines[i] + (i < cuisines.length - 1 ? ", " : "");
+        }
+        return list;
+    }
+
+    public boolean isCuisinesEmpty(){
+        if (cuisines == null || cuisines.length == 0) { return true; }
+        return false;
     }
 }

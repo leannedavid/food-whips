@@ -1,56 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/recipe_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:layout_width="@dimen/img_width"
+        android:layout_height="@dimen/img_height"
+        android:src="@drawable/template"
+        android:padding="10dp"
         />
 
-    <TextView
-        android:id="@+id/recipe_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="14sp"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/recipe_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        />
+        <TextView
+            android:id="@+id/recipe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:paddingTop="7dp"
+            android:textSize="16dp"/>
 
-    <TextView
-        android:id="@+id/recipe_source"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="10sp"/>
+        <TextView
+            android:id="@+id/recipe_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/search_results_padding"
+            android:textSize="@dimen/search_results_details"
+            />
 
-    <TextView
-        android:id="@+id/recipe_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="10sp"/>
+        <TextView
+            android:id="@+id/recipe_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/search_results_padding"
+            android:textSize="@dimen/search_results_details"/>
 
-    <TextView
-        android:id="@+id/recipe_courses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="10sp"/>
+        <TextView
+            android:id="@+id/recipe_courses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/search_results_padding"
+            android:textSize="@dimen/search_results_details"/>
 
-    <TextView
-        android:id="@+id/recipe_cuisines"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="10sp"/>
+        <TextView
+            android:id="@+id/recipe_cuisines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/search_results_padding"
+            android:textSize="@dimen/search_results_details"
+            android:paddingBottom="10dp" />
+    </LinearLayout>
 
 </LinearLayout>

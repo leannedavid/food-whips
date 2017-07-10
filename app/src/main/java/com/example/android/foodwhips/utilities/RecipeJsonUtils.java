@@ -1,0 +1,95 @@
+package com.example.android.foodwhips.utilities;
+
+import com.example.android.foodwhips.models.Recipe;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+/* Created by li-en on 7/2/17. */
+
+public class RecipeJsonUtils {
+    private static final String RECIPE_MATCHES = "matches";
+    private static final String RECIPE_IMG = "imageUrlsBySize";
+    private static final String RECIPE_IMG_SIZE_90 = "90";
+    private static final String RECIPE_SOURCE = "sourceDisplayName";
+    private static final String RECIPE_INGREDIENTS = "ingredients";
+    private static final String RECIPE_ID = "id";
+    private static final String RECIPE_NAME = "recipeName";
+    private static final String RECIPE_TIME_TAKEN = "totalTimeInSeconds";
+    private static final String RECIPE_RATING = "rating";
+    private static final String RECIPE_ATTRIBUTES = "attributes";
+    private static final String RECIPE_COURSES = "course";
+    private static final String RECIPE_CUISINES = "cuisine";
+
+
+    public static ArrayList<Recipe> parseJSON(String json) throws JSONException{
+        ArrayList<Recipe> recipeResults = new ArrayList<>();
+        JSONObject main = new JSONObject(json);
+        JSONArray matches = main.getJSONArray(RECIPE_MATCHES);
+
+        for(int i = 0; i < matches.length(); i++){
+            JSONObject match = matches.getJSONObject(i);
+
+            //IMAGE URL
+            JSONObject imgObj = match.getJSONObject(RECIPE_IMG);
+            String img = imgObj.getString(RECIPE_IMG_SIZE_90);
+
+            //RECIPE SOURCE
+            String source = match.getString(RECIPE_SOURCE);
+
+            //INGREDIENTS
+            JSONArray ingredientArrayList = match.getJSONArray(RECIPE_INGREDIENTS);
+            ArrayList<String> ingredients = new ArrayList<>();
+            for(int j = 0; j < ingredientArrayList.length(); j++){
+                ingredients.add(ingredientArrayList.getString(j));
+            }
+            String[] ingredientsList = ingredients.toArray(new String[ingredientArrayList.length()]);
+
+            //RECIPE ID
+            String id = match.getString(RECIPE_ID);
+
+            //RECIPE NAME
+            String name = match.getString(RECIPE_NAME);
+
+            //TIME TAKEN TO MAKE RECIPE
+            String timeTaken = match.getString(RECIPE_TIME_TAKEN);
+
+            //RATING OF THE RECIPE
+            String rating = match.getString(RECIPE_RATING);
+
+            //JSON ATTRIBUTES OF RECIPE (COURSES & CUISINES)
+            JSONObject attributes = match.getJSONObject(RECIPE_ATTRIBUTES);
+
+            //RECIPE COURSES
+            ArrayList<String> coursesArrayList = new ArrayList<>();
+
+            if(attributes.has(RECIPE_COURSES)) {
+                JSONArray courses = attributes.getJSONArray(RECIPE_COURSES);
+                for (int j = 0; j < courses.length(); j++) {
+                    coursesArrayList.add(courses.optString(j));
+                }
+            }
+            String[] coursesList = coursesArrayList.toArray(new String[coursesArrayList.size()]);
+
+            //RECIPE CUISINES
+            ArrayList<String> cuisineArrayList = new ArrayList<>();
+
+            if(attributes.has(RECIPE_CUISINES)) {
+                JSONArray cuisines = attributes.getJSONArray(RECIPE_CUISINES);
+                for (int j = 0; j < cuisines.length(); j++) {
+                    cuisineArrayList.add(cuisines.optString(j));
+                }
+            }
+            String[] cuisineList = cuisineArrayList.toArray(new String[cuisineArrayList.size()]);
+
+            Recipe recipe = new Recipe(img, source, ingredientsList, id, name, timeTaken, rating,
+                    coursesList, cuisineList);
+
+            recipeResults.add(recipe);
+        }
+        return recipeResults;
+    }
+}

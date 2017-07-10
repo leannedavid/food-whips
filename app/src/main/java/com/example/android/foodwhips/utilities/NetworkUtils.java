@@ -17,7 +17,7 @@ import java.util.Scanner;
 public final class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    private static final String NEWS_BASE_URL = "http://api.yummly.com/v1/api/recipes?";
+    private static final String FOOD_BASE_URL = "http://api.yummly.com/v1/api/recipes?";
 
     /* Query parameters here */
     private final static String QUERY_PARAM_APP_ID = "_app_id";
@@ -32,7 +32,8 @@ public final class NetworkUtils {
 
     public static URL buildUrl(String search) {
         search.replaceAll("\\s+","+");
-        Uri builtUri = Uri.parse(NEWS_BASE_URL).buildUpon().
+
+        Uri builtUri = Uri.parse(FOOD_BASE_URL).buildUpon().
                 appendQueryParameter(QUERY_PARAM_APP_ID, appid).
                 appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
                 appendQueryParameter(QUERY_PARAM_NAME, search).
@@ -71,6 +72,4 @@ public final class NetworkUtils {
             urlConnection.disconnect();
         }
     }
-
-
 }
