@@ -3,11 +3,13 @@ package com.example.android.foodwhips;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,24 +55,35 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressBar bar;
 
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Setup toolbar on the activity
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //Setup navigation drawer in activity
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+
+        //RecyclerView
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(startAdapter);
 
+        //Progress Bar
         bar = (ProgressBar) findViewById(R.id.progressBar);
 
+        //Button setup
         mButtonSearch = (Button)findViewById(R.id.search_button);
-        mEditView   = (EditText)findViewById(R.id.search_text);
-        mTab1 = (TextView)findViewById(R.id.popular_tab);
-        mTab2 = (TextView)findViewById(R.id.new_tab);
-        mTab3 = (TextView)findViewById(R.id.favorites_tab);
-
         mButtonSearch.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -82,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
                         loadFoodData();
                     }
                 });
+
+        //EditText setup
+        mEditView   = (EditText)findViewById(R.id.search_text);
+
+        //Tab setup
+        mTab1 = (TextView)findViewById(R.id.popular_tab);
+        mTab2 = (TextView)findViewById(R.id.new_tab);
+        mTab3 = (TextView)findViewById(R.id.favorites_tab);
     }
 
     private void loadFoodData() {
@@ -131,24 +152,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState){
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
         MenuInflater inflater = getMenuInflater();
-        /* Use the inflater's inflate method to inflate our menu layout to this menu */
-        inflater.inflate(R.menu.menu, menu);
-        /* Return true so that the menu is displayed in the Toolbar */
+        inflater.inflate(R.menu.toolbar_ellipsis_option, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.refresh) {
-            loadFoodData();
-            return true;
+        switch (item.getItemId()) {
+            case R.id.information:
+                //Handle information click.
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     public void onClickTab1(View v)
@@ -163,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickTab2(View v)
     {
-        if(mTabInt1){
+        if(mTabInt2){
         }else{
             mTab2.setBackgroundResource(R.drawable.press);
             mTab1.setBackgroundResource(R.drawable.back);
@@ -173,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickTab3(View v)
     {
-        if(mTabInt1){
+        if(mTabInt3){
         }else{
             mTab3.setBackgroundResource(R.drawable.press);
             mTab1.setBackgroundResource(R.drawable.back);
