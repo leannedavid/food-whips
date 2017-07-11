@@ -1,6 +1,6 @@
 package com.example.android.foodwhips.utilities;
 
-import com.example.android.foodwhips.models.Recipe;
+import com.example.android.foodwhips.models.SearchRecipe;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,23 +10,26 @@ import java.util.ArrayList;
 
 /* Created by li-en on 7/2/17. */
 
-public class RecipeJsonUtils {
+public class SearchRecipeJsonUtils {
     private static final String RECIPE_MATCHES = "matches";
+
     private static final String RECIPE_IMG = "imageUrlsBySize";
     private static final String RECIPE_IMG_SIZE_90 = "90";
+
     private static final String RECIPE_SOURCE = "sourceDisplayName";
     private static final String RECIPE_INGREDIENTS = "ingredients";
     private static final String RECIPE_ID = "id";
     private static final String RECIPE_NAME = "recipeName";
     private static final String RECIPE_TIME_TAKEN = "totalTimeInSeconds";
     private static final String RECIPE_RATING = "rating";
+
     private static final String RECIPE_ATTRIBUTES = "attributes";
     private static final String RECIPE_COURSES = "course";
     private static final String RECIPE_CUISINES = "cuisine";
 
 
-    public static ArrayList<Recipe> parseJSON(String json) throws JSONException{
-        ArrayList<Recipe> recipeResults = new ArrayList<>();
+    public static ArrayList<SearchRecipe> parseJSON(String json) throws JSONException{
+        ArrayList<SearchRecipe> recipeResults = new ArrayList<>();
         JSONObject main = new JSONObject(json);
         JSONArray matches = main.getJSONArray(RECIPE_MATCHES);
 
@@ -55,7 +58,10 @@ public class RecipeJsonUtils {
             String name = match.getString(RECIPE_NAME);
 
             //TIME TAKEN TO MAKE RECIPE
-            String timeTaken = match.getString(RECIPE_TIME_TAKEN);
+            String timeTaken = "";
+            if (!match.isNull(RECIPE_TIME_TAKEN)) {
+                timeTaken = match.getString(RECIPE_TIME_TAKEN);
+            }
 
             //RATING OF THE RECIPE
             String rating = match.getString(RECIPE_RATING);
@@ -85,7 +91,7 @@ public class RecipeJsonUtils {
             }
             String[] cuisineList = cuisineArrayList.toArray(new String[cuisineArrayList.size()]);
 
-            Recipe recipe = new Recipe(img, source, ingredientsList, id, name, timeTaken, rating,
+            SearchRecipe recipe = new SearchRecipe(img, source, ingredientsList, id, name, timeTaken, rating,
                     coursesList, cuisineList);
 
             recipeResults.add(recipe);

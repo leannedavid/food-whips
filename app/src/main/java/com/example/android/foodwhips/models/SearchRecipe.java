@@ -4,7 +4,7 @@ package com.example.android.foodwhips.models;
  * Created by li-en on 7/2/17.
  */
 
-public class Recipe {
+public class SearchRecipe {
     private String img;
     private String sourceDisplayName;
     private String[] ingredients;
@@ -16,8 +16,8 @@ public class Recipe {
     private String[] cuisines;
 
 
-    public Recipe(String img, String sourceDisplayName, String[] ingredients, String id,
-                  String recipeName, String timeInSecs, String rating, String[] courses, String[] cuisines) {
+    public SearchRecipe(String img, String sourceDisplayName, String[] ingredients, String id,
+                        String recipeName, String timeInSecs, String rating, String[] courses, String[] cuisines) {
         this.img = img;
         this.sourceDisplayName = sourceDisplayName;
         this.ingredients = ingredients;

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.support.annotation.IntDef;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.foodwhips.R;
-import com.example.android.foodwhips.models.Recipe;
+import com.example.android.foodwhips.models.SearchRecipe;
 import com.example.android.foodwhips.utilities.ConversionUtils;
 
 import java.io.InputStream;
@@ -25,11 +24,11 @@ import java.util.ArrayList;
  */
 
 public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdapter.RecipeHolder> {
-    private ArrayList<Recipe> recipeList;
+    private ArrayList<SearchRecipe> recipeList;
     RecipeClickListener listener;
 
     //Constructor of RecipeResults Adapter
-    public RecipeResultsAdapter(ArrayList<Recipe> recipeList, RecipeClickListener listener) {
+    public RecipeResultsAdapter(ArrayList<SearchRecipe> recipeList, RecipeClickListener listener) {
         this.recipeList = recipeList;
         this.listener = listener;
     }
@@ -92,12 +91,15 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
         }
 
         public void bind(int position) {
-            Recipe recipe = recipeList.get(position);
+            SearchRecipe recipe = recipeList.get(position);
 
             new FetchImageTask(mFoodImage).execute(recipe.getImg());
             mRecipeNameText.setText(recipe.getRecipeName().toUpperCase());
             mRatingText.setText("Rating: " + ConversionUtils.starRating(recipe.getRating()));
-            mTimeTakenText.setText("Time: " + ConversionUtils.secondsToHrsMins(recipe.getTimeInSecs()));
+
+            if(!recipe.getTimeInSecs().equals("") || recipe.getTimeInSecs().length() > 0) {
+                mTimeTakenText.setText("Time: " + ConversionUtils.secondsToHrsMins(recipe.getTimeInSecs()));
+            }
 
             if (recipe.isCoursesEmpty() == false) {
                 mCoursesText.setText("Course(s): " + recipe.printCourses());

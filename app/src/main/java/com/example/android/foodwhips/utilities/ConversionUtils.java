@@ -12,9 +12,12 @@ public class ConversionUtils {
             int min = (time % 60);
 
             finalTime = Integer.toString(hr) +
-                    (hr > 1 ? " hours and " : " hour and ") +
-                    Integer.toString(min) +
-                    (min > 1 ? " minutes" : " minute");
+                    (hr > 1 ? " hours" : " hour");
+
+            if(min >= 1) {
+                 finalTime += " and " + Integer.toString(min) +
+                 (min > 1 ? " minutes" : " minute");
+            }
         }
         return finalTime;
     }
