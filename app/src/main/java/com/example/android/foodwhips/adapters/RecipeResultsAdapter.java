@@ -93,7 +93,7 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
         public void bind(int position) {
             SearchRecipe recipe = recipeList.get(position);
 
-            new FetchImageTask(mFoodImage).execute(recipe.getImg());
+            new ConversionUtils.FetchImageTask(mFoodImage).execute(recipe.getImg());
             mRecipeNameText.setText(recipe.getRecipeName().toUpperCase());
             mRatingText.setText("Rating: " + ConversionUtils.starRating(recipe.getRating()));
 
@@ -116,30 +116,6 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
             listener.onRecipeClick(pos);
         }
 
-        private class FetchImageTask extends AsyncTask<String, Void, Bitmap> {
-            ImageView image;
 
-            public FetchImageTask(ImageView mImage) {
-                this.image = mImage;
-            }
-
-            @Override
-            protected Bitmap doInBackground(String... urls){
-                String img_url = urls[0];
-                Bitmap icon = null;
-                try{
-                    InputStream in = new URL(img_url).openStream();
-                    icon = BitmapFactory.decodeStream(in);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                return icon;
-            }
-
-            @Override
-            protected void onPostExecute(Bitmap img){
-                image.setImageBitmap(img);
-            }
-        }
     }
 }

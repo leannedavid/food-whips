@@ -22,10 +22,10 @@ public final class NetworkUtils {
     private static final String GET_RECIPE_PATH = "v1/api/recipe/";
     /* Query parameters here */
     private final static String QUERY_PARAM_APP_ID = "_app_id";
-    private final static String appid = "ad09ae93";
+    private final static String appid = "";
 
     private final static String QUERY_PARAM_APPKEY = "_app_key";
-    private final static String appkey = "3f2689c4a0210e2290e584081ab9dc0e";
+    private final static String appkey = "";
 
     /* Need to add something to accept third / multiple parameters */
     private final static String QUERY_PARAM_NAME = "q";

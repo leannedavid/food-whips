@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FOOD WHIPS</string>
+    <string name="app_name">Food Whips</string>
     <string name="random_text">Random</string>
     <string name="search_text">Search</string>
     <string name="search_hint">Search for a recipe here.</string>
@@ -15,4 +15,7 @@
     <string name="search_ingredients">Search by Ingredients</string>
     <string name="search_cuisine">Search by Cuisine</string>
     <string name="information">Information</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

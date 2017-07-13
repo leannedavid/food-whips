@@ -1,5 +1,6 @@
 package com.example.android.foodwhips;
 
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.android.foodwhips.activities.RecipeDetailsActivity;
 import com.example.android.foodwhips.adapters.RecipeResultsAdapter;
 import com.example.android.foodwhips.models.SearchRecipe;
 import com.example.android.foodwhips.utilities.NetworkUtils;
@@ -133,7 +136,12 @@ public class MainActivity extends AppCompatActivity {
                 RecipeResultsAdapter adapter = new RecipeResultsAdapter(recipeList, new RecipeResultsAdapter.RecipeClickListener(){
                     @Override
                     public void onRecipeClick(int clickedItemIndex){
-                        String name = recipeList.get(clickedItemIndex).getRecipeName();
+                        String recipeId = recipeList.get(clickedItemIndex).getId();
+                        Log.v(TAG, "Le name: " + recipeId);
+
+                        Intent switchAct = new Intent(MainActivity.this, RecipeDetailsActivity.class);
+                        switchAct.putExtra("recipe_id", recipeId);
+                        startActivity(switchAct);
                     }
                 });
                 recyclerView.setAdapter(adapter);

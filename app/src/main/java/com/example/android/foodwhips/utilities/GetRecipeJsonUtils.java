@@ -42,7 +42,7 @@ public class GetRecipeJsonUtils {
         String time = main.getString(GET_TOTAL_TIME);
 
         //GET RECIPE IMAGE ARRAY
-        JSONArray imagesArray = new JSONArray(GET_IMAGES);
+        JSONArray imagesArray = main.getJSONArray(GET_IMAGES);
         String img = "";
         for (int i = 0; i < imagesArray.length(); i++){
             JSONObject imageObj = imagesArray.getJSONObject(i);
