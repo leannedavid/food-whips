@@ -4,10 +4,21 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.foodwhips.fragments.GeneralInfo">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/info_time"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textSize="16sp"
         android:text="@string/hello_blank_fragment" />
+
+    <TextView
+        android:id="@+id/info_courses"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="16sp"
+        android:text="Hello Fragment #1" />
+
+
 
 </FrameLayout>

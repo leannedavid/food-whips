@@ -1,13 +1,20 @@
 package com.example.android.foodwhips.activities;
 
 import android.os.AsyncTask;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TabHost;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.android.foodwhips.R;
+import com.example.android.foodwhips.adapters.FragmentRecipeAdapter;
+import com.example.android.foodwhips.fragments.IngredientsInfo;
 import com.example.android.foodwhips.models.GetRecipe;
 import com.example.android.foodwhips.models.SearchRecipe;
 import com.example.android.foodwhips.utilities.ConversionUtils;
@@ -38,6 +45,27 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_details);
 
+
+        TabHost mTabHost = (TabHost) findViewById(R.id.tabHost);
+        mTabHost.setup();
+
+        TabHost.TabSpec mSpec = mTabHost.newTabSpec("General");
+        mSpec.setContent(R.id.general_info);
+        mSpec.setIndicator("General");
+        mTabHost.addTab(mSpec);
+
+        //add second tab
+        mSpec = mTabHost.newTabSpec("Ingredients");
+        mSpec.setContent(R.id.ingredients_info);
+        mSpec.setIndicator("Ingredients");
+        mTabHost.addTab(mSpec);
+
+
+
+
+
+
+
         mRecipeImage = (ImageView) findViewById(R.id.detail_image);
         mRecipeName = (TextView) findViewById(R.id.detail_name);
         mRecipeRate = (TextView) findViewById(R.id.detail_rating);
@@ -47,6 +75,20 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         mSourceUrl = (TextView) findViewById(R.id.detail_source_link);
 
         mIngredientsView = (TextView) findViewById(R.id.detail_ingredients);
+
+//
+//        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+//        FragmentRecipeAdapter adapter = new FragmentRecipeAdapter(getSupportFragmentManager());
+//        pager.setAdapter(adapter);
+//
+//        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+//        tabs.setupWithViewPager(pager);
+
+
+//        IngredientsInfo ingredients = new IngredientsInfo();
+//        ingredients.setArguments(getIntent().getExtras());
+//        getSupportFragmentManager().beginTransaction().add(R.id.detail_ingredients, ingredients).commit();
+
 
         new FetchRecipeTask().execute();
     }
