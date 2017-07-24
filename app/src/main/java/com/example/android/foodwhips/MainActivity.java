@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.information:
-                //Handle information click.
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -22,6 +22,8 @@
     <string name="yummly_info">The Yummly API is an access library for recipes hosted in the Yummly database; use of the API in the app follows the proper rules and guidelines</string>
     <string name="repo_help">For more information or to report an issue, please visit the repository linked and contact us.</string>
     <string name="yummly_link">For information on the Yummly API visit their website at the linked location -></string>
+    <string name="yummly_anchor">https://developer.yummly.com/</string>
+    <string name="app_version">0.1.1 / Non-Complete</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
