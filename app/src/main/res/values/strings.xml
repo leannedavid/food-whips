@@ -3,18 +3,27 @@
     <string name="random_text">Random</string>
     <string name="search_text">Search</string>
     <string name="search_hint">Search for a recipe here.</string>
-    <string name="popular_text">popular</string>
-    <string name="new_text">new</string>
-    <string name="favorites_text">favorites</string>
+    <string name="popular_text">Popular</string>
+    <string name="new_text">New</string>
+    <string name="favorites_text">Favorites</string>
     <string name="drawer_open">drawer open</string>
     <string name="drawer_close">drawer close</string>
-    <string name="header_title">Search recipes with Food Whips</string>
-    <string name="powered_by">Powered by Yummly API</string>
+    <string name="header_title">Search a variety of recipes.</string>
+    <string name="header_description">Over 5,000,000 to try!</string>
+    <string name="powered_by">Powered by the Yummly API</string>
     <string name="home">Home</string>
     <string name="search_name">Search by Name</string>
     <string name="search_ingredients">Search by Ingredients</string>
     <string name="search_cuisine">Search by Cuisine</string>
-    <string name="information">Information</string>
+    <string name="about">About</string>
+    <string name="developed">Developed by the Weeb Team</string>
+    <string name="repository">https://github.com/leannedavid/food-whips</string>
+    <string name="app_info">Food Whips is an app created by students for the CS 4540 class in Cal State LA.</string>
+    <string name="yummly_info">The Yummly API is an access library for recipes hosted in the Yummly database; use of the API in the app follows the proper rules and guidelines</string>
+    <string name="repo_help">For more information or to report an issue, please visit the repository linked and contact us.</string>
+    <string name="yummly_link">For information on the Yummly API visit their website at the linked location -></string>
+    <string name="yummly_anchor">https://developer.yummly.com/</string>
+    <string name="app_version">0.1.1 / Non-Complete</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
