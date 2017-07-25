@@ -25,7 +25,22 @@
     <string name="yummly_anchor">https://developer.yummly.com/</string>
     <string name="app_version">0.1.1 / Non-Complete</string>
 
+
+    <!-- Filter Activity strings -->
+    <string name="filter_search_hint">Name of food or recipe</string>
+    <string name="filter_text">Ingredient</string>
+    <string name="filter_hint">Ingredient filtered here.</string>
+
+    <!-- Radio Buttons strings -->
+    <string name="include_ingredient">Include</string>
+    <string name="exclude_ingredient">Exclude</string>
+
+    <!-- Add Button for Dynamically adding new layouts -->
+    <string name="add_new_layout">Add</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="title_activity_base">BaseActivity</string>
+
 </resources>
