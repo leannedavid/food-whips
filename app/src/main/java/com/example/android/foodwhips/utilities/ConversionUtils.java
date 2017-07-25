@@ -3,12 +3,21 @@ package com.example.android.foodwhips.utilities;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
+import com.example.android.foodwhips.models.GetRecipe;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
 public class ConversionUtils {
+    static final String TAG = "conversionutls";
+
     public static String secondsToHrsMins(String timeInSecs){
         String finalTime = "";
         int time = Integer.parseInt(timeInSecs);
@@ -63,4 +72,25 @@ public class ConversionUtils {
             image.setImageBitmap(img);
         }
     }
+
+    public static GetRecipe FetchRecipeTask(Bundle stuff){
+        //Bundle bundle = getIntent().getExtras();
+
+        String recipeId = stuff.getString("recipe_id");
+        URL recipeUrl = NetworkUtils.buildUrl(recipeId, 2);
+        GetRecipe specificRecipe = null;
+
+        try {
+            String JsonRecipeDataResponse = NetworkUtils.getResponseFromHttpUrl(recipeUrl);
+            specificRecipe = GetRecipeJsonUtils.parseJSON(JsonRecipeDataResponse);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "THE RECIPE ID: " + recipeId);
+        return specificRecipe;
+    }
+
 }

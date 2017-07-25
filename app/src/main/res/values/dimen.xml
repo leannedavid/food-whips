@@ -8,4 +8,5 @@
     <dimen name="recipe_details_padding">10dp</dimen>
     <dimen name="recipe_details_textSize">12dp</dimen>
 
+    <dimen name="about_padding">8dp</dimen>
 </resources>

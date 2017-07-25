@@ -5,19 +5,45 @@
     tools:context="com.example.android.foodwhips.fragments.GeneralInfo">
 
 
-    <TextView
-        android:id="@+id/info_time"
+    <LinearLayout
+        android:id="@+id/general_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="16sp"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/info_courses"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="16sp"
-        android:text="Hello Fragment #1" />
+        <TextView
+            android:id="@+id/detail_time_taken"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tab1"
+            android:paddingLeft="@dimen/recipe_details_padding"
+            android:textSize="@dimen/recipe_details_textSize" />
+
+        <TextView
+            android:id="@+id/detail_servings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tab1"
+            android:paddingLeft="@dimen/recipe_details_padding"
+            android:textSize="@dimen/recipe_details_textSize" />
+
+        <TextView
+            android:id="@+id/detail_source_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tab1"
+            android:paddingLeft="@dimen/recipe_details_padding"
+            android:textSize="@dimen/recipe_details_textSize" />
+
+        <TextView
+            android:id="@+id/detail_source_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tab1"
+            android:paddingLeft="@dimen/recipe_details_padding"
+            android:textSize="@dimen/recipe_details_textSize" />
+
+    </LinearLayout>
 
 
 

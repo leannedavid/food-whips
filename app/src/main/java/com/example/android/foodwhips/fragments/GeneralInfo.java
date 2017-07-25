@@ -7,105 +7,67 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.android.foodwhips.R;
+import com.example.android.foodwhips.models.GetRecipe;
+import com.example.android.foodwhips.utilities.ConversionUtils;
+import com.example.android.foodwhips.utilities.NetworkUtils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GeneralInfo.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GeneralInfo#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class GeneralInfo extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private ImageView mRecipeImage;
+    private TextView mRecipeName;
+    private TextView mRecipeRate;
+    private TextView mTimeTaken;
+    private TextView mRecipeServings;
+    private TextView mSourceName;
+    private TextView mSourceUrl;
 
     public GeneralInfo() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GeneralInfo.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GeneralInfo newInstance(String param1, String param2) {
-        GeneralInfo fragment = new GeneralInfo();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_general_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_general_info, container, false);
+        mRecipeImage = (ImageView) view.findViewById(R.id.detail_image);
+        mRecipeName = (TextView) view.findViewById(R.id.detail_name);
+        mRecipeRate = (TextView) view.findViewById(R.id.detail_rating);
+        mTimeTaken = (TextView) view.findViewById(R.id.detail_time_taken);
+        mRecipeServings = (TextView) view.findViewById(R.id.detail_servings);
+        mSourceName = (TextView) view.findViewById(R.id.detail_source_name);
+        mSourceUrl = (TextView) view.findViewById(R.id.detail_source_link);
 
-
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+        return view;
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void onStart(){
+        super.onStart();
+
+        //Bundle bundle = getActivity().getIntent().getExtras();
+//        GetRecipe recipe = ConversionUtils.FetchRecipeTask(bundle);
+//
+//        new ConversionUtils.FetchImageTask(mRecipeImage).execute(recipe.getImgUrl());
+//        mRecipeName.setText(recipe.getRecipeName().toUpperCase());
+//        mRecipeRate.setText("Rating: " + recipe.getRating() + "/5");
+//        mTimeTaken.setText("Time: " + recipe.getTotalTime());
+//        mRecipeServings.setText("Serving(s): " + recipe.getServings());
+//        mSourceName.setText("Source: " + recipe.getSourceName());
+//        mSourceUrl.setText("Source Link: " + recipe.getSourceRecipeUrl());
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    @Override
+    public void onResume(){
+        super.onResume();
+
     }
 }

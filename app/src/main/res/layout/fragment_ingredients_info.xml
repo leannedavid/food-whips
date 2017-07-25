@@ -4,11 +4,22 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.foodwhips.fragments.IngredientsInfo">
 
-    <TextView
-        android:id="@+id/info_ingredients"
+    <LinearLayout
+        android:id="@+id/ingredients_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="16sp"
-        android:text="Hello fragment#2" />
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/detail_ingredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tab2"
+                android:paddingLeft="@dimen/recipe_details_padding"
+                android:textSize="@dimen/recipe_details_textSize" />
+        </ScrollView>
+    </LinearLayout>
 
 </FrameLayout>
