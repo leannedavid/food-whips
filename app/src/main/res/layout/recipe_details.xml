@@ -36,16 +36,16 @@
     <ImageView
         android:id="@+id/detail_image"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="250dp"
         android:paddingBottom="20dp"
         android:src="@drawable/template"
         />
 
 
     <TabHost
-        android:id="@+id/tabHost"
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/detail_image">
         
         <TabWidget
@@ -57,18 +57,21 @@
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="62dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
 
-            <FrameLayout
+            <LinearLayout
                 android:id="@+id/general_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/detail_time_taken"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/recipe_details_padding"
                     android:textSize="@dimen/recipe_details_textSize" />
@@ -94,20 +97,24 @@
                     android:paddingLeft="@dimen/recipe_details_padding"
                     android:textSize="@dimen/recipe_details_textSize" />
 
-            </FrameLayout>
+            </LinearLayout>
 
-
-            <FrameLayout
+            <LinearLayout
                 android:id="@+id/ingredients_info"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/detail_ingredients"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/recipe_details_padding"
                     android:textSize="@dimen/recipe_details_textSize" />
-            </FrameLayout>
+                </ScrollView>
+            </LinearLayout>
         </FrameLayout>
 
     </TabHost>

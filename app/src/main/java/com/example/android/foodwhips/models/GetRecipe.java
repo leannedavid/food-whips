@@ -95,7 +95,7 @@ public class GetRecipe {
     public String printIngredients() {
         String list = "";
         for(int i = 0; i < ingredientsList.length; i++){
-            list += ingredientsList[i] + "\n";
+            list += "- " + ingredientsList[i] + "\n";
         }
         return list;
     }

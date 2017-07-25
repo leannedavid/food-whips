@@ -46,7 +46,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.recipe_details);
 
 
-        TabHost mTabHost = (TabHost) findViewById(R.id.tabHost);
+        TabHost mTabHost = (TabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup();
 
         TabHost.TabSpec mSpec = mTabHost.newTabSpec("General");
