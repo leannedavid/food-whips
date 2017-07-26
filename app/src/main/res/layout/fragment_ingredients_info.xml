@@ -16,7 +16,6 @@
                 android:id="@+id/detail_ingredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="tab2"
                 android:paddingLeft="@dimen/recipe_details_padding"
                 android:textSize="@dimen/recipe_details_textSize" />
         </ScrollView>

@@ -18,13 +18,15 @@ import java.util.ArrayList;
 
 import static android.widget.LinearLayout.VERTICAL;
 import static android.widget.LinearLayout.HORIZONTAL;
+
+import com.example.android.foodwhips.activities.BaseActivity;
 import com.example.android.foodwhips.utilities.NetworkUtils;
 
 /**
  * Created by Vincent on 7/10/2017.
  */
 
-public class FilterActivity extends AppCompatActivity {
+public class FilterActivity extends BaseActivity {
 
     private TextView mSearchQuery;
     private TextView mEditView;
@@ -77,6 +79,7 @@ public class FilterActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.MATCH_PARENT);
+
                 ll.setLayoutParams(llParams);
                 // Change to own desire:
                 ll.setPadding(10, 10, 10, 10);
@@ -135,7 +138,7 @@ public class FilterActivity extends AppCompatActivity {
     public void addEditText(LinearLayout ll) {
         EditText et = new EditText(this);
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0);
-        p.weight = 14;
+        p.weight = 1;
         et.setLayoutParams(p);
         et.setHint(R.string.filter_hint);
         et.setTextSize(16);
@@ -146,7 +149,7 @@ public class FilterActivity extends AppCompatActivity {
     public void addRadioButtons(LinearLayout ll) {
         RadioGroup rbg = new RadioGroup(this);
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0);
-        p.weight = 12;
+        p.weight = 3;
         rbg.setLayoutParams(p);
         rbg.setOrientation(HORIZONTAL);
 

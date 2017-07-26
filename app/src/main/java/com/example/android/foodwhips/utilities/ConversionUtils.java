@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class ConversionUtils {
-    static final String TAG = "conversionutls";
+    static final String TAG = "conversionutils";
 
     public static String secondsToHrsMins(String timeInSecs){
         String finalTime = "";
@@ -73,10 +73,10 @@ public class ConversionUtils {
         }
     }
 
-    public static GetRecipe FetchRecipeTask(Bundle stuff){
+    public static GetRecipe FetchRecipeTask(String recipeId){
         //Bundle bundle = getIntent().getExtras();
 
-        String recipeId = stuff.getString("recipe_id");
+       // String recipeId = stuff.getString("recipe_id");
         URL recipeUrl = NetworkUtils.buildUrl(recipeId, 2);
         GetRecipe specificRecipe = null;
 

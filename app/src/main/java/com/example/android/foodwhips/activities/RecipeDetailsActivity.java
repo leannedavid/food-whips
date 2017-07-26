@@ -56,11 +56,13 @@ public class RecipeDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_details);
 
-
-        //drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //View contentView = inflater.inflate(R.layout.recipe_details, null, false);
-        //drawerLayout.addView(contentView, 0);
+        Bundle bundle = this.getIntent().getExtras();
+        String recipeId = bundle.getString("recipe_id");
+        Log.v(TAG, "check if this is sending");
+        Log.v(TAG, "ID IS " + recipeId);
+        //bundle.putString("recipe_id", recipeId);
+        //IngredientsInfo ingInfo = new IngredientsInfo();
+       // ingInfo.setArguments(bundle);
 
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
@@ -71,18 +73,9 @@ public class RecipeDetailsActivity extends BaseActivity {
                 .setIndicator("General"), GeneralInfo.class, null);
 
         mTabHost.addTab(mTabHost.newTabSpec("Ingredients")
-                .setIndicator("Ingredients"), IngredientsInfo.class, null);
+                .setIndicator("Ingredients"), IngredientsInfo.class, bundle);
 
-//        TabHost.TabSpec mSpec = mTabHost.newTabSpec("General");
-//        mSpec.setContent(R.id.general_info);
-//        mSpec.setIndicator("General");
-//        mTabHost.addTab(mSpec);
-//
-//        //add second tab
-//        mSpec = mTabHost.newTabSpec("Ingredients");
-//        mSpec.setContent(R.id.ingredients_info);
-//        mSpec.setIndicator("Ingredients");
-//        mTabHost.addTab(mSpec);
+
 
 //        mRecipeImage = (ImageView) findViewById(R.id.detail_image);
 //        mRecipeName = (TextView) findViewById(R.id.detail_name);
@@ -106,45 +99,6 @@ public class RecipeDetailsActivity extends BaseActivity {
 //        IngredientsInfo ingredients = new IngredientsInfo();
 //        ingredients.setArguments(getIntent().getExtras());
 //        getSupportFragmentManager().beginTransaction().add(R.id.detail_ingredients, ingredients).commit();
-
-
-        //new FetchRecipeTask().execute();
     }
 
-    private class FetchRecipeTask extends AsyncTask<String, Void, GetRecipe> {
-        @Override
-        protected GetRecipe doInBackground(String... params) {
-
-            Bundle bundle = getIntent().getExtras();
-            String recipeId = bundle.getString("recipe_id");
-            URL recipeUrl = NetworkUtils.buildUrl(recipeId, 2);
-            GetRecipe specificRecipe = null;
-
-            try {
-                String JsonRecipeDataResponse = NetworkUtils.getResponseFromHttpUrl(recipeUrl);
-                specificRecipe = GetRecipeJsonUtils.parseJSON(JsonRecipeDataResponse);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            Log.v(TAG, "THE RECIPE ID: " + recipeId);
-            return specificRecipe;
-        }
-
-        @Override
-        protected void onPostExecute(final GetRecipe recipe) {
-            super.onPostExecute(recipe);
-            new ConversionUtils.FetchImageTask(mRecipeImage).execute(recipe.getImgUrl());
-            mRecipeName.setText(recipe.getRecipeName().toUpperCase());
-            mRecipeRate.setText("Rating: " + recipe.getRating() + "/5");
-            mTimeTaken.setText("Time: " + recipe.getTotalTime());
-            mRecipeServings.setText("Serving(s): " + recipe.getServings());
-            mSourceName.setText("Source: " + recipe.getSourceName());
-            mSourceUrl.setText("Source Link: " + recipe.getSourceRecipeUrl());
-
-            mIngredientsView.setText(recipe.printIngredients());
-        }
-    }
 }
