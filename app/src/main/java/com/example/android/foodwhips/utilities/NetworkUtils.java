@@ -72,13 +72,12 @@ public final class NetworkUtils {
 
 
     // New buildURL for each ingredients filter
-//    public static URL buildFilteredUrl(String search, int type, String [] include, String [] exclude) {
-      public static URL buildFilteredUrl(String search, int type, ArrayList<String> include, ArrayList<String> exclude) {
+    public static URL buildFilteredUrl(String search, int type, ArrayList<String> include, ArrayList<String> exclude) {
         search.replaceAll("\\s+","+");
         Uri.Builder builder = new Uri.Builder();
 
         builder.scheme("https").authority("api.yummly.com").appendPath("v1").appendPath("api").
-                appendPath("recipes").appendQueryParameter(QUERY_PARAM_APP_ID, appid).
+                appendPath("recipes").appendQueryParameter(QUERY_PARAM_NAME, search).appendQueryParameter(QUERY_PARAM_APP_ID, appid).
                 appendQueryParameter(QUERY_PARAM_APPKEY, appkey);
 
         for(String s: include){

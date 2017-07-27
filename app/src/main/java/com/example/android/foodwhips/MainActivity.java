@@ -76,27 +76,6 @@ public class MainActivity extends AppCompatActivity {
         //Progress Bar
         bar = (ProgressBar) findViewById(R.id.progressBar);
 
-        //Button setup
-        /*
-        mButtonSearch = (Button)findViewById(R.id.search_button);
-        mButtonSearch.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        String[] included = {"cognac", "nuts"};
-                        String[] excluded = {"orange"};
-
-                        search_query = mEditView.getText().toString();
-//                        foodsUrl = NetworkUtils.buildUrl(search_query, 1);
-                        foodsUrl = NetworkUtils.buildFilteredUrl(search_query, 1, included, excluded);
-                        loadFoodData();
-                    }
-                });
-        */
-        //EditText setup
-        mEditView   = (EditText)findViewById(R.id.search_text);
-
         //Tab setup
         mTab1 = (TextView)findViewById(R.id.popular_tab);
         mTab2 = (TextView)findViewById(R.id.new_tab);
