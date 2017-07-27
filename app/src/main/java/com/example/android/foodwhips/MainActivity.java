@@ -77,19 +77,15 @@ public class MainActivity extends AppCompatActivity {
         bar = (ProgressBar) findViewById(R.id.progressBar);
 
         //Button setup
-
         mButtonSearch = (Button)findViewById(R.id.search_button);
         mButtonSearch.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)
                     {
-                        String[] included = {"cognac", "nuts"};
-                        String[] excluded = {"orange"};
-
                         search_query = mEditView.getText().toString();
                         foodsUrl = NetworkUtils.buildUrl(search_query, 1);
-                       // foodsUrl = NetworkUtils.buildFilteredUrl(search_query, 1, included, excluded);
+
                         loadFoodData();
                     }
                 });

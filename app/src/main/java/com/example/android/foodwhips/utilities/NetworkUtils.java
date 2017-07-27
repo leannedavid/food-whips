@@ -25,10 +25,10 @@ public final class NetworkUtils {
     private static final String GET_RECIPE_PATH = "v1/api/recipe/";
     /* Query parameters here */
     private final static String QUERY_PARAM_APP_ID = "_app_id";
-    private final static String appid = "";
+    private final static String appid = "ad09ae93";
 
     private final static String QUERY_PARAM_APPKEY = "_app_key";
-    private final static String appkey = "";
+    private final static String appkey = "ca4a3cb230d72671a6fc66eeaddc9238";
 
     private final static String QUERY_PARAM_NAME = "q";
     // private final static String param_query = "";
@@ -74,13 +74,12 @@ public final class NetworkUtils {
 
 
     // New buildURL for each ingredients filter
-//    public static URL buildFilteredUrl(String search, int type, String [] include, String [] exclude) {
-      public static URL buildFilteredUrl(String search, int type, ArrayList<String> include, ArrayList<String> exclude) {
+    public static URL buildFilteredUrl(String search, int type, ArrayList<String> include, ArrayList<String> exclude) {
         search.replaceAll("\\s+","+");
         Uri.Builder builder = new Uri.Builder();
 
         builder.scheme("https").authority("api.yummly.com").appendPath("v1").appendPath("api").
-                appendPath("recipes").appendQueryParameter(QUERY_PARAM_APP_ID, appid).
+                appendPath("recipes").appendQueryParameter(QUERY_PARAM_NAME, search).appendQueryParameter(QUERY_PARAM_APP_ID, appid).
                 appendQueryParameter(QUERY_PARAM_APPKEY, appkey);
 
         for(String s: include){
