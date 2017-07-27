@@ -1,55 +1,48 @@
 package com.example.android.foodwhips.activities;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentPagerAdapter;
+
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.app.LoaderManager;
+import android.content.Loader;
+
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
+
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TabHost;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.android.foodwhips.R;
-import com.example.android.foodwhips.adapters.FragmentRecipeAdapter;
 import com.example.android.foodwhips.fragments.GeneralInfo;
 import com.example.android.foodwhips.fragments.IngredientsInfo;
+import com.example.android.foodwhips.fragments.PhotoInfo;
 import com.example.android.foodwhips.models.GetRecipe;
-import com.example.android.foodwhips.models.SearchRecipe;
+
 import com.example.android.foodwhips.utilities.ConversionUtils;
-import com.example.android.foodwhips.utilities.GetRecipeJsonUtils;
-import com.example.android.foodwhips.utilities.NetworkUtils;
+import com.example.android.foodwhips.utilities.RecipeLoader;
 
-import org.json.JSONException;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-
-public class RecipeDetailsActivity extends BaseActivity {
+public class RecipeDetailsActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<GetRecipe>{
+    private FragmentTabHost mTabHost;
     private ImageView mRecipeImage;
     private TextView mRecipeName;
     private TextView mRecipeRate;
-    private TextView mTimeTaken;
-    private TextView mRecipeServings;
-    private TextView mSourceName;
-    private TextView mSourceUrl;
 
-    private TextView mIngredientsView;
-
-    private FragmentTabHost mTabHost;
-    private DrawerLayout drawerLayout;
+    private Button faveButton;
+    private Button picButton;
 
     static final String TAG = "recipedetailsactivity";
+
+    private static final String GENERAL_INFO = "General";
+    private static final String INGREDIENT_INFO = "Ingredients";
+    private static final String PHOTO_INFO = "Photos";
+
+    private static final String INGREDIENTS_VALUE = "ingredients";
+    private static final String RECIPE_TIME_VALUE = "recipe_time";
+    private static final String RECIPE_SERVINGS_VALUE = "recipe_servings";
+    private static final String RECIPE_SOURCE_NAME = "recipe_source_name";
+    private static final String RECIPE_SOURCE_URL = "recipe_source_url";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,45 +53,59 @@ public class RecipeDetailsActivity extends BaseActivity {
         String recipeId = bundle.getString("recipe_id");
         Log.v(TAG, "check if this is sending");
         Log.v(TAG, "ID IS " + recipeId);
-        //bundle.putString("recipe_id", recipeId);
-        //IngredientsInfo ingInfo = new IngredientsInfo();
-       // ingInfo.setArguments(bundle);
 
+        mRecipeImage = (ImageView) findViewById(R.id.detail_image);
+        mRecipeName = (TextView) findViewById(R.id.detail_name);
+        mRecipeRate = (TextView) findViewById(R.id.detail_rating);
+
+        faveButton = (Button) findViewById(R.id.favorite_button);
+        picButton = (Button) findViewById(R.id.pic_button);
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
+        getLoaderManager().initLoader(0, null, this).forceLoad();
 
-        mTabHost.addTab(mTabHost.newTabSpec("General")
-                .setIndicator("General"), GeneralInfo.class, null);
-
-        mTabHost.addTab(mTabHost.newTabSpec("Ingredients")
-                .setIndicator("Ingredients"), IngredientsInfo.class, bundle);
-
-
-
-//        mRecipeImage = (ImageView) findViewById(R.id.detail_image);
-//        mRecipeName = (TextView) findViewById(R.id.detail_name);
-//        mRecipeRate = (TextView) findViewById(R.id.detail_rating);
-//        mTimeTaken = (TextView) findViewById(R.id.detail_time_taken);
-//        mRecipeServings = (TextView) findViewById(R.id.detail_servings);
-//        mSourceName = (TextView) findViewById(R.id.detail_source_name);
-//        mSourceUrl = (TextView) findViewById(R.id.detail_source_link);
-
-//        mIngredientsView = (TextView) findViewById(R.id.detail_ingredients);
-
-//
-//        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-//        FragmentRecipeAdapter adapter = new FragmentRecipeAdapter(getSupportFragmentManager());
-//        pager.setAdapter(adapter);
-//
-//        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-//        tabs.setupWithViewPager(pager);
-
-
-//        IngredientsInfo ingredients = new IngredientsInfo();
-//        ingredients.setArguments(getIntent().getExtras());
-//        getSupportFragmentManager().beginTransaction().add(R.id.detail_ingredients, ingredients).commit();
     }
 
+    @Override
+    public Loader<GetRecipe> onCreateLoader(int id, final Bundle args){
+        Bundle bundle = this.getIntent().getExtras();
+        String recipeId = bundle.getString("recipe_id");
+
+        Log.v(TAG, "THE VALUE OF INSIDE LOADER IS: " + recipeId);
+        return new RecipeLoader(this, recipeId);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<GetRecipe> loader, GetRecipe data){
+        if(data != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString(INGREDIENTS_VALUE, data.printIngredients());
+            bundle.putString(RECIPE_TIME_VALUE, data.getTotalTime());
+            bundle.putString(RECIPE_SERVINGS_VALUE, data.getServings());
+            bundle.putString(RECIPE_SOURCE_NAME, data.getSourceName());
+            bundle.putString(RECIPE_SOURCE_URL, data.getSourceRecipeUrl());
+
+            new ConversionUtils.FetchImageTask(mRecipeImage).execute(data.getImgUrl());
+            mRecipeName.setText(data.getRecipeName().toUpperCase());
+            mRecipeRate.setText("Rating: " + data.getRating() + "/5");
+
+            mTabHost.addTab(mTabHost.newTabSpec(GENERAL_INFO)
+                    .setIndicator(GENERAL_INFO), GeneralInfo.class, bundle);
+
+            mTabHost.addTab(mTabHost.newTabSpec(INGREDIENT_INFO)
+                    .setIndicator(INGREDIENT_INFO), IngredientsInfo.class, bundle);
+
+            mTabHost.addTab(mTabHost.newTabSpec(PHOTO_INFO)
+                    .setIndicator(PHOTO_INFO), PhotoInfo.class, null);
+
+            Log.v(TAG, "SUCCESSFULLY PUT INFO INTO A BUNDLE");
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<GetRecipe> loader){}
+
 }
+

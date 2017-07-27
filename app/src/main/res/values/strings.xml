@@ -42,4 +42,7 @@
 
     <string name="title_activity_base">BaseActivity</string>
 
+    <string name="favorite_button">Favorite</string>
+    <string name="picture_button">Take a Photo</string>
+
 </resources>

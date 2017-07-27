@@ -7,23 +7,11 @@
     android:orientation="vertical"
     tools:context="com.example.android.foodwhips.activities.RecipeDetailsActivity">
 
-    <!--<android.support.design.widget.TabLayout-->
-        <!--android:id="@+id/tabs"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:tabMode="fixed"-->
-        <!--app:tabGravity="fill"/>-->
-
-    <!--<android.support.v4.view.ViewPager-->
-        <!--android:id="@+id/pager"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"/>-->
-
     <TextView
         android:id="@+id/detail_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="7dp"
+        android:padding="5dp"
         android:textSize="26sp" />
 
     <TextView
@@ -31,15 +19,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/recipe_details_padding"
+        android:paddingBottom="5dp"
         android:textSize="15sp" />
 
     <ImageView
         android:id="@+id/detail_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:paddingBottom="20dp"
+        android:paddingBottom="5dp"
         android:src="@drawable/template"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/favorite_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/favorite_button"/>
+
+        <Button
+            android:id="@+id/pic_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/picture_button"/>
+    </LinearLayout>
 
 
     <android.support.v4.app.FragmentTabHost
@@ -47,84 +54,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/detail_image">
-        
+
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="62dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-
-            <!--<LinearLayout-->
-                <!--android:id="@+id/general_info"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/detail_time_taken"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:paddingLeft="@dimen/recipe_details_padding"-->
-                    <!--android:textSize="@dimen/recipe_details_textSize" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/detail_servings"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:paddingLeft="@dimen/recipe_details_padding"-->
-                    <!--android:textSize="@dimen/recipe_details_textSize" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/detail_source_name"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:paddingLeft="@dimen/recipe_details_padding"-->
-                    <!--android:textSize="@dimen/recipe_details_textSize" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/detail_source_link"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:paddingLeft="@dimen/recipe_details_padding"-->
-                    <!--android:textSize="@dimen/recipe_details_textSize" />-->
-
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-                <!--android:id="@+id/ingredients_info"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="vertical">-->
-                <!--<ScrollView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content">-->
-                <!--<TextView-->
-                    <!--android:id="@+id/detail_ingredients"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:paddingLeft="@dimen/recipe_details_padding"-->
-                    <!--android:textSize="@dimen/recipe_details_textSize" />-->
-                <!--</ScrollView>-->
-            <!--</LinearLayout>-->
+            android:layout_height="match_parent">
         </FrameLayout>
-
     </android.support.v4.app.FragmentTabHost>
-
-    <!--<fragment-->
-        <!--android:name="com.example.android.foodwhips.fragments.IngredientsInfo"-->
-        <!--android:id="@+id/detail_ingredients"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingLeft="@dimen/recipe_details_padding"-->
-        <!--android:textSize="@dimen/recipe_details_textSize" />-->
-
 </LinearLayout>

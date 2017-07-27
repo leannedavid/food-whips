@@ -113,8 +113,6 @@ public class FilterActivity extends BaseActivity {
                         exclude_query = mEditView.getText().toString();
                         excludeSearchQueries.add(exclude_query);
                         break;
-
-
                 }
             }
         });
@@ -129,9 +127,7 @@ public class FilterActivity extends BaseActivity {
                 search_query = mSearchQuery.getText().toString();
                 foodsUrl = NetworkUtils.buildFilteredUrl(search_query, 1, includeSearchQueries, excludeSearchQueries);
             }
-
         });
-
     }
 
     // Adds Edit Text to the newly added linear layout

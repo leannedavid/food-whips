@@ -8,8 +8,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/* Created by li-en on 7/2/17. */
-
 public class SearchRecipeJsonUtils {
     private static final String RECIPE_MATCHES = "matches";
 

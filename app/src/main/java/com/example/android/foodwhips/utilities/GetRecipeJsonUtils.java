@@ -8,10 +8,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by li-en on 7/10/17.
- */
-
 public class GetRecipeJsonUtils {
     private static final String GET_TOTAL_TIME = "totalTime";
 
