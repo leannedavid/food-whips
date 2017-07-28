@@ -1,14 +1,20 @@
 package com.example.android.foodwhips.utilities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import android.os.AsyncTask;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
+import com.example.android.foodwhips.MainActivity;
+import com.example.android.foodwhips.activities.RecipeDetailsActivity;
+import com.example.android.foodwhips.adapters.RecipeResultsAdapter;
 import com.example.android.foodwhips.models.GetRecipe;
+import com.example.android.foodwhips.models.SearchRecipe;
 
 import org.json.JSONException;
 
@@ -16,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ConversionUtils {
     static final String TAG = "conversionutils";

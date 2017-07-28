@@ -1,10 +1,7 @@
 package com.example.android.foodwhips.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +10,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.android.foodwhips.AboutActivity;
-import com.example.android.foodwhips.MainActivity;
 import com.example.android.foodwhips.R;
 
 /* Responsible of keeping the same base layout (Toolbar/Navigation Drawer/Search Bar/Ellipses Menu)
@@ -27,6 +24,10 @@ public class BaseActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+
+    private String search_query;
+    private EditText mEditView;
+    private Button mButtonSearch;
 
     @Override
     public void setContentView(int layoutResID){
@@ -46,6 +47,19 @@ public class BaseActivity extends AppCompatActivity {
                 R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
+        //EditText setup
+        mEditView   = (EditText)findViewById(R.id.search_text);
+
+        //Button setup
+        mButtonSearch = (Button)findViewById(R.id.search_button);
+        mButtonSearch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                search_query = mEditView.getText().toString();
+                Intent switchAct = new Intent(BaseActivity.this, SearchResultsActivity.class);
+                switchAct.putExtra("searchQuery", search_query);
+                startActivity(switchAct);
+            }
+        });
     }
 
     @Override
@@ -77,5 +91,4 @@ public class BaseActivity extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState();
     }
-
 }

@@ -5,8 +5,10 @@
     <dimen name="search_results_details">13sp</dimen>
     <dimen name="search_results_padding">20dp</dimen>
 
-    <dimen name="recipe_details_padding">10dp</dimen>
-    <dimen name="recipe_details_textSize">12dp</dimen>
+    <dimen name="recipe_details_padding">12dp</dimen>
+    <dimen name="recipe_details_textSize">13dp</dimen>
+
+    <dimen name="recipe_source_textSize">14dp</dimen>
 
     <dimen name="about_padding">8dp</dimen>
 </resources>

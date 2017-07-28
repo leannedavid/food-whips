@@ -1,6 +1,7 @@
 package com.example.android.foodwhips.activities;
 
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTabHost;
 import android.app.LoaderManager;
 import android.content.Loader;
@@ -8,6 +9,7 @@ import android.content.Loader;
 import android.os.Bundle;
 import android.util.Log;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,8 +28,10 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
     private FragmentTabHost mTabHost;
     private ImageView mRecipeImage;
     private TextView mRecipeName;
+    private TextView mSourceName;
     private TextView mRecipeRate;
 
+    private Button instructionsButton;
     private Button faveButton;
     private Button picButton;
 
@@ -35,12 +39,13 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
 
     private static final String GENERAL_INFO = "General";
     private static final String INGREDIENT_INFO = "Ingredients";
-    private static final String PHOTO_INFO = "Photos";
+    private static final String PHOTO_INFO = "Photo";
 
     private static final String INGREDIENTS_VALUE = "ingredients";
     private static final String RECIPE_TIME_VALUE = "recipe_time";
     private static final String RECIPE_SERVINGS_VALUE = "recipe_servings";
-    private static final String RECIPE_SOURCE_NAME = "recipe_source_name";
+    private static final String RECIPE_COURSES = "recipe_courses";
+    private static final String RECIPE_CUISINES = "recipe_cuisines";
     private static final String RECIPE_SOURCE_URL = "recipe_source_url";
 
 
@@ -56,16 +61,34 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
 
         mRecipeImage = (ImageView) findViewById(R.id.detail_image);
         mRecipeName = (TextView) findViewById(R.id.detail_name);
+        mSourceName = (TextView) findViewById(R.id.detail_source_name);
         mRecipeRate = (TextView) findViewById(R.id.detail_rating);
 
+        instructionsButton = (Button) findViewById(R.id.instructions_button);
         faveButton = (Button) findViewById(R.id.favorite_button);
         picButton = (Button) findViewById(R.id.pic_button);
+
+        faveButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                Button fave = (Button) view;
+                if (fave.getText().toString().equals("Un-favorite")){
+                    faveButton.setText("Favorite");
+                }
+                else{
+                    faveButton.setText("Un-favorite");
+                }
+            }
+        });
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
         getLoaderManager().initLoader(0, null, this).forceLoad();
+    }
 
+    @Override
+    public void onRestart(){
+        super.onRestart();
     }
 
     @Override
@@ -84,12 +107,33 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
             bundle.putString(INGREDIENTS_VALUE, data.printIngredients());
             bundle.putString(RECIPE_TIME_VALUE, data.getTotalTime());
             bundle.putString(RECIPE_SERVINGS_VALUE, data.getServings());
-            bundle.putString(RECIPE_SOURCE_NAME, data.getSourceName());
+
+            if(!data.isCoursesEmpty()) {
+                bundle.putString(RECIPE_COURSES, data.printCourses());
+            }
+
+            if(!data.isCuisinesEmpty()) {
+                bundle.putString(RECIPE_CUISINES, data.printCuisines());
+            }
             bundle.putString(RECIPE_SOURCE_URL, data.getSourceRecipeUrl());
 
             new ConversionUtils.FetchImageTask(mRecipeImage).execute(data.getImgUrl());
             mRecipeName.setText(data.getRecipeName().toUpperCase());
+            mSourceName.setText(data.getSourceName());
             mRecipeRate.setText("Rating: " + data.getRating() + "/5");
+
+            final String sourceUrl = data.getSourceRecipeUrl();
+
+
+            instructionsButton.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View view) {
+                    mTabHost.clearAllTabs();
+                    Intent switchAct = new Intent(RecipeDetailsActivity.this, WebActivity.class);
+                    switchAct.putExtra("source_url", sourceUrl);
+                    startActivity(switchAct);
+                }
+            });
+
 
             mTabHost.addTab(mTabHost.newTabSpec(GENERAL_INFO)
                     .setIndicator(GENERAL_INFO), GeneralInfo.class, bundle);
@@ -101,11 +145,12 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
                     .setIndicator(PHOTO_INFO), PhotoInfo.class, null);
 
             Log.v(TAG, "SUCCESSFULLY PUT INFO INTO A BUNDLE");
+            Log.v(TAG, "VALUE OF COURSES: " + data.printCourses());
+            Log.v(TAG, "VALUE OF CUISINES: " + data.printCuisines());
         }
     }
 
     @Override
     public void onLoaderReset(Loader<GetRecipe> loader){}
-
 }
 

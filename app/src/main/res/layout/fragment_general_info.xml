@@ -28,11 +28,20 @@
             android:textSize="@dimen/recipe_details_textSize" />
 
         <TextView
-            android:id="@+id/detail_source_name"
+            android:id="@+id/detail_courses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/recipe_details_padding"
-            android:textSize="@dimen/recipe_details_textSize" />
+            android:textSize="@dimen/recipe_details_textSize"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/detail_cuisines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/recipe_details_padding"
+            android:textSize="@dimen/recipe_details_textSize"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/detail_source_link"
