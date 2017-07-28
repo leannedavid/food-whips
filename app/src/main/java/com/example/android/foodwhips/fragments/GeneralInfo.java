@@ -18,7 +18,7 @@ public class GeneralInfo extends Fragment{
     private TextView mRecipeServings;
     private TextView mCourses;
     private TextView mCuisines;
-    private TextView mSourceUrl;
+    private TextView mFlavors;
 
     static final String TAG = "generalinfofragment";
 
@@ -26,7 +26,7 @@ public class GeneralInfo extends Fragment{
     private static final String RECIPE_SERVINGS_VALUE = "recipe_servings";
     private static final String RECIPE_COURSES = "recipe_courses";
     private static final String RECIPE_CUISINES = "recipe_cuisines";
-    private static final String RECIPE_SOURCE_URL = "recipe_source_url";
+    private static final String RECIPE_FLAVORS = "recipe_flavors";
 
     public GeneralInfo() {}
 
@@ -40,6 +40,7 @@ public class GeneralInfo extends Fragment{
 
         String recipe_courses = getArguments().getString(RECIPE_COURSES);
         String recipe_cuisines = getArguments().getString(RECIPE_CUISINES);
+        String recipe_flavors = getArguments().getString(RECIPE_FLAVORS);
 
         Log.v(TAG, "DID COURSES COPY?: " + recipe_courses);
 
@@ -47,7 +48,7 @@ public class GeneralInfo extends Fragment{
         mRecipeServings = (TextView) view.findViewById(R.id.detail_servings);
         mCourses = (TextView) view.findViewById(R.id.detail_courses);
         mCuisines = (TextView) view.findViewById(R.id.detail_cuisines);
-        mSourceUrl = (TextView) view.findViewById(R.id.detail_source_link);
+        mFlavors = (TextView) view.findViewById(R.id.detail_flavors);
 
         mTimeTaken.setText("Time: " + getArguments().getString(RECIPE_TIME_VALUE));
         mRecipeServings.setText("Serving(s): " + getArguments().getString(RECIPE_SERVINGS_VALUE));
@@ -62,7 +63,10 @@ public class GeneralInfo extends Fragment{
             mCuisines.setText("Cuisines: " + recipe_cuisines);
         }
 
-        mSourceUrl.setText("Source Link: " + getArguments().getString(RECIPE_SOURCE_URL));
+        if (recipe_flavors != null) {
+            mFlavors.setVisibility(View.VISIBLE);
+            mFlavors.setText("\nFlavors: " + recipe_flavors);
+        }
 
         return view;
     }

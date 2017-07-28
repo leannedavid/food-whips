@@ -46,6 +46,7 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
     private static final String RECIPE_SERVINGS_VALUE = "recipe_servings";
     private static final String RECIPE_COURSES = "recipe_courses";
     private static final String RECIPE_CUISINES = "recipe_cuisines";
+    private static final String RECIPE_FLAVORS = "recipe_flavors";
     private static final String RECIPE_SOURCE_URL = "recipe_source_url";
 
 
@@ -115,6 +116,11 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
             if(!data.isCuisinesEmpty()) {
                 bundle.putString(RECIPE_CUISINES, data.printCuisines());
             }
+
+            if(!data.isFlavorsEmpty()){
+                bundle.putString(RECIPE_FLAVORS, data.printFlavors());
+            }
+
             bundle.putString(RECIPE_SOURCE_URL, data.getSourceRecipeUrl());
 
             new ConversionUtils.FetchImageTask(mRecipeImage).execute(data.getImgUrl());

@@ -1,5 +1,7 @@
 package com.example.android.foodwhips.models;
 
+import com.example.android.foodwhips.utilities.ConversionUtils;
+
 /**
  * Created by li-en on 7/10/17.
  */
@@ -156,6 +158,23 @@ public class GetRecipe {
 
     public void setFlavors(String[] flavors) {
         this.flavors = flavors;
+    }
+
+    public String printFlavors(){
+        String list = "Piquant: " + ConversionUtils.decimalsToPercentage(flavors[0]) + ", " +
+                      "Meaty: " + ConversionUtils.decimalsToPercentage(flavors[1]) + ", " +
+                      "Bitter: " + ConversionUtils.decimalsToPercentage(flavors[2]) + ", " +
+                      "Sweet: " + ConversionUtils.decimalsToPercentage(flavors[3]) + ", " +
+                      "Sour: " + ConversionUtils.decimalsToPercentage(flavors[4]) + ", " +
+                      "Salty: " + ConversionUtils.decimalsToPercentage(flavors[5]);
+        return list;
+    }
+
+    public boolean isFlavorsEmpty() {
+        if (flavors == null || flavors.length == 0) {
+            return true;
+        }
+        return false;
     }
 
     public String getRating() {

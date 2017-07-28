@@ -47,6 +47,11 @@
                 android:hint="@string/search_hint"
                 android:layout_weight="40"/>
 
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"/>
+
             <Button
                 android:id="@+id/search_button"
                 android:layout_width="wrap_content"
@@ -55,11 +60,10 @@
                 android:textColor="@color/white"
                 android:text="@string/search_text"/>
 
-
             <android.support.v4.widget.Space
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight=".5"/>
         </LinearLayout>
     </LinearLayout>
 

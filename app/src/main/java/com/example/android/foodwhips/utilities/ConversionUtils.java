@@ -56,6 +56,14 @@ public class ConversionUtils {
         return stars;
     }
 
+    public static String decimalsToPercentage(String decimal){
+        String percentage = "";
+        double decimalValue = Math.round(Double.parseDouble(decimal) * 100);
+
+        percentage = Integer.toString((int) decimalValue) + "%";
+
+        return percentage;
+    }
     public static class FetchImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView image;
 
