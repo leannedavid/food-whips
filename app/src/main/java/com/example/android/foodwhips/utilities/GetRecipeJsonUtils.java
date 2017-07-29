@@ -28,6 +28,14 @@ public class GetRecipeJsonUtils {
     private static final String GET_CUISINES = "cuisine";
     private static final String GET_COURSES = "course";
 
+    private static final String GET_FLAVORS = "flavors";
+    private static final String GET_PIQUANT = "Piquant";
+    private static final String GET_MEATY = "Meaty";
+    private static final String GET_BITTER = "Bitter";
+    private static final String GET_SWEET = "Sweet";
+    private static final String GET_SOUR = "Sour";
+    private static final String GET_SALTY = "Salty";
+
     private static final String GET_RATING = "rating";
     //do flavors later
 
@@ -104,13 +112,26 @@ public class GetRecipeJsonUtils {
         String[] cuisineList = cuisineArrayList.toArray(new String[cuisineArrayList.size()]);
 
         //GET RECIPE FLAVORS
-        String flavors[] = null;
+        JSONObject flavors = main.getJSONObject(GET_FLAVORS);
+        ArrayList<String> flavorArrayList = new ArrayList<>();
+
+        if(flavors.length() != 0) {
+            flavorArrayList.add(flavors.getString(GET_PIQUANT));
+            flavorArrayList.add(flavors.getString(GET_MEATY));
+            flavorArrayList.add(flavors.getString(GET_BITTER));
+            flavorArrayList.add(flavors.getString(GET_SWEET));
+            flavorArrayList.add(flavors.getString(GET_SOUR));
+            flavorArrayList.add(flavors.getString(GET_SALTY));
+        }
+
+
+        String[] flavorsList = flavorArrayList.toArray(new String[flavorArrayList.size()]);
 
         String rating = main.getString(GET_RATING);
 
         GetRecipe recipe = new GetRecipe(time, img, recipeName,
                 sourceName, sourceUrl, id, ingredientsList,
-                servings, cuisineList, coursesList, flavors, rating);
+                servings, cuisineList, coursesList, flavorsList, rating);
         return recipe;
     }
 }

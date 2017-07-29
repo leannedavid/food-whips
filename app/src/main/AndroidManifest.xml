@@ -12,23 +12,39 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".IngredientFilterActivity">
+        <!-- Base Activity for all activities -->
+        <activity
+            android:name=".activities.BaseActivity"
+            android:label="@string/title_activity_base"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/AppTheme"/>
+
+        <!-- Main Activity -->
+        <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- About Activity -->
         <activity android:name=".AboutActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-         <activity android:name=".activities.RecipeDetailsActivity"></activity>
-        <activity
-            android:name=".activities.BaseActivity"
-            android:label="@string/title_activity_base"
-            android:theme="@style/AppTheme"></activity>
-    </application>
 
+        <!-- Search Results Activity -->
+        <activity android:name=".activities.SearchResultsActivity"
+                  android:windowSoftInputMode="stateHidden"/>
+
+        <!-- Recipe Details Activity -->
+        <activity android:name=".activities.RecipeDetailsActivity"
+                  android:windowSoftInputMode="stateHidden"/>
+
+        <!-- Internal/Web Browser Activity -->
+        <activity android:name=".activities.WebActivity"/>
+
+    </application>
 </manifest>

@@ -94,6 +94,9 @@ public class IngredientFilterActivity extends BaseActivity {
                 // Add Radio Buttons to layout
                 addRadioButtons(ll);
 
+                // Add new sub-layouts to the array
+                //subLayouts.add(ll);
+
                 // Last step, add the new linear layout to the base layout
                 container.addView(ll);
             }
@@ -137,10 +140,12 @@ public class IngredientFilterActivity extends BaseActivity {
     // Adds Edit Text to the newly added linear layout
     public void addEditText(LinearLayout ll) {
         EditText et = new EditText(this);
-        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0);
-        p.weight = 1;
-        et.setLayoutParams(p);
+
+        //LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0);
+        //p.weight = 1;
+        //et.setLayoutParams(p);
         et.setHint(R.string.ingredient_hint);
+
         et.setTextSize(16);
 
         // Add new Edit Text to allEditText ArrayList
@@ -153,9 +158,9 @@ public class IngredientFilterActivity extends BaseActivity {
     // Add Radio Buttons to the newly added linear layout
     public void addRadioButtons(LinearLayout ll) {
         RadioGroup rbg = new RadioGroup(this);
-        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0);
-        p.weight = 3;
-        rbg.setLayoutParams(p);
+        //LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0);
+       // p.weight = 3;
+        //rbg.setLayoutParams(p);
         rbg.setOrientation(HORIZONTAL);
 
         RadioButton rb1 = new RadioButton(this);

@@ -15,53 +15,6 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Include the toolbar in the main xml-->
-        <include
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            layout="@layout/toolbar"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/colorPrimary"
-            android:outlineProvider="bounds">
-
-
-            <android.support.v4.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-
-            <!-- Made edits here-->
-            <EditText
-                android:id="@+id/search_text"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_gravity="center"
-                android:inputType="text"
-                android:paddingLeft="10dp"
-                android:background="@color/white"
-                android:hint="@string/search_hint"
-                android:layout_weight="40"/>
-
-            <Button
-                android:id="@+id/search_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minHeight="18dp"
-                android:textColor="@color/white"
-                android:text="@string/search_text"/>
-
-
-            <android.support.v4.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -105,22 +58,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:background="@drawable/back"/>
-
         </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:paddingTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
     </LinearLayout>
 
     <!-- Drawer items go in here -->

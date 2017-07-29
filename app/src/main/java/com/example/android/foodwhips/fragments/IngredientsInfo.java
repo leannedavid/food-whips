@@ -31,7 +31,6 @@ public class IngredientsInfo extends Fragment {
 
         String ingredients = getArguments().getString(INGREDIENTS_VALUE);
         mIngredientsView.setText(ingredients);
-        //mIngredientsView.setText(ingredients != null ? ingredients : "lmao empty");
 
         return view;
     }
