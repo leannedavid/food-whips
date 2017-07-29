@@ -20,7 +20,9 @@
             android:theme="@style/AppTheme"/>
 
         <!-- Main Activity -->
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,7 +30,18 @@
         </activity>
 
         <!-- About Activity -->
-        <activity android:name=".AboutActivity">
+        <activity
+            android:name=".AboutActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Filter by ingredients activity-->
+        <activity
+            android:name=".FilterActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
