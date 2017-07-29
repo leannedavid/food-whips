@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
 
     <!-- ID to represent EditText & RadioGroup-->
     <LinearLayout
@@ -16,12 +18,12 @@
 
         <!-- Search bar above filter layout -->
         <EditText
-            android:id="@+id/search_text"
+            android:id="@+id/search_ingredient_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:layout_weight="14"
-            android:hint="@string/filter_search_hint"
+            android:hint="@string/ingredient_search_hint"
             android:inputType="text"
             android:paddingLeft="10sp">
 
@@ -36,15 +38,15 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/filter_text"
+                android:id="@+id/ingredient_text"
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:layout_weight=".55"
-                android:hint="@string/filter_hint"
+                android:hint="@string/ingredient_hint"
                 android:textSize="16dp"
                 android:inputType="text"
                 android:paddingLeft="10sp">
-                <!--<requestFocus/>-->
+                <requestFocus/>
             </EditText>
 
             <RadioGroup
@@ -96,6 +98,7 @@
             <!--android:text="@string/exclude_ingredient" />-->
 
             <!--</RadioGroup>-->
+
         </LinearLayout>
     </LinearLayout>
 
@@ -108,7 +111,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/filter_search_button"
+            android:id="@+id/ingredient_search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_text" />
@@ -122,3 +125,4 @@
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

@@ -31,11 +31,8 @@ public final class NetworkUtils {
     private final static String appkey = "ca4a3cb230d72671a6fc66eeaddc9238";
 
     private final static String QUERY_PARAM_NAME = "q";
-    // private final static String param_query = "";
 
-    private final static String QUERY_PARAM_INCLUDE = "allowedIngredient[]";
-    private final static String QUERY_PARAM_EXCLUDE = "excludedIngredient[]";
-
+    // Basic / General URL method
     public static URL buildUrl(String search, int type) {
         search.replaceAll("\\s+","+");
 
@@ -73,8 +70,8 @@ public final class NetworkUtils {
     }
 
 
-    // New buildURL for each ingredients filter
-    public static URL buildFilteredUrl(String search, int type, ArrayList<String> include, ArrayList<String> exclude) {
+    // buildURL method for including / excluding ingredients
+    public static URL buildIngredientUrl(String search, int type, ArrayList<String> include, ArrayList<String> exclude) {
         search.replaceAll("\\s+","+");
         Uri.Builder builder = new Uri.Builder();
 
@@ -114,11 +111,56 @@ public final class NetworkUtils {
             e.printStackTrace();
         }
 
-        Log.v(TAG, "Built Filtered URI: " + url);
+        Log.v(TAG, "Built Ingredient Filtered URI: " + url);
 
         return url;
     }
 
+    // buildURL method for including / excluding cuisines
+    public static URL buildCuisineUrl(String search, int type, ArrayList<String> allowed, ArrayList<String> exclude) {
+        search.replaceAll("\\s+","+");
+        Uri.Builder builder = new Uri.Builder();
+
+        builder.scheme("https").authority("api.yummly.com").appendPath("v1").appendPath("api").
+                appendPath("recipes").appendQueryParameter(QUERY_PARAM_NAME, search).appendQueryParameter(QUERY_PARAM_APP_ID, appid).
+                appendQueryParameter(QUERY_PARAM_APPKEY, appkey);
+
+        for(String s: allowed){
+            builder.appendQueryParameter("allowedCuisine[]", s);
+        }
+
+        for(String s2: exclude) {
+            builder.appendQueryParameter("excludedCuisine[]", s2);
+        }
+        Uri builtUri = null;
+
+
+        if (type == 1) {
+            builtUri = builder.build();
+        }
+
+        else if(type == 2){
+            builtUri = Uri.parse(RECIPE_BASE_URL).buildUpon().
+                    path(GET_RECIPE_PATH + search).
+                    appendQueryParameter(QUERY_PARAM_APP_ID, appid).
+                    appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
+
+                    build();
+        }
+
+        URL url = null;
+
+        try {
+            url = new URL(builtUri.toString());
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built Cuisine Filtered URI: " + url);
+
+        return url;
+    }
 
     /* This method goes to the API and grabs the JSON string */
     public static String getResponseFromHttpUrl(URL url) throws IOException {
