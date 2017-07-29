@@ -25,18 +25,60 @@
     <string name="yummly_anchor">https://developer.yummly.com/</string>
     <string name="app_version">0.1.1 / Non-Complete</string>
 
+    <!-- Filter Add Button for Dynamically adding new layouts -->
+    <string name="add_new_layout">Add</string>
 
-    <!-- Filter Activity strings -->
-    <string name="filter_search_hint">Enter name of food or recipe.</string>
-    <string name="filter_text">Ingredient</string>
-    <string name="filter_hint">Enter an ingredient.</string>
+    <!-- Ingredient Activity strings -->
+    <string name="ingredient_search_hint">Enter name of food or recipe.</string>
+    <string name="ingredient_text">Ingredient</string>
+    <string name="ingredient_hint">Enter an ingredient.</string>
 
-    <!-- Radio Buttons strings -->
+    <!-- Ingredient Radio Buttons strings -->
     <string name="include_ingredient">Include</string>
     <string name="exclude_ingredient">Exclude</string>
 
-    <!-- Add Button for Dynamically adding new layouts -->
-    <string name="add_new_layout">Add</string>
+    <!-- Cuisine Activity strings -->
+    <string name="cuisine_search_hint">Enter name of food or recipe.</string>
+    <string name="cuisine_text">Cuisine</string>
+    <string name="cuisine_hint">Enter a cuisine.</string>
+
+    <!-- Cuisine Spinner strings -->
+    <string name="cuisine_prompt">Choose a cuisine</string>
+
+    <!-- Cuisine Radio Buttons strings -->
+    <string name="allow_cuisine">Allow</string>
+    <string name="exclude_cuisine">Exclude</string>
+
+    <!-- List of options for cuisines -->
+    <string-array name="cuisine_arrays">
+        <item>American</item>
+        <item>Italian</item>
+        <item>Asian</item>
+        <item>Mexican</item>
+        <item>Southern &amp; Soul Food</item>
+        <item>French</item>
+        <item>Southwestern</item>
+        <item>Barbecue</item>
+        <item>Indian</item>
+        <item>Chinese</item>
+        <item>Cajun &amp; Creole</item>
+        <item>English</item>
+        <item>Mediterranean</item>
+        <item>Greek</item>
+        <item>Spanish</item>
+        <item>German</item>
+        <item>Thai</item>
+        <item>Moroccan</item>
+        <item>Irish</item>
+        <item>Japanese</item>
+        <item>Cuban</item>
+        <item>Hawaiian</item>
+        <item>Swedish</item>
+        <item>Swedish</item>
+        <item>Hungarian</item>
+        <item>Portugese</item>
+    </string-array>
+
 
     <string name="empty_data">No data to display.</string>
 

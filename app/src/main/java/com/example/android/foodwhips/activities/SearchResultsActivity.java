@@ -40,9 +40,17 @@ public class SearchResultsActivity extends BaseActivity {
         String searchQuery = bundle.getString("searchQuery");
         String ingredientsQuery = bundle.getString("ingredientsFilter");
 
-        Log.v(TAG, "IS SEARCH QUERY NULL? " + searchQuery);
+        Log.v(TAG, "IS SEARCH QUERY NULL ? " + searchQuery);
+        Log.v(TAG, "IS INGREDIENTS FILTER NULL? " + ingredientsQuery);
 
-        foodsUrl = NetworkUtils.buildUrl(searchQuery, 1);
+        URL ingredientsFilter = null;
+        try {
+            ingredientsFilter = new URL(ingredientsQuery);
+        }catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+
+        foodsUrl = (searchQuery != null ? NetworkUtils.buildUrl(searchQuery, 1) : ingredientsFilter);
 
         //Progress Bar
         bar = (ProgressBar) findViewById(R.id.progressBar);
@@ -55,6 +63,7 @@ public class SearchResultsActivity extends BaseActivity {
         new FetchFoodTask().execute();
 
         Log.v(TAG, "HITTING THE SEARCHRESULTS ACTIVITY WITH QUERY: " + searchQuery);
+        Log.v(TAG, "WHAT IS FOODS URL?: " + foodsUrl.toString());
     }
 
 

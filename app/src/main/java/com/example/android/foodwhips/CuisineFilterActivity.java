@@ -1,6 +1,5 @@
 package com.example.android.foodwhips;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,31 +17,33 @@ import static android.widget.LinearLayout.VERTICAL;
 import static android.widget.LinearLayout.HORIZONTAL;
 
 import com.example.android.foodwhips.activities.BaseActivity;
-import com.example.android.foodwhips.activities.SearchResultsActivity;
 import com.example.android.foodwhips.utilities.NetworkUtils;
 
 /**
- * Created by Vincent on 7/10/2017.
+ * Created by Vincent on 7/29/2017.
  */
 
-public class IngredientFilterActivity extends BaseActivity {
+public class CuisineFilterActivity extends BaseActivity {
+    private String TAG = "CUISINE ACTIVITY: ";
 
-    private String TAG = "INGREDIENT ACTIVITY: ";
     private EditText mSearchQuery;
-    private EditText mEditView;
-    public static ArrayList<String> includeSearchQueries = new ArrayList<>();
-    public static ArrayList<String> excludeSearchQueries = new ArrayList<>();
+
+    public static ArrayList<String> allowedCuisines = new ArrayList<>();
+    public static ArrayList<String> excludedCuisines = new ArrayList<>();
+
     private String search_query;
+
     private URL foodsUrl;
 
     // This linear layout holds the first layout container
     private LinearLayout baseLayoutContainer;
 
-    // ArrayList setup of all Edit Text & Radio Buttons created
-    private ArrayList<EditText> allEditTexts = new ArrayList<>();
+    // ArrayList setup of all Spinners & Radio Buttons created
+    private ArrayList<Spinner> allSpinnerOptions = new ArrayList<>();
     private ArrayList<RadioButton> allRadioButtons = new ArrayList<>();
 
-    // Radio Button setup
+    // Spinner & Radio Button setup
+    private Spinner spinner;
     private RadioButton radioButton1;
     private RadioButton radioButton2;
 
@@ -52,15 +54,17 @@ public class IngredientFilterActivity extends BaseActivity {
         setContentView(R.layout.filter_ingredients);
 
         //EditText setup
-        mSearchQuery = (EditText)findViewById(R.id.search_ingredient_text);
+        mSearchQuery = (EditText)findViewById(R.id.search_text);
 
-        mEditView = (EditText)findViewById(R.id.ingredient_text);
-        allEditTexts.add(mEditView);
+        // Initialize original spinner created from xml page
+        spinner = (Spinner) findViewById(R.id.cuisine_options);
+        // And Add to list of spinners
+        allSpinnerOptions.add(spinner);
 
         // Initialize original radio buttons created from xml page
         radioButton1 = (RadioButton) findViewById(R.id.filter_ingredient_1);
         radioButton2 = (RadioButton) findViewById(R.id.filter_ingredient_2);
-        // And add to overall list of radio buttons
+        // And add to list of radio buttons
         allRadioButtons.add(radioButton1);
         allRadioButtons.add(radioButton2);
 
@@ -70,7 +74,7 @@ public class IngredientFilterActivity extends BaseActivity {
         Button button = (Button) findViewById(R.id.add_button);
 
         // When ADD button is pressed
-        // Adds new layout with Edit Text & Radio Buttons
+        // Adds new layout with Spinner & Radio Buttons
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +84,7 @@ public class IngredientFilterActivity extends BaseActivity {
                 LinearLayout container = baseLayoutContainer;
 
                 // Initialize the new layouts to be created
-                LinearLayout ll = new LinearLayout(IngredientFilterActivity.this);
+                LinearLayout ll = new LinearLayout(CuisineFilterActivity.this);
                 ll.setOrientation(VERTICAL);
                 LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -90,14 +94,11 @@ public class IngredientFilterActivity extends BaseActivity {
                 // Change to own desire:
                 ll.setPadding(10, 10, 10, 10);
 
-                // Add EditText to layout
-                addEditText(ll);
+                // Add Spinner to layout
+                addSpinners(ll);
 
                 // Add Radio Buttons to layout
                 addRadioButtons(ll);
-
-                // Add new sub-layouts to the array
-                //subLayouts.add(ll);
 
                 // Last step, add the new linear layout to the base layout
                 container.addView(ll);
@@ -113,30 +114,22 @@ public class IngredientFilterActivity extends BaseActivity {
             public void onClick(View view) {
                 Log.v(TAG, "TESTING ON CREATE BEFORE SEARCH BUTTON");
 
-
                 Log.v(TAG, "ENTERING THE SEARCH METHOD");
                 search_query = mSearchQuery.getText().toString();
                 Log.v(TAG, "QUERY ENTERED: " + mSearchQuery.getText().toString());
-                Log.v(TAG, "EDIT ARRAY SIZE = " + allEditTexts.size());
                 Log.v(TAG, "RADIO BUTTON SIZE = " + allRadioButtons.size());
-                for(int i = 0; i < allEditTexts.size(); i++) {
-                    Log.v(TAG, "ARRAY SIZE IS: " + allEditTexts.size() + "; i = " + i);
+                for(int i = 0; i < allSpinnerOptions.size(); i++) {
+                    Log.v(TAG, "ARRAY SIZE IS: " + allSpinnerOptions.size() + "; i = " + i);
                     if(allRadioButtons.get(i*2).isChecked() == true) {
-                        includeSearchQueries.add(allEditTexts.get(i).getText().toString());
+//                        allowedCuisines.add(allSpinnerOptions.getSelectedItem());
                     }
                     else if(allRadioButtons.get(i*2+1).isChecked() == true) {
-                        excludeSearchQueries.add(allEditTexts.get(i).getText().toString());
+//                        excludedCuisines.add(allSpinnerOptions.get(i).getText().toString());
                     }
                 }
-
-                foodsUrl = NetworkUtils.buildIngredientUrl(search_query, 1, includeSearchQueries, excludeSearchQueries);
-
-                Intent switchAct = new Intent(IngredientFilterActivity.this, SearchResultsActivity.class);
-                switchAct.putExtra("ingredientsFilter", foodsUrl.toString());
-                startActivity(switchAct);
-
-                Log.v(TAG, "INCLUDED INGREDIENTS: " + includeSearchQueries);
-                Log.v(TAG, "EXCLUDED INGREDIENTS: " + excludeSearchQueries);
+                foodsUrl = NetworkUtils.buildCuisineUrl(search_query, 1, allowedCuisines, excludedCuisines);
+                Log.v(TAG, "INCLUDED CUISINES: " + allowedCuisines);
+                Log.v(TAG, "EXCLUDED CUISINES: " + excludedCuisines);
             }
         });
 
@@ -144,37 +137,29 @@ public class IngredientFilterActivity extends BaseActivity {
 
     }
 
-    // Adds Edit Text to the newly added linear layout
-    public void addEditText(LinearLayout ll) {
-        EditText et = new EditText(this);
+    // Add Spinner to the newly added linear layout
+    public void addSpinners(LinearLayout ll) {
+        Spinner sp = new Spinner(this);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        sp.setLayoutParams(p);
 
-        //LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0);
-        //p.weight = 1;
-        //et.setLayoutParams(p);
-        et.setHint(R.string.ingredient_hint);
-
-        et.setTextSize(16);
-
-        // Add new Edit Text to allEditText ArrayList
-        allEditTexts.add(et);
-
-        // Add new Edit Text to the new Linear Layout
-        ll.addView(et);
+        allSpinnerOptions.add(sp);
+        ll.addView(sp);
     }
 
     // Add Radio Buttons to the newly added linear layout
     public void addRadioButtons(LinearLayout ll) {
         RadioGroup rbg = new RadioGroup(this);
-        //LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0);
-       // p.weight = 3;
-        //rbg.setLayoutParams(p);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0);
+        p.weight = 3;
+        rbg.setLayoutParams(p);
         rbg.setOrientation(HORIZONTAL);
 
         RadioButton rb1 = new RadioButton(this);
         RadioButton rb2 = new RadioButton(this);
 
-        rb1.setText("Included");
-        rb2.setText("Excluded");
+        rb1.setText("Allow");
+        rb2.setText("Exclude");
 
         // Add new radio buttons to a radio group
         rbg.addView(rb1);
