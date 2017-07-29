@@ -1,192 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout_about"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
+    <!-- Include the toolbar in the main xml-->
+    <include
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/toolbar"/>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".2"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
         android:weightSum="1">
 
-        <!-- Include the toolbar in the main xml-->
-        <include
-            android:layout_height="wrap_content"
+        <android.support.v4.widget.Space
             android:layout_width="match_parent"
-            layout="@layout/toolbar"/>
+            android:layout_height="0dp"
+            android:layout_weight=".1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".2"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical"
+            android:layout_weight=".8"
+            android:orientation="horizontal"
             android:weightSum="1">
 
             <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".1"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".05"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/pan"
+                android:layout_weight=".35" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".8"
-                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".55"
+                android:orientation="vertical"
                 android:weightSum="1">
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".05"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".5"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/pan"
-                    android:layout_weight=".35" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".55"
-                    android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight=".5"
-                        android:text="@string/app_name"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight=".5"
-                        android:text="@string/app_version"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"/>
-
-                </LinearLayout>
-
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".05"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".5"
+                    android:text="@string/app_version"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
 
             </LinearLayout>
 
             <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".1"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".05"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
+        <android.support.v4.widget.Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".8">
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/developed"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:gravity="center"/>
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
-
-            <TextView
-                android:id="@+id/repo_link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/repository"
-                android:gravity="center"
-                android:clickable="true"
-                android:autoLink="web"
-                android:onClick="onClickGithub"/>
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp"/>
-
-            <TextView
-                android:id="@+id/yummly_link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/yummly_link"
-                android:background="@drawable/back"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/black"
-                android:clickable="true"
-                android:onClick="onClickYummly"/>
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/about_padding"
-                android:text="@string/app_info"
-                android:textColor="@color/black"/>
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/about_padding"
-                android:text="@string/yummly_info"
-                android:textColor="@color/black"/>
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/about_padding"
-                android:text="@string/repo_help"
-                android:textColor="@color/black"/>
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
-
-        </LinearLayout>
+            android:layout_weight=".1"/>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".8">
 
-    <!-- Drawer items go in here -->
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation_view_about"
-        android:layout_gravity="start"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:headerLayout="@layout/navigation_drawer_header"
-        app:menu="@menu/navigation_drawer_menu"/>
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
-</android.support.v4.widget.DrawerLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/developed"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <TextView
+            android:id="@+id/repo_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/repository"
+            android:gravity="center"
+            android:clickable="true"
+            android:autoLink="web"
+            android:onClick="onClickGithub"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:id="@+id/yummly_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/yummly_link"
+            android:background="@drawable/back"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/black"
+            android:clickable="true"
+            android:onClick="onClickYummly"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/about_padding"
+            android:text="@string/app_info"
+            android:textColor="@color/black"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/about_padding"
+            android:text="@string/yummly_info"
+            android:textColor="@color/black"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/about_padding"
+            android:text="@string/repo_help"
+            android:textColor="@color/black"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
