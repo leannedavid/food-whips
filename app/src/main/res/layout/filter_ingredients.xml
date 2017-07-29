@@ -20,7 +20,7 @@
 
             <!-- Search bar above filter layout -->
             <EditText
-                android:id="@+id/search_text"
+                android:id="@+id/search_ingredient_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
@@ -40,7 +40,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/filter_text"
+                    android:id="@+id/ingredient_text"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
                     android:layout_weight=".55"
@@ -113,7 +113,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/filter_search_button"
+                android:id="@+id/ingredient_search_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/search_text" />

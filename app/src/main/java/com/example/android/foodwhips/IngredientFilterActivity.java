@@ -17,6 +17,7 @@ import static android.widget.LinearLayout.VERTICAL;
 import static android.widget.LinearLayout.HORIZONTAL;
 
 import com.example.android.foodwhips.activities.BaseActivity;
+import com.example.android.foodwhips.activities.SearchResultsActivity;
 import com.example.android.foodwhips.utilities.NetworkUtils;
 
 /**
@@ -127,6 +128,10 @@ public class IngredientFilterActivity extends BaseActivity {
                     }
                 }
                 foodsUrl = NetworkUtils.buildIngredientUrl(search_query, 1, includeSearchQueries, excludeSearchQueries);
+
+                Intent switchAct = new Intent(IngredientFilterActivity.this, SearchResultsActivity.class);
+                switchAct.putExtra("ingredientsFilter", foodsUrl.toString());
+                startActivity(switchAct);
 
                 Log.v(TAG, "INCLUDED INGREDIENTS: " + includeSearchQueries);
                 Log.v(TAG, "EXCLUDED INGREDIENTS: " + excludeSearchQueries);
