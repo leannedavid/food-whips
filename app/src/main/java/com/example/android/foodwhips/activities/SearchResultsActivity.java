@@ -39,9 +39,11 @@ public class SearchResultsActivity extends BaseActivity {
         Bundle bundle = this.getIntent().getExtras();
         String searchQuery = bundle.getString("searchQuery");
         String ingredientsQuery = bundle.getString("ingredientsFilter");
+        String cuisineQuery = bundle.getString("cuisinesFilter");
 
         Log.v(TAG, "IS SEARCH QUERY NULL ? " + searchQuery);
-        Log.v(TAG, "IS INGREDIENTS FILTER NULL? " + ingredientsQuery);
+        Log.v(TAG, "IS INGREDIENTS FILTER NULL ? " + ingredientsQuery);
+        Log.v(TAG, "IS CUISINE FILTER NULL ? " + cuisineQuery);
 
         URL ingredientsFilter = null;
         try {
@@ -50,7 +52,21 @@ public class SearchResultsActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        foodsUrl = (searchQuery != null ? NetworkUtils.buildUrl(searchQuery, 1) : ingredientsFilter);
+        URL cuisineFilter = null;
+        try {
+            cuisineFilter = new URL(cuisineQuery);
+        }catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+
+        if(searchQuery != null) {
+            foodsUrl = NetworkUtils.buildUrl(searchQuery, 1);
+        } else if(ingredientsFilter != null) {
+            foodsUrl =  ingredientsFilter;
+        } else if(cuisineFilter != null) {
+            foodsUrl = cuisineFilter;
+        }
+
 
         //Progress Bar
         bar = (ProgressBar) findViewById(R.id.progressBar);

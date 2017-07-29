@@ -1,8 +1,10 @@
 package com.example.android.foodwhips;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -17,6 +19,7 @@ import static android.widget.LinearLayout.VERTICAL;
 import static android.widget.LinearLayout.HORIZONTAL;
 
 import com.example.android.foodwhips.activities.BaseActivity;
+import com.example.android.foodwhips.activities.SearchResultsActivity;
 import com.example.android.foodwhips.utilities.NetworkUtils;
 
 /**
@@ -28,7 +31,7 @@ public class CuisineFilterActivity extends BaseActivity {
 
     private EditText mSearchQuery;
 
-    public static ArrayList<String> allowedCuisines = new ArrayList<>();
+    private static ArrayList<String> allowedCuisines = new ArrayList<>();
     public static ArrayList<String> excludedCuisines = new ArrayList<>();
 
     private String search_query;
@@ -39,27 +42,40 @@ public class CuisineFilterActivity extends BaseActivity {
     private LinearLayout baseLayoutContainer;
 
     // ArrayList setup of all Spinners & Radio Buttons created
-    private ArrayList<Spinner> allSpinnerOptions = new ArrayList<>();
+    private ArrayList<Spinner> allSpinners = new ArrayList<>();
     private ArrayList<RadioButton> allRadioButtons = new ArrayList<>();
+
+    // Makes an array of value strings into an ArrayList
+    private String[] spinnerArray;
 
     // Spinner & Radio Button setup
     private Spinner spinner;
     private RadioButton radioButton1;
     private RadioButton radioButton2;
+    private ArrayAdapter spinnerAdapter;
+
+    // Boolean to check for back
+    private Boolean check;
 
     // Beginning of activity: loads filter xml page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.filter_ingredients);
+        setContentView(R.layout.filter_cuisines);
+
+        check = true;
 
         //EditText setup
         mSearchQuery = (EditText)findViewById(R.id.search_text);
 
         // Initialize original spinner created from xml page
         spinner = (Spinner) findViewById(R.id.cuisine_options);
+
+        // Retrieves adapter for that spinner
+        spinnerAdapter = (ArrayAdapter) spinner.getAdapter();
+
         // And Add to list of spinners
-        allSpinnerOptions.add(spinner);
+        allSpinners.add(spinner);
 
         // Initialize original radio buttons created from xml page
         radioButton1 = (RadioButton) findViewById(R.id.filter_ingredient_1);
@@ -118,16 +134,21 @@ public class CuisineFilterActivity extends BaseActivity {
                 search_query = mSearchQuery.getText().toString();
                 Log.v(TAG, "QUERY ENTERED: " + mSearchQuery.getText().toString());
                 Log.v(TAG, "RADIO BUTTON SIZE = " + allRadioButtons.size());
-                for(int i = 0; i < allSpinnerOptions.size(); i++) {
-                    Log.v(TAG, "ARRAY SIZE IS: " + allSpinnerOptions.size() + "; i = " + i);
-                    if(allRadioButtons.get(i*2).isChecked() == true) {
-//                        allowedCuisines.add(allSpinnerOptions.getSelectedItem());
+                for(int i = 0; i < allSpinners.size(); i++) {
+                    Log.v(TAG, "ARRAY SIZE IS: " + allSpinners.size() + "; i = " + i);
+                    if(allRadioButtons.get(i*2).isChecked()) {
+                        allowedCuisines.add(allSpinners.get(i).getSelectedItem().toString());
                     }
-                    else if(allRadioButtons.get(i*2+1).isChecked() == true) {
-//                        excludedCuisines.add(allSpinnerOptions.get(i).getText().toString());
+                    else if(allRadioButtons.get(i*2+1).isChecked()) {
+                        excludedCuisines.add(allSpinners.get(i).getSelectedItem().toString());
                     }
                 }
                 foodsUrl = NetworkUtils.buildCuisineUrl(search_query, 1, allowedCuisines, excludedCuisines);
+
+                Intent switchAct = new Intent(CuisineFilterActivity.this, SearchResultsActivity.class);
+                switchAct.putExtra("cuisinesFilter", foodsUrl.toString());
+                startActivity(switchAct);
+
                 Log.v(TAG, "INCLUDED CUISINES: " + allowedCuisines);
                 Log.v(TAG, "EXCLUDED CUISINES: " + excludedCuisines);
             }
@@ -137,13 +158,28 @@ public class CuisineFilterActivity extends BaseActivity {
 
     }
 
+    // Clears search queries from previous search
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(check) {
+            check = false;
+        } else {
+            allowedCuisines.clear();
+            excludedCuisines.clear();
+        }
+    }
+
     // Add Spinner to the newly added linear layout
     public void addSpinners(LinearLayout ll) {
         Spinner sp = new Spinner(this);
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
         sp.setLayoutParams(p);
 
-        allSpinnerOptions.add(sp);
+        sp.setAdapter(spinnerAdapter);
+
+        allSpinners.add(sp);
         ll.addView(sp);
     }
 

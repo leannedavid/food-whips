@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.android.foodwhips.AboutActivity;
+import com.example.android.foodwhips.CuisineFilterActivity;
 import com.example.android.foodwhips.IngredientFilterActivity;
 import com.example.android.foodwhips.MainActivity;
 import com.example.android.foodwhips.R;
@@ -101,7 +102,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.search_ingredients) {
             startActivity(new Intent(this, IngredientFilterActivity.class));
         } else if (id == R.id.search_cuisine) {
-
+            startActivity(new Intent(this, CuisineFilterActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
