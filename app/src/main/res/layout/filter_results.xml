@@ -20,7 +20,7 @@
 
             <!-- Search bar above filter layout -->
             <EditText
-                android:id="@+id/search_text"
+                android:id="@+id/search_ingredient_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"

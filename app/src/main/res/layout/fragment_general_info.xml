@@ -25,7 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/recipe_details_padding"
-            android:textSize="@dimen/recipe_details_textSize" />
+            android:textSize="@dimen/recipe_details_textSize"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/detail_courses"

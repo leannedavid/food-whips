@@ -13,14 +13,13 @@ import android.widget.TextView;
 import com.example.android.foodwhips.R;
 
 public class GeneralInfo extends Fragment{
-
     private TextView mTimeTaken;
     private TextView mRecipeServings;
     private TextView mCourses;
     private TextView mCuisines;
     private TextView mFlavors;
 
-    static final String TAG = "generalinfofragment";
+    static final String TAG = "GeneralInfoFragment";
 
     private static final String RECIPE_TIME_VALUE = "recipe_time";
     private static final String RECIPE_SERVINGS_VALUE = "recipe_servings";
@@ -38,6 +37,8 @@ public class GeneralInfo extends Fragment{
         //String recipe_id = getArguments().getString("recipe_id");
         //Log.v(TAG, "SUCCESSFULLY PASSED ID: " + recipe_id);
 
+        String recipe_time = getArguments().getString(RECIPE_TIME_VALUE);
+        String recipe_servings = getArguments().getString(RECIPE_SERVINGS_VALUE);
         String recipe_courses = getArguments().getString(RECIPE_COURSES);
         String recipe_cuisines = getArguments().getString(RECIPE_CUISINES);
         String recipe_flavors = getArguments().getString(RECIPE_FLAVORS);
@@ -50,8 +51,17 @@ public class GeneralInfo extends Fragment{
         mCuisines = (TextView) view.findViewById(R.id.detail_cuisines);
         mFlavors = (TextView) view.findViewById(R.id.detail_flavors);
 
-        mTimeTaken.setText("Time: " + getArguments().getString(RECIPE_TIME_VALUE));
-        mRecipeServings.setText("Serving(s): " + getArguments().getString(RECIPE_SERVINGS_VALUE));
+        if (recipe_time != null) {
+            mCourses.setVisibility(View.VISIBLE);
+            mTimeTaken.setText("Time: " + recipe_time);
+        }
+
+        if (recipe_servings != null) {
+            mCourses.setVisibility(View.VISIBLE);
+            mRecipeServings.setText("Serving(s): " + recipe_servings);
+        }
+
+        Log.v(TAG, "IS THE SERVINGS ATTRIBUTE NULL?: " + recipe_servings);
 
         if (recipe_courses != null) {
             mCourses.setVisibility(View.VISIBLE);

@@ -1,7 +1,7 @@
 package com.example.android.foodwhips;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,13 +17,14 @@ import static android.widget.LinearLayout.VERTICAL;
 import static android.widget.LinearLayout.HORIZONTAL;
 
 import com.example.android.foodwhips.activities.BaseActivity;
+import com.example.android.foodwhips.activities.SearchResultsActivity;
 import com.example.android.foodwhips.utilities.NetworkUtils;
 
 /**
  * Created by Vincent on 7/10/2017.
  */
 
-public class FilterActivity extends BaseActivity {
+public class IngredientFilterActivity extends BaseActivity {
 
     private String TAG = "FILTERED ACTIVITY: ";
     private EditText mSearchQuery;
@@ -54,7 +55,7 @@ public class FilterActivity extends BaseActivity {
         setContentView(R.layout.filter_results);
 
         //EditText setup
-        mSearchQuery = (EditText)findViewById(R.id.search_text);
+        mSearchQuery = (EditText)findViewById(R.id.search_ingredient_text);
         mEditView = (EditText)findViewById(R.id.filter_text);
         allEditTexts.add(mEditView);
 
@@ -86,7 +87,7 @@ public class FilterActivity extends BaseActivity {
                 }
 
                 // Initialize the new layouts to be created
-                LinearLayout ll = new LinearLayout(FilterActivity.this);
+                LinearLayout ll = new LinearLayout(IngredientFilterActivity.this);
                 ll.setOrientation(VERTICAL);
                 LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -135,6 +136,7 @@ public class FilterActivity extends BaseActivity {
                     }
                 }
                 foodsUrl = NetworkUtils.buildFilteredUrl(search_query, 1, includeSearchQueries, excludeSearchQueries);
+
                 Log.v(TAG, "INCLUDED INGREDIENTS: " + includeSearchQueries);
                 Log.v(TAG, "EXCLUDED INGREDIENTS: " + excludeSearchQueries);
             }
