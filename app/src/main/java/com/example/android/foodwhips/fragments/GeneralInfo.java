@@ -37,13 +37,14 @@ public class GeneralInfo extends Fragment{
         //String recipe_id = getArguments().getString("recipe_id");
         //Log.v(TAG, "SUCCESSFULLY PASSED ID: " + recipe_id);
 
-        String recipe_time = getArguments().getString(RECIPE_TIME_VALUE);
-        String recipe_servings = getArguments().getString(RECIPE_SERVINGS_VALUE);
-        String recipe_courses = getArguments().getString(RECIPE_COURSES);
-        String recipe_cuisines = getArguments().getString(RECIPE_CUISINES);
-        String recipe_flavors = getArguments().getString(RECIPE_FLAVORS);
+        String recipe_time = this.getArguments().getString(RECIPE_TIME_VALUE);
+        String recipe_servings = this.getArguments().getString(RECIPE_SERVINGS_VALUE);
+        String recipe_courses = this.getArguments().getString(RECIPE_COURSES);
+        String recipe_cuisines = this.getArguments().getString(RECIPE_CUISINES);
+        String recipe_flavors = this.getArguments().getString(RECIPE_FLAVORS);
 
         Log.v(TAG, "DID COURSES COPY?: " + recipe_courses);
+        Log.v(TAG, "WHAT IS THE VALUE OF SERVINGS?: " + recipe_servings);
 
         mTimeTaken = (TextView) view.findViewById(R.id.detail_time_taken);
         mRecipeServings = (TextView) view.findViewById(R.id.detail_servings);
@@ -57,8 +58,8 @@ public class GeneralInfo extends Fragment{
         }
 
         if (recipe_servings != null) {
-            mCourses.setVisibility(View.VISIBLE);
-            mRecipeServings.setText("Serving(s): " + recipe_servings);
+            mRecipeServings.setVisibility(View.VISIBLE);
+            mRecipeServings.setText("Serving(s): " + recipe_servings + " serving sizes");
         }
 
         Log.v(TAG, "IS THE SERVINGS ATTRIBUTE NULL?: " + recipe_servings);

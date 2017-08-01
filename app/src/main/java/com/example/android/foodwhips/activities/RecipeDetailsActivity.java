@@ -1,23 +1,30 @@
 package com.example.android.foodwhips.activities;
 
-
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.app.LoaderManager;
 import android.content.Loader;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.foodwhips.MainActivity;
 import com.example.android.foodwhips.R;
+import com.example.android.foodwhips.database.DBHelper;
+import com.example.android.foodwhips.database.DatabaseUtils;
 import com.example.android.foodwhips.fragments.GeneralInfo;
 import com.example.android.foodwhips.fragments.IngredientsInfo;
-import com.example.android.foodwhips.fragments.PhotoInfo;
 import com.example.android.foodwhips.models.GetRecipe;
 
 import com.example.android.foodwhips.utilities.ConversionUtils;
@@ -35,6 +42,13 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
     private Button faveButton;
     private Button picButton;
 
+    private Cursor cursor;
+    private DBHelper helper;
+    private SQLiteDatabase db;
+
+    private Bundle bundle;
+    private boolean check;
+
     static final String TAG = "recipedetailsactivity";
 
     private static final String GENERAL_INFO = "General";
@@ -49,16 +63,17 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
     private static final String RECIPE_FLAVORS = "recipe_flavors";
     private static final String RECIPE_SOURCE_URL = "recipe_source_url";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_details);
 
-        Bundle bundle = this.getIntent().getExtras();
+        bundle = this.getIntent().getExtras();
         String recipeId = bundle.getString("recipe_id");
         Log.v(TAG, "check if this is sending");
         Log.v(TAG, "ID IS " + recipeId);
+
+        check = true;
 
         mRecipeImage = (ImageView) findViewById(R.id.detail_image);
         mRecipeName = (TextView) findViewById(R.id.detail_name);
@@ -69,28 +84,70 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         faveButton = (Button) findViewById(R.id.favorite_button);
         picButton = (Button) findViewById(R.id.pic_button);
 
-        faveButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                Button fave = (Button) view;
-                if (fave.getText().toString().equals("Un-favorite")){
-                    faveButton.setText("Favorite");
-                }
-                else{
-                    faveButton.setText("Un-favorite");
-                }
-            }
-        });
-
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
+
+//        mTabHost.addTab(mTabHost.newTabSpec(GENERAL_INFO)
+//                .setIndicator(GENERAL_INFO), GeneralInfo.class, null);
+//
+//        mTabHost.addTab(mTabHost.newTabSpec(INGREDIENT_INFO)
+//                .setIndicator(INGREDIENT_INFO), IngredientsInfo.class, null);
 
         getLoaderManager().initLoader(0, null, this).forceLoad();
     }
 
     @Override
-    public void onRestart(){
-        super.onRestart();
+    public void onStart(){
+        super.onStart();
+        helper = new DBHelper(this);
+        db = helper.getReadableDatabase();
+        cursor = DatabaseUtils.getAll(db);
     }
+
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        FragmentManager fm = getSupportFragmentManager();
+        Log.v(TAG, "GETTING BACK STACK ENTRY COUNT: " + fm.getBackStackEntryCount());
+        Log.v(TAG, "GETTING CURRENT TAB INDEX: " + mTabHost.getChildCount());
+
+        if(check){ check = false; }
+        else{
+            Log.v(TAG, "WENT INSIDE ELSE STATEMENT IN ONRESUME(): ");
+//            Fragment frg = getSupportFragmentManager().findFragmentByTag(GENERAL_INFO);
+//            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.setAllowOptimization(false);
+//            ft.detach(frg);
+//            ft.attach(frg);
+//            ft.commit();
+        }
+    }
+
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+//        FragmentManager fm = getSupportFragmentManager();
+//
+//        Log.v(TAG, "PRINT NUMBER OF BACKSTACK ENTRIES ON CHILD COUNT: " + mTabHost.getChildCount());
+//
+//        if(fm.getBackStackEntryCount() == 0){
+//           // this.finish();
+//            super.onBackPressed();
+//        }
+//        else{
+//            getFragmentManager().popBackStack();
+//        }
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        db.close();
+        cursor.close();
+    }
+
 
     @Override
     public Loader<GetRecipe> onCreateLoader(int id, final Bundle args){
@@ -102,7 +159,7 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
     }
 
     @Override
-    public void onLoadFinished(Loader<GetRecipe> loader, GetRecipe data){
+    public void onLoadFinished(Loader<GetRecipe> loader, final GetRecipe data){
         if(data != null) {
             Bundle bundle = new Bundle();
             bundle.putString(INGREDIENTS_VALUE, data.printIngredients());
@@ -130,7 +187,6 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
 
             final String sourceUrl = data.getSourceRecipeUrl();
 
-
             instructionsButton.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) {
                     mTabHost.clearAllTabs();
@@ -140,6 +196,38 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
                 }
             });
 
+            cursor = DatabaseUtils.returnById(db, data.getId());
+
+            faveButton.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View view){
+                    Button fave = (Button) view;
+
+                    //Must be in the database already for it to mark the column to '0'
+                    if (fave.getText().toString().equals("Un-favorite")){
+                        DatabaseUtils.updateRecipeFaveStatus(db, data.getId(), 0);
+                        faveButton.setText("Favorite");
+                    }
+                    else{ //Two cases when trying to mark a recipe as a favorite
+
+                        //Recipe is already in the database, so just update the favorite column to '1'
+                        if(cursor.equals(data.getId())) {
+                            DatabaseUtils.updateRecipeFaveStatus(db, data.getId(), 1);
+                        }
+                        else{ //Recipe is not in the database, so add it AND mark favorite column as '1'
+                            DatabaseUtils.addRecipeToDatabase(db, data.getId(), data.getRecipeName(), data.getSourceName(),
+                                    data.getSourceRecipeUrl(), data.getImgUrl(), data.getRating(), data.getTotalTime(),
+                                    data.getServings(), data.printCourses(), data.printCuisines(),
+                                    data.printFlavors(), data.printIngredients(), 1, null);
+                        }
+                        faveButton.setText("Un-favorite");
+                    }
+                }
+            });
+
+            GeneralInfo gen = new GeneralInfo();
+            gen.setArguments(bundle);
+            IngredientsInfo ing = new IngredientsInfo();
+            ing.setArguments(bundle);
 
             mTabHost.addTab(mTabHost.newTabSpec(GENERAL_INFO)
                     .setIndicator(GENERAL_INFO), GeneralInfo.class, bundle);
@@ -147,16 +235,16 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
             mTabHost.addTab(mTabHost.newTabSpec(INGREDIENT_INFO)
                     .setIndicator(INGREDIENT_INFO), IngredientsInfo.class, bundle);
 
-            mTabHost.addTab(mTabHost.newTabSpec(PHOTO_INFO)
-                    .setIndicator(PHOTO_INFO), PhotoInfo.class, null);
+//            mTabHost.addTab(mTabHost.newTabSpec(PHOTO_INFO)
+//                    .setIndicator(PHOTO_INFO), PhotoInfo.class, null);
 
             Log.v(TAG, "SUCCESSFULLY PUT INFO INTO A BUNDLE");
             Log.v(TAG, "VALUE OF COURSES: " + data.printCourses());
             Log.v(TAG, "VALUE OF CUISINES: " + data.printCuisines());
+
         }
     }
 
     @Override
     public void onLoaderReset(Loader<GetRecipe> loader){}
 }
-

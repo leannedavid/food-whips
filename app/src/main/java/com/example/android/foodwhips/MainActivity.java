@@ -8,11 +8,13 @@ import android.widget.EditText;
 
 import com.example.android.foodwhips.activities.BaseActivity;
 import com.example.android.foodwhips.activities.SearchResultsActivity;
+import com.example.android.foodwhips.database.DBHelper;
 
 public class MainActivity extends BaseActivity{
     private String search_query;
     private EditText mEditView;
     private Button mButtonSearch;
+    private DBHelper helper;
 
     static final String TAG = "mainactivity";
 
@@ -34,13 +36,17 @@ public class MainActivity extends BaseActivity{
                 startActivity(switchAct);
             }
         });
+    }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        helper = new DBHelper(this);
+        helper.getWritableDatabase();
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState){
         super.onPostCreate(savedInstanceState);
     }
-
-
 }

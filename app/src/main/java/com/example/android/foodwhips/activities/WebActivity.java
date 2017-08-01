@@ -3,12 +3,14 @@ package com.example.android.foodwhips.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.android.foodwhips.R;
 
 public class WebActivity extends BaseActivity {
+    final static String TAG = "WEBACTIVITY";
     private WebView mWebView;
 
     @Override
@@ -33,19 +35,15 @@ public class WebActivity extends BaseActivity {
 
     @Override
     public void onBackPressed(){
-        if(getFragmentManager().getBackStackEntryCount() == 0){
-            this.finish();
+        Log.v(TAG, "PRINT NUMBER OF BACKSTACK ENTRIES: " + getFragmentManager().getBackStackEntryCount());
+
+        if(mWebView.canGoBack()){
+            //mWebView.goBack();
+            startActivity(new Intent(this, RecipeDetailsActivity.class));
         }
         else{
-            getFragmentManager().popBackStack();
+            super.onBackPressed();
         }
-//        if(mWebView.canGoBack()){
-//            //mWebView.goBack();
-//            startActivity(new Intent(this, RecipeDetailsActivity.class));
-//        }
-//        else{
-//            super.onBackPressed();
-//        }
     }
 
 

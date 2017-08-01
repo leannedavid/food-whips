@@ -22,7 +22,7 @@ public class GetRecipeJsonUtils {
 
     private static final String GET_ID = "id";
     private static final String GET_INGREDIENTS_LIST = "ingredientLines";
-    private static final String GET_SERVINGS = "yield";
+    private static final String GET_SERVINGS = "numberOfServings";
 
     private static final String GET_ATTRIBUTES = "attributes";
     private static final String GET_CUISINES = "cuisine";
@@ -123,7 +123,6 @@ public class GetRecipeJsonUtils {
             flavorArrayList.add(flavors.getString(GET_SOUR));
             flavorArrayList.add(flavors.getString(GET_SALTY));
         }
-
 
         String[] flavorsList = flavorArrayList.toArray(new String[flavorArrayList.size()]);
 

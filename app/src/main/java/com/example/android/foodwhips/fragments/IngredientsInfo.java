@@ -28,8 +28,10 @@ public class IngredientsInfo extends Fragment {
         //Log.v(TAG, "SUCCESSFULLY PASSED ID TO INGREDIENT FRAGMENT: " + recipe_id);
 
         mIngredientsView = (TextView) view.findViewById(R.id.detail_ingredients);
+        mIngredientsView.setFocusable(true);
+        mIngredientsView.requestFocus();
 
-        String ingredients = getArguments().getString(INGREDIENTS_VALUE);
+        String ingredients = this.getArguments().getString(INGREDIENTS_VALUE);
         mIngredientsView.setText(ingredients);
 
         return view;
