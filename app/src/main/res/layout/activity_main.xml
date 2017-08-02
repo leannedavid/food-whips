@@ -12,6 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/search_box"
         android:orientation="horizontal"
         android:background="@color/colorPrimary"
         android:outlineProvider="bounds">
@@ -52,4 +53,39 @@
             android:layout_height="match_parent"
             android:layout_weight=".5"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/main_app_title"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:textColor="@color/black"
+            android:layout_weight=".1"/>
+
+        <!-- Image carrousel -->
+        <android.support.v4.view.ViewPager
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/image_carousel"
+            android:layout_weight=".4">
+        </android.support.v4.view.ViewPager>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="Some random text"
+            android:textColor="@color/black"
+            android:layout_weight=".5"/>
+    </LinearLayout>
+
 </LinearLayout>

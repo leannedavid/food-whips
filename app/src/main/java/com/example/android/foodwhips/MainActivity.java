@@ -2,12 +2,14 @@ package com.example.android.foodwhips;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.android.foodwhips.activities.BaseActivity;
 import com.example.android.foodwhips.activities.SearchResultsActivity;
+import com.example.android.foodwhips.adapters.SwipeAdapter;
 import com.example.android.foodwhips.database.DBHelper;
 
 public class MainActivity extends BaseActivity{
@@ -15,6 +17,8 @@ public class MainActivity extends BaseActivity{
     private EditText mEditView;
     private Button mButtonSearch;
     private DBHelper helper;
+    private ViewPager viewPager;
+    private SwipeAdapter swipeAdapter;
 
     static final String TAG = "mainactivity";
 
@@ -25,6 +29,11 @@ public class MainActivity extends BaseActivity{
 
         //EditText setup
         mEditView   = (EditText)findViewById(R.id.search_text);
+
+        //Get the View Pager
+        viewPager = (ViewPager) findViewById(R.id.image_carousel);
+        swipeAdapter = new SwipeAdapter(this);
+        viewPager.setAdapter(swipeAdapter);
 
         //Button setup
         mButtonSearch = (Button)findViewById(R.id.search_button);
