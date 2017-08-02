@@ -20,6 +20,10 @@ import com.example.android.foodwhips.CuisineFilterActivity;
 import com.example.android.foodwhips.IngredientFilterActivity;
 import com.example.android.foodwhips.MainActivity;
 import com.example.android.foodwhips.R;
+import com.example.android.foodwhips.utilities.NetworkUtils;
+
+import java.net.URL;
+import java.util.Random;
 
 /* Responsible of keeping the same base layout (Toolbar/Navigation Drawer/Search Bar/Ellipses Menu)
    throughout all activities when navigating through the app.
@@ -31,6 +35,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     LinearLayout activityContainer;
     DrawerLayout fullView;
+    private String[] cuisines;
+    private String[] courses;
+    private String[] flavors;
 
 
     @Override
@@ -40,6 +47,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullView);
+
+        //Get the arrays for random
+        cuisines = getResources().getStringArray(R.array.cuisine_arrays);
+        courses = getResources().getStringArray(R.array.course_array);
+        flavors = getResources().getStringArray(R.array.flavor_array);
 
         //Setup toolbar on the activity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,7 +108,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.drawer_favorites) {
 
         } else if (id == R.id.drawer_random) {
-
+            String cuisine = cuisines[new Random().nextInt(cuisines.length)];
+            String course = cuisines[new Random().nextInt(courses.length)];
+            String flavor = cuisines[new Random().nextInt(flavors.length)];
+            URL foodsUrl = NetworkUtils.randomURLBuilder(flavor, cuisine, course);
+            Intent switchAct = new Intent(this, SearchResultsActivity.class);
+            switchAct.putExtra("randomFilter", foodsUrl.toString());
+            startActivity(switchAct);
         } else if (id == R.id.search_name) {
 
         } else if (id == R.id.search_ingredients) {

@@ -125,10 +125,10 @@ public class IngredientFilterActivity extends BaseActivity {
                 Log.v(TAG, "RADIO BUTTON SIZE = " + allRadioButtons.size());
                 for(int i = 0; i < allEditTexts.size(); i++) {
                     Log.v(TAG, "ARRAY SIZE IS: " + allEditTexts.size() + "; i = " + i);
-                    if(allRadioButtons.get(i*2).isChecked() == true) {
+                    if(allRadioButtons.get(i*2).isChecked()) {
                         includeSearchQueries.add(allEditTexts.get(i).getText().toString());
                     }
-                    else if(allRadioButtons.get(i*2+1).isChecked() == true) {
+                    else if(allRadioButtons.get(i*2+1).isChecked()) {
                         excludeSearchQueries.add(allEditTexts.get(i).getText().toString());
                     }
                 }

@@ -25,10 +25,10 @@ public final class NetworkUtils {
     private static final String GET_RECIPE_PATH = "v1/api/recipe/";
     /* Query parameters here */
     private final static String QUERY_PARAM_APP_ID = "_app_id";
-    private final static String appid = "";
+    private final static String appid = "ad09ae93";
 
     private final static String QUERY_PARAM_APPKEY = "_app_key";
-    private final static String appkey = "";
+    private final static String appkey = "ca4a3cb230d72671a6fc66eeaddc9238";
 
     private final static String QUERY_PARAM_NAME = "q";
     private final static String QUERY_MAX_RESULTS = "maxResult";
@@ -37,7 +37,7 @@ public final class NetworkUtils {
 
     // Basic / General URL method
     public static URL buildUrl(String search, int type) {
-        search.replaceAll("\\s+","+");
+        search = search.replaceAll("\\s+","+");
 
         Uri builtUri = null;
 
@@ -76,19 +76,24 @@ public final class NetworkUtils {
 
     // buildURL method for including / excluding ingredients
     public static URL buildIngredientUrl(String search, int type, ArrayList<String> include, ArrayList<String> exclude) {
-        search.replaceAll("\\s+","+");
+        search = search.replaceAll("\\s+","+");
         Uri.Builder builder = new Uri.Builder();
 
         builder.scheme("https").authority("api.yummly.com").appendPath("v1").appendPath("api").
-                appendPath("recipes").appendQueryParameter(QUERY_PARAM_NAME, search).appendQueryParameter(QUERY_PARAM_APP_ID, appid).
-                appendQueryParameter(QUERY_PARAM_APPKEY, appkey);
+                appendPath("recipes").appendQueryParameter(QUERY_PARAM_APP_ID, appid).
+                appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
+                appendQueryParameter(QUERY_PARAM_NAME, search);
 
         for(String s: include){
-            builder.appendQueryParameter("allowedIngredient[]", s);
+            if(s.length() > 0){
+                builder.appendQueryParameter("allowedIngredient[]", s.replaceAll("\\s","%20"));
+            }
         }
 
         for(String s2: exclude) {
-            builder.appendQueryParameter("excludedIngredient[]", s2);
+            if(s2.length() > 0){
+                builder.appendQueryParameter("excludedIngredient[]", s2.replaceAll("\\s","%20"));
+            }
         }
         Uri builtUri = null;
 
@@ -122,19 +127,24 @@ public final class NetworkUtils {
 
     // buildURL method for including / excluding cuisines
     public static URL buildCuisineUrl(String search, int type, ArrayList<String> allowed, ArrayList<String> exclude) {
-        search.replaceAll("\\s+","+");
+        search = search.replaceAll("\\s+","+");
         Uri.Builder builder = new Uri.Builder();
 
         builder.scheme("https").authority("api.yummly.com").appendPath("v1").appendPath("api").
-                appendPath("recipes").appendQueryParameter(QUERY_PARAM_NAME, search).appendQueryParameter(QUERY_PARAM_APP_ID, appid).
-                appendQueryParameter(QUERY_PARAM_APPKEY, appkey);
+                appendPath("recipes").appendQueryParameter(QUERY_PARAM_APP_ID, appid).
+                appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
+                appendQueryParameter(QUERY_PARAM_NAME, search);
 
         for(String s: allowed){
-            builder.appendQueryParameter("allowedCuisine[]", s);
+            if(s.length() > 0){
+                builder.appendQueryParameter("allowedCuisine[]", "cuisine^cuisine-" + s.toLowerCase());
+            }
         }
 
         for(String s2: exclude) {
-            builder.appendQueryParameter("excludedCuisine[]", s2);
+            if(s2.length() > 0){
+                builder.appendQueryParameter("excludedCuisine[]", "cuisine^cuisine-" + s2.toLowerCase());
+            }
         }
         Uri builtUri = null;
 
@@ -164,6 +174,29 @@ public final class NetworkUtils {
         Log.v(TAG, "Built Cuisine Filtered URI: " + url);
 
         return url;
+    }
+
+    //A random generated URL
+    public static URL randomURLBuilder(String search, String cuisine, String course){
+        search = search.replaceAll("\\s+","+");
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("https").authority("api.yummly.com").appendPath("v1").appendPath("api").
+                appendPath("recipes").appendQueryParameter(QUERY_PARAM_APP_ID, appid).
+                appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
+                appendQueryParameter(QUERY_PARAM_NAME, search);
+        builder.appendQueryParameter("allowedCuisine[]", "cuisine^cuisine-" + cuisine.toLowerCase());
+        builder.appendQueryParameter("allowedCourse[]", "course^course-" + course.toLowerCase());
+        Uri builtUri = builder.build();
+        URL url = null;
+
+        try {
+            url = new URL(builtUri.toString());
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+
     }
 
     /* This method goes to the API and grabs the JSON string */

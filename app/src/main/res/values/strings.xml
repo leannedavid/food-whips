@@ -55,13 +55,13 @@
         <item>Italian</item>
         <item>Asian</item>
         <item>Mexican</item>
-        <item>Southern &amp; Soul Food</item>
+        <item>Southern</item>
         <item>French</item>
         <item>Southwestern</item>
         <item>Barbecue</item>
         <item>Indian</item>
         <item>Chinese</item>
-        <item>Cajun &amp; Creole</item>
+        <item>Cajun</item>
         <item>English</item>
         <item>Mediterranean</item>
         <item>Greek</item>
@@ -76,7 +76,33 @@
         <item>Swedish</item>
         <item>Swedish</item>
         <item>Hungarian</item>
-        <item>Portugese</item>
+        <item>Portuguese</item>
+    </string-array>
+
+    <!-- List of options for courses -->
+    <string-array name="course_array">
+        <item>Main</item>
+        <item>Desserts</item>
+        <item>Side</item>
+        <item>Lunch</item>
+        <item>Appetizers</item>
+        <item>Salads</item>
+        <item>Breads</item>
+        <item>Breakfast</item>
+        <item>Soups</item>
+        <item>Beverages</item>
+        <item>Condiments</item>
+        <item>Cocktails</item>
+    </string-array>
+
+    <!-- List of options for flavors in random -->
+    <string-array name="flavor_array">
+        <item>Vanilla</item>
+        <item>Chocolate</item>
+        <item>Strawberry</item>
+        <item>Banana</item>
+        <item>Apple</item>
+        <item>Spicy</item>
     </string-array>
 
 

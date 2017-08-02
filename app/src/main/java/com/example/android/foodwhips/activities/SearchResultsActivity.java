@@ -40,10 +40,12 @@ public class SearchResultsActivity extends BaseActivity {
         String searchQuery = bundle.getString("searchQuery");
         String ingredientsQuery = bundle.getString("ingredientsFilter");
         String cuisineQuery = bundle.getString("cuisinesFilter");
+        String randomQuery = bundle.getString("randomFilter");
 
         Log.v(TAG, "IS SEARCH QUERY NULL ? " + searchQuery);
         Log.v(TAG, "IS INGREDIENTS FILTER NULL ? " + ingredientsQuery);
         Log.v(TAG, "IS CUISINE FILTER NULL ? " + cuisineQuery);
+        Log.v(TAG, "IS RANDOM NULL ? " + randomQuery);
 
         URL ingredientsFilter = null;
         try {
@@ -59,12 +61,21 @@ public class SearchResultsActivity extends BaseActivity {
             e.printStackTrace();
         }
 
+        URL randomFilter = null;
+        try{
+            randomFilter = new URL(randomQuery);
+        }catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+
         if(searchQuery != null) {
             foodsUrl = NetworkUtils.buildUrl(searchQuery, 1);
         } else if(ingredientsFilter != null) {
             foodsUrl =  ingredientsFilter;
         } else if(cuisineFilter != null) {
             foodsUrl = cuisineFilter;
+        }else if(randomFilter != null){
+            foodsUrl = randomFilter;
         }
 
 
