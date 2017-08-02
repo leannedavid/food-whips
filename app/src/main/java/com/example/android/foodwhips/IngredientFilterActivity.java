@@ -45,11 +45,15 @@ public class IngredientFilterActivity extends BaseActivity {
     private RadioButton radioButton1;
     private RadioButton radioButton2;
 
+    private Boolean check;
+
     // Beginning of activity: loads filter xml page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filter_ingredients);
+
+        check = true;
 
         //EditText setup
         mSearchQuery = (EditText)findViewById(R.id.search_ingredient_text);
@@ -137,11 +141,25 @@ public class IngredientFilterActivity extends BaseActivity {
 
                 Log.v(TAG, "INCLUDED INGREDIENTS: " + includeSearchQueries);
                 Log.v(TAG, "EXCLUDED INGREDIENTS: " + excludeSearchQueries);
+
             }
         });
 
         Log.v(TAG, "ON CREATE FINISHED");
 
+    }
+
+    // Clears search queries from previous search
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(check) {
+            check = false;
+        } else {
+            includeSearchQueries.clear();
+            excludeSearchQueries.clear();
+        }
     }
 
     // Adds Edit Text to the newly added linear layout

@@ -37,9 +37,18 @@
             </intent-filter>
         </activity>
 
-        <!-- Filter by ingredients activity-->
+        <!-- Filter by ingredients activity -->
         <activity
             android:name=".IngredientFilterActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Filter by cuisine activity -->
+        <activity
+            android:name=".CuisineFilterActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
