@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static android.widget.LinearLayout.VERTICAL;
 import static android.widget.LinearLayout.HORIZONTAL;
 
 import com.example.android.foodwhips.activities.BaseActivity;
@@ -78,8 +77,8 @@ public class CuisineFilterActivity extends BaseActivity {
         allSpinners.add(spinner);
 
         // Initialize original radio buttons created from xml page
-        radioButton1 = (RadioButton) findViewById(R.id.filter_ingredient_1);
-        radioButton2 = (RadioButton) findViewById(R.id.filter_ingredient_2);
+        radioButton1 = (RadioButton) findViewById(R.id.filter_cuisine_1);
+        radioButton2 = (RadioButton) findViewById(R.id.filter_cuisine_2);
         // And add to list of radio buttons
         allRadioButtons.add(radioButton1);
         allRadioButtons.add(radioButton2);
@@ -101,14 +100,13 @@ public class CuisineFilterActivity extends BaseActivity {
 
                 // Initialize the new layouts to be created
                 LinearLayout ll = new LinearLayout(CuisineFilterActivity.this);
-                ll.setOrientation(VERTICAL);
+                ll.setOrientation(HORIZONTAL);
                 LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT);
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                llParams.setMargins(0, 100, 0, 0);
 
                 ll.setLayoutParams(llParams);
-                // Change to own desire:
-                ll.setPadding(10, 10, 10, 10);
 
                 // Add Spinner to layout
                 addSpinners(ll);
@@ -122,7 +120,7 @@ public class CuisineFilterActivity extends BaseActivity {
         });
 
         // Button setup for when search button is pressed
-        Button searchButton = (Button) findViewById(R.id.ingredient_search_button);
+        Button searchButton = (Button) findViewById(R.id.cuisines_search_button);
 
         // Add everything from search query and direct to URL
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +172,7 @@ public class CuisineFilterActivity extends BaseActivity {
     // Add Spinner to the newly added linear layout
     public void addSpinners(LinearLayout ll) {
         Spinner sp = new Spinner(this);
-        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         sp.setLayoutParams(p);
 
         sp.setAdapter(spinnerAdapter);
@@ -186,14 +184,17 @@ public class CuisineFilterActivity extends BaseActivity {
     // Add Radio Buttons to the newly added linear layout
     public void addRadioButtons(LinearLayout ll) {
         RadioGroup rbg = new RadioGroup(this);
-        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0);
-        p.weight = 3;
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
+        p.weight = 0.3f;
         rbg.setLayoutParams(p);
         rbg.setOrientation(HORIZONTAL);
 
         RadioButton rb1 = new RadioButton(this);
         RadioButton rb2 = new RadioButton(this);
+        LinearLayout.LayoutParams b = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
+        rb1.setLayoutParams(b);
+        rb2.setLayoutParams(b);
         rb1.setText("Allow");
         rb2.setText("Exclude");
 

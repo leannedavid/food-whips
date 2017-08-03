@@ -81,6 +81,7 @@
 
     <!-- List of options for courses -->
     <string-array name="course_array">
+        <item>Choose course</item>
         <item>Main</item>
         <item>Desserts</item>
         <item>Side</item>
@@ -105,6 +106,46 @@
         <item>Spicy</item>
     </string-array>
 
+    <!-- List of options for diets -->
+    <string-array name="diet_array">
+        <item>Choose Diet</item>
+        <item>387^Lacto-ovo vegetarian</item>
+        <item>388^Lacto vegetarian</item>
+        <item>389^Ovo vegetarian</item>
+        <item>390^Pescetarian</item>
+        <item>386^Vegan</item>
+        <item>403^Paleo</item>
+    </string-array>
+
+    <!-- List of options for Holidays -->
+    <string-array name="holiday_array">
+        <item>Choose Holiday</item>
+        <item>Christmas</item>
+        <item>Thanksgiving</item>
+        <item>Summer</item>
+        <item>Fall</item>
+        <item>New Year</item>
+        <item>Super Bowl</item>
+        <item>Winter</item>
+        <item>Spring</item>
+        <item>Halloween</item>
+        <item>Valentines Day</item>
+        <item>Hanukkah</item>
+        <item>Passover</item>
+        <item>Easter</item>
+        <item>St Patricks Day</item>
+        <item>Chinese New Year</item>
+        <item>4th of July</item>
+    </string-array>
+
+    <!-- List of options for Time -->
+    <string-array name="time_array">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50+</item>
+    </string-array>
 
     <string name="empty_data">No data to display.</string>
 

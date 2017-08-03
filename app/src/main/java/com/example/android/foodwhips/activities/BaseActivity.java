@@ -116,7 +116,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             switchAct.putExtra("randomFilter", foodsUrl.toString());
             startActivity(switchAct);
         } else if (id == R.id.search_name) {
-
+            startActivity(new Intent(this, NameFilterActivity.class));
         } else if (id == R.id.search_ingredients) {
             startActivity(new Intent(this, IngredientFilterActivity.class));
         } else if (id == R.id.search_cuisine) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -13,7 +14,6 @@ import android.widget.LinearLayout;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static android.widget.LinearLayout.VERTICAL;
 import static android.widget.LinearLayout.HORIZONTAL;
 
 import com.example.android.foodwhips.activities.BaseActivity;
@@ -85,23 +85,19 @@ public class IngredientFilterActivity extends BaseActivity {
 
                 // Initialize the new layouts to be created
                 LinearLayout ll = new LinearLayout(IngredientFilterActivity.this);
-                ll.setOrientation(VERTICAL);
+                ll.setOrientation(HORIZONTAL);
                 LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT);
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                llParams.setMargins(0, 100, 0, 0);
 
                 ll.setLayoutParams(llParams);
-                // Change to own desire:
-                ll.setPadding(10, 10, 10, 10);
 
                 // Add EditText to layout
                 addEditText(ll);
 
                 // Add Radio Buttons to layout
                 addRadioButtons(ll);
-
-                // Add new sub-layouts to the array
-                //subLayouts.add(ll);
 
                 // Last step, add the new linear layout to the base layout
                 container.addView(ll);
@@ -166,10 +162,10 @@ public class IngredientFilterActivity extends BaseActivity {
     public void addEditText(LinearLayout ll) {
         EditText et = new EditText(this);
 
-        //LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0);
-        //p.weight = 1;
-        //et.setLayoutParams(p);
         et.setHint(R.string.ingredient_hint);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+        p.weight = 0.55f;
+        et.setLayoutParams(p);
 
         et.setTextSize(16);
 
@@ -183,16 +179,19 @@ public class IngredientFilterActivity extends BaseActivity {
     // Add Radio Buttons to the newly added linear layout
     public void addRadioButtons(LinearLayout ll) {
         RadioGroup rbg = new RadioGroup(this);
-        //LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0);
-       // p.weight = 3;
-        //rbg.setLayoutParams(p);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
+        p.weight = 0.5f;
+        rbg.setLayoutParams(p);
         rbg.setOrientation(HORIZONTAL);
 
         RadioButton rb1 = new RadioButton(this);
         RadioButton rb2 = new RadioButton(this);
+        LinearLayout.LayoutParams b = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
-        rb1.setText("Included");
-        rb2.setText("Excluded");
+        rb1.setLayoutParams(b);
+        rb2.setLayoutParams(b);
+        rb1.setText("Include");
+        rb2.setText("Exclude");
 
         // Add new radio buttons to a radio group
         rbg.addView(rb1);

@@ -23,6 +23,7 @@ public final class NetworkUtils {
     private static final String FOOD_BASE_URL = "http://api.yummly.com/v1/api/recipes?";
     private static final String RECIPE_BASE_URL = "http://api.yummly.com/";
     private static final String GET_RECIPE_PATH = "v1/api/recipe/";
+
     /* Query parameters here */
     private final static String QUERY_PARAM_APP_ID = "_app_id";
     private final static String appid = "ad09ae93";
@@ -32,6 +33,8 @@ public final class NetworkUtils {
 
     private final static String QUERY_PARAM_NAME = "q";
     private final static String QUERY_MAX_RESULTS = "maxResult";
+
+    private final static String QUERY_PARAM_TIME = "maxTotalTimeInSeconds";
 
     private final static int MAX_RESULT_NUM = 20;
 
@@ -185,7 +188,9 @@ public final class NetworkUtils {
                 appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
                 appendQueryParameter(QUERY_PARAM_NAME, search);
         builder.appendQueryParameter("allowedCuisine[]", "cuisine^cuisine-" + cuisine.toLowerCase());
-        builder.appendQueryParameter("allowedCourse[]", "course^course-" + course.toLowerCase());
+        if(course != "Choose Course") {
+            builder.appendQueryParameter("allowedCourse[]", "course^course-" + course.toLowerCase());
+        }
         Uri builtUri = builder.build();
         URL url = null;
 
@@ -197,6 +202,76 @@ public final class NetworkUtils {
         }
         return url;
 
+    }
+
+    // buildURL method for all other filters
+    public static URL buildNameUrl(String search, int type, String timeInSeconds,
+           String allowedCourse, String allowedDiet, String allowedHoliday) {
+        search = search.replaceAll("\\s+","+");
+        Uri.Builder builder = new Uri.Builder();
+
+        builder.scheme("https").authority("api.yummly.com").appendPath("v1").appendPath("api").
+                appendPath("recipes").appendQueryParameter(QUERY_PARAM_APP_ID, appid).
+                appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
+                appendQueryParameter(QUERY_PARAM_NAME, search);
+
+        if(allowedCourse.length() != 0){
+            if(allowedCourse != "Choose Course") {
+                builder.appendQueryParameter("allowedCourse[]", "course^course-" + allowedCourse.toLowerCase());
+            }
+        }
+
+        if(allowedDiet.length() != 0){
+            if(allowedDiet != "Choose Diet") {
+                builder.appendQueryParameter("allowedDiet[]", allowedDiet);
+            }
+        }
+
+        if(allowedHoliday.length() != 0){
+            if(allowedHoliday != "Choose Holiday") {
+                builder.appendQueryParameter("allowedHoliday[]", "holiday^holiday-" + allowedHoliday.replaceAll("\\s", "-").toLowerCase());
+            }
+        }
+
+        if(timeInSeconds.length() != 0){
+            if(timeInSeconds == "50+") {
+                builder.appendQueryParameter(QUERY_PARAM_TIME, "10000");
+            }
+            else {
+                int timeInteger = Integer.parseInt(timeInSeconds);
+                timeInteger = timeInteger * 60;
+                builder.appendQueryParameter(QUERY_PARAM_TIME, Integer.toString(timeInteger));
+            }
+        }
+
+        Uri builtUri = null;
+
+
+        if (type == 1) {
+            builtUri = builder.build();
+        }
+
+        else if(type == 2){
+            builtUri = Uri.parse(RECIPE_BASE_URL).buildUpon().
+                    path(GET_RECIPE_PATH + search).
+                    appendQueryParameter(QUERY_PARAM_APP_ID, appid).
+                    appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
+
+                    build();
+        }
+
+        URL url = null;
+
+        try {
+            url = new URL(builtUri.toString());
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built Name Filtered URI: " + url);
+
+        return url;
     }
 
     /* This method goes to the API and grabs the JSON string */
