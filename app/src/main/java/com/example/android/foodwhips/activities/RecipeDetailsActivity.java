@@ -104,8 +104,6 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         }
     }
 
-
-
     @Override
     public void onResume(){
         super.onResume();
@@ -125,7 +123,6 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         }
     }
 
-
     @Override
     public void onBackPressed(){
         super.onBackPressed();
@@ -141,6 +138,7 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
 //            getFragmentManager().popBackStack();
 //        }
     }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -163,7 +161,15 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         if(data != null) {
             Bundle bundle = new Bundle();
             bundle.putString(INGREDIENTS_VALUE, data.printIngredients());
-            bundle.putString(RECIPE_TIME_VALUE, data.getTotalTime());
+
+            Log.v(TAG, "TOTAL TIME IN THE LOADER FOR THE RECIPE IS: " + data.getTotalTime());
+            Log.v(TAG, "LENGTH OF TIME data.getTotalTime() IS " + data.getTotalTime().length());
+            Log.v(TAG, "COURSES IS: " + data.getCourses().length + " AND CUISINES IS: " + data.getCuisines().length);
+
+            if (data.getTotalTime().length() != 0 && data.getTotalTime() != null ) {
+                Log.v(TAG, "SHOULD NOT GO IN HERE CUZ IT'S NULL BUT IT DID???");
+                bundle.putString(RECIPE_TIME_VALUE, data.getTotalTime());
+            }
             bundle.putString(RECIPE_SERVINGS_VALUE, data.getServings());
 
             if(!data.isCoursesEmpty()) {

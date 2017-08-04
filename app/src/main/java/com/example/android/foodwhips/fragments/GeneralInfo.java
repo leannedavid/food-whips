@@ -43,8 +43,8 @@ public class GeneralInfo extends Fragment{
         String recipe_cuisines = this.getArguments().getString(RECIPE_CUISINES);
         String recipe_flavors = this.getArguments().getString(RECIPE_FLAVORS);
 
-        Log.v(TAG, "DID COURSES COPY?: " + recipe_courses);
-        Log.v(TAG, "WHAT IS THE VALUE OF SERVINGS?: " + recipe_servings);
+        //Log.v(TAG, "DID COURSES COPY?: " + recipe_courses);
+        //Log.v(TAG, "WHAT IS THE VALUE OF SERVINGS?: " + recipe_servings);
         Log.v(TAG, "WHAT IS THE VALUE OF TIME?: " + recipe_time);
 
         mTimeTaken = (TextView) view.findViewById(R.id.detail_time_taken);
@@ -54,6 +54,11 @@ public class GeneralInfo extends Fragment{
         mFlavors = (TextView) view.findViewById(R.id.detail_flavors);
 
         if (recipe_time != null) {
+            Log.v(TAG, "THE LENGTH OF RECIPE TIME IS: " + recipe_time.length());
+            Log.v(TAG, "WHY DID IT GO HERE THEN IF RECIPE TIME IS NULL?: " + recipe_time);
+            String isNull = recipe_time.isEmpty() ? "YES IT'S NULL WTF" : "NO IT'S NOT NULL";
+            Log.v(TAG, "Checking nullability: " + isNull);
+
             mTimeTaken.setVisibility(View.VISIBLE);
             mTimeTaken.setText("Time: " + recipe_time);
         }

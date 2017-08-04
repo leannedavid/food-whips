@@ -38,7 +38,7 @@ public class FavoritesActivity extends BaseActivity
         super.onStart();
         helper = new DBHelper(this);
         db = helper.getReadableDatabase();
-        cursor = DatabaseUtils.getAll(db);
+        cursor = DatabaseUtils.returnFavorites(db, 1);
         adapter = new FavoriteRecipesAdapter(cursor, this);
         recyclerView.setAdapter(adapter);
     }

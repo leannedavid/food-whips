@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -28,9 +29,16 @@ public class WebActivity extends BaseActivity {
 
     private void webView(String url){
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.getSettings().setDomStorageEnabled(true);
-        //mWebView.setWebViewClient(new WebViewClient());
         mWebView.loadUrl(url);
+
+        mWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request){
+                view.loadUrl(request.getUrl().toString());
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -38,13 +46,10 @@ public class WebActivity extends BaseActivity {
         Log.v(TAG, "PRINT NUMBER OF BACKSTACK ENTRIES: " + getFragmentManager().getBackStackEntryCount());
 
         if(mWebView.canGoBack()){
-            //mWebView.goBack();
             startActivity(new Intent(this, RecipeDetailsActivity.class));
         }
         else{
             super.onBackPressed();
         }
     }
-
-
 }

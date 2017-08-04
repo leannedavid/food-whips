@@ -3,6 +3,7 @@ package com.example.android.foodwhips.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,13 +82,24 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
 
             new ConversionUtils.FetchImageTask(mFoodImage).execute(cursor.getString(cursor.getColumnIndex(Contract.FOODWHIPS_TABLE.COLUMN_NAME_IMG_URL)));
             mRecipeNameText.setText(cursor.getString(cursor.getColumnIndex(Contract.FOODWHIPS_TABLE.COLUMN_NAME_TITLE)).toUpperCase());
-            mRatingText.setText("Rating: " + rating);
-            mTimeTakenText.setText("Time: " + timeTaken);
+
+            if(rating.length() != 0){
+                mRatingText.setVisibility(View.VISIBLE);
+                mRatingText.setText("Rating: " + rating);
+            }
+
+            if(timeTaken.length() > 0 && timeTaken != null) {
+                Log.v(TAG, "CHECKING THE TIME TAKEN LENGTH IN FAVES: " + timeTaken.length());
+                mTimeTakenText.setVisibility(View.VISIBLE);
+                mTimeTakenText.setText("Time: " + timeTaken);
+            }
 
             if(courses.length() != 0) {
+                mCoursesText.setVisibility(View.VISIBLE);
                 mCoursesText.setText("Courses: " + courses);
             }
             if(cuisines.length() != 0) {
+                mCuisinesText.setVisibility(View.VISIBLE);
                 mCuisinesText.setText("Cuisines: " + cuisines);
             }
         }

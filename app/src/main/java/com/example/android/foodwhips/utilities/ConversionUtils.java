@@ -1,49 +1,39 @@
 package com.example.android.foodwhips.utilities;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
 import android.os.AsyncTask;
-
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
-
-import com.example.android.foodwhips.MainActivity;
-import com.example.android.foodwhips.activities.RecipeDetailsActivity;
-import com.example.android.foodwhips.adapters.RecipeResultsAdapter;
 import com.example.android.foodwhips.models.GetRecipe;
-import com.example.android.foodwhips.models.SearchRecipe;
-
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.net.URL;
-import java.util.ArrayList;
 
 public class ConversionUtils {
-    static final String TAG = "conversionutils";
+    static final String TAG = "ConversionUtils";
 
     public static String secondsToHrsMins(String timeInSecs){
         String finalTime = "";
-        double temp = Double.parseDouble(timeInSecs);
-        int time = (int) temp;
-        time = Math.round(time/60);
-        finalTime = Integer.toString(time) + " minutes";
 
-        if(time > 60){
-            int hr = time / 60;
-            int min = (time % 60);
+        if(timeInSecs.length() > 0) {
+            double temp = Double.parseDouble(timeInSecs);
+            int time = (int) temp;
+            time = Math.round(time / 60);
+            finalTime = Integer.toString(time) + " minutes";
 
-            finalTime = Integer.toString(hr) +
-                    (hr > 1 ? " hours" : " hour");
+            if (time >= 60) {
+                int hr = time / 60;
+                int min = (time % 60);
 
-            if(min >= 1) {
-                 finalTime += " and " + Integer.toString(min) +
-                 (min > 1 ? " minutes" : " minute");
+                finalTime = Integer.toString(hr) +
+                        (hr > 1 ? " hours" : " hour");
+
+                if (min >= 1) {
+                    finalTime += " and " + Integer.toString(min) +
+                            (min > 1 ? " minutes" : " minute");
+                }
             }
         }
         return finalTime;
@@ -65,6 +55,7 @@ public class ConversionUtils {
 
         return percentage;
     }
+
     public static class FetchImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView image;
 
@@ -92,9 +83,6 @@ public class ConversionUtils {
     }
 
     public static GetRecipe FetchRecipeTask(String recipeId){
-        //Bundle bundle = getIntent().getExtras();
-
-       // String recipeId = stuff.getString("recipe_id");
         URL recipeUrl = NetworkUtils.buildUrl(recipeId, 2);
         GetRecipe specificRecipe = null;
 
@@ -106,9 +94,7 @@ public class ConversionUtils {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         Log.v(TAG, "THE RECIPE ID: " + recipeId);
         return specificRecipe;
     }
-
 }

@@ -25,6 +25,8 @@ public class SearchRecipeJsonUtils {
     private static final String RECIPE_COURSES = "course";
     private static final String RECIPE_CUISINES = "cuisine";
 
+    private static final String RECIPE_TOTAL_RESULTS = "totalMatchCount";
+
 
     public static ArrayList<SearchRecipe> parseJSON(String json) throws JSONException{
         ArrayList<SearchRecipe> recipeResults = new ArrayList<>();
@@ -36,7 +38,10 @@ public class SearchRecipeJsonUtils {
 
             //IMAGE URL
             JSONObject imgObj = match.getJSONObject(RECIPE_IMG);
-            String img = imgObj.getString(RECIPE_IMG_SIZE_90);
+            String img = "";
+            if(imgObj != null && imgObj.has(RECIPE_IMG_SIZE_90)) {
+                img = imgObj.getString(RECIPE_IMG_SIZE_90);
+            }
 
             //RECIPE SOURCE
             String source = match.getString(RECIPE_SOURCE);

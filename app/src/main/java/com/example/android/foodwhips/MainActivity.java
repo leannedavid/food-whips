@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.EditText;
 
 import com.example.android.foodwhips.activities.BaseActivity;
 import com.example.android.foodwhips.activities.SearchResultsActivity;
-import com.example.android.foodwhips.adapters.SwipeAdapter;
+import com.example.android.foodwhips.adapters.HomeSwipeAdapter;
 import com.example.android.foodwhips.database.DBHelper;
 import com.example.android.foodwhips.models.GetRecipe;
 import com.example.android.foodwhips.utilities.GetRecipeJsonUtils;
@@ -31,7 +30,7 @@ public class MainActivity extends BaseActivity{
     private Button mButtonSearch;
     private DBHelper helper;
     private ViewPager viewPager;
-    private SwipeAdapter swipeAdapter;
+    private HomeSwipeAdapter swipeAdapter;
 
     private Context ctx;
 
@@ -45,15 +44,15 @@ public class MainActivity extends BaseActivity{
         ctx = this;
 
         //placeholder only
-//        imagesFromURL = new String[]{
-//          "http://www.tivix.com/uploads/blog_pics/Android-logo.png"
-//        };
+        imagesFromURL = new String[]{
+          "http://www.tivix.com/uploads/blog_pics/Android-logo.png"
+        };
 
-        new FetchCarouselView().execute(
-                "French-Lentil-Soup-1096886",
-                "Magic-Custard-Cake-2113595",
-                "Scalloped-Potatoes-2057149"
-        );
+//        new FetchCarouselView().execute(
+//                "French-Lentil-Soup-1096886",
+//                "Magic-Custard-Cake-2113595",
+//                "Scalloped-Potatoes-2057149"
+//        );
 
         ArrayList<GetRecipe> starter = new ArrayList<>();
 
@@ -62,7 +61,7 @@ public class MainActivity extends BaseActivity{
 
         //Get the View Pager
         viewPager = (ViewPager) findViewById(R.id.image_carousel);
-        swipeAdapter = new SwipeAdapter(this, imagesFromURL, starter);
+        swipeAdapter = new HomeSwipeAdapter(this, imagesFromURL, starter);
         viewPager.setAdapter(swipeAdapter);
 
         //Button setup
@@ -120,7 +119,7 @@ public class MainActivity extends BaseActivity{
                 for(int i = 0; i < data.size(); i++){
                     imagesFromURL[i] =  data.get(i).getImgUrl();
                 }
-                SwipeAdapter swipeAdapter = new SwipeAdapter(ctx, imagesFromURL, data);
+                HomeSwipeAdapter swipeAdapter = new HomeSwipeAdapter(ctx, imagesFromURL, data);
                 viewPager.setAdapter(swipeAdapter);
             }
         }

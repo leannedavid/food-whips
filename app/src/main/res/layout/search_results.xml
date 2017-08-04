@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/search_results_padding"
             android:textSize="@dimen/search_results_details"
+            android:visibility="gone"
             />
 
         <TextView
@@ -38,14 +39,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/search_results_padding"
-            android:textSize="@dimen/search_results_details"/>
+            android:textSize="@dimen/search_results_details"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/recipe_courses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/search_results_padding"
-            android:textSize="@dimen/search_results_details"/>
+            android:textSize="@dimen/search_results_details"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/recipe_cuisines"
@@ -53,7 +56,8 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/search_results_padding"
             android:textSize="@dimen/search_results_details"
-            android:paddingBottom="10dp" />
+            android:paddingBottom="10dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdapter.RecipeHolder> {
     private ArrayList<SearchRecipe> recipeList;
     RecipeClickListener listener;
+
+    final static String TAG = "RECIPERESULTSADAPTER";
 
     //Constructor of RecipeResults Adapter
     public RecipeResultsAdapter(ArrayList<SearchRecipe> recipeList, RecipeClickListener listener) {
@@ -95,17 +98,26 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
 
             new ConversionUtils.FetchImageTask(mFoodImage).execute(recipe.getImg());
             mRecipeNameText.setText(recipe.getRecipeName().toUpperCase());
-            mRatingText.setText("Rating: " + ConversionUtils.starRating(recipe.getRating()));
 
-            if(!recipe.getTimeInSecs().equals("") || recipe.getTimeInSecs().length() > 0) {
+            if(recipe.getRating() != null) {
+                mRatingText.setVisibility(View.VISIBLE);
+                mRatingText.setText("Rating: " + ConversionUtils.starRating(recipe.getRating()));
+            }
+
+            if(recipe.getTimeInSecs().length() > 0 && recipe.getTimeInSecs() != null) {
+                Log.v(TAG, "YET APPARENTLY THE LENGTH OF TIME IS: " + recipe.getTimeInSecs().length());
+                Log.v(TAG, "THE VALUE OF TIME IS: " + recipe.getTimeInSecs());
+                mTimeTakenText.setVisibility(View.VISIBLE);
                 mTimeTakenText.setText("Time: " + ConversionUtils.secondsToHrsMins(recipe.getTimeInSecs()));
             }
 
             if (recipe.isCoursesEmpty() == false) {
+                mCoursesText.setVisibility(View.VISIBLE);
                 mCoursesText.setText("Course(s): " + recipe.printCourses());
             }
 
             if(recipe.isCuisinesEmpty() == false) {
+                mCuisinesText.setVisibility(View.VISIBLE);
                 mCuisinesText.setText("Cuisine(s): " + recipe.printCuisines());
             }
         }
@@ -115,7 +127,5 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
             int pos = getAdapterPosition();
             listener.onRecipeClick(pos);
         }
-
-
     }
 }

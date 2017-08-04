@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Created by Ariel on 8/1/2017.
  */
 
-public class SwipeAdapter extends PagerAdapter {
+public class HomeSwipeAdapter extends PagerAdapter {
     private Context ctx;
     private LayoutInflater layoutInflater;
     private String[] imagesFromURL;
@@ -31,7 +31,7 @@ public class SwipeAdapter extends PagerAdapter {
 
     final static String TAG = "SWIPEADAPTER";
 
-    public SwipeAdapter(Context ctx, String[] imagesFromURL, ArrayList<GetRecipe> data){
+    public HomeSwipeAdapter(Context ctx, String[] imagesFromURL, ArrayList<GetRecipe> data){
         this.ctx = ctx;
         this.imagesFromURL = imagesFromURL;
         this.data = data;
@@ -57,12 +57,12 @@ public class SwipeAdapter extends PagerAdapter {
         ImageView imageView = (ImageView) itemView.findViewById(R.id.carousel_image);
         TextView textView = (TextView) itemView.findViewById(R.id.carousel_title);
 
-        Log.v(TAG, "ENTERING SWIPE ADAPTER, VALUE OF POSITION " + position + " IS: " + data.get(position).getRecipeName());
+        //Log.v(TAG, "ENTERING SWIPE ADAPTER, VALUE OF POSITION " + position + " IS: " + data.get(position).getRecipeName());
 
         Picasso.with(ctx).load(imagesFromURL[position]).into(imageView);
         Log.v(TAG, "VALUE OF POSITION: " + position);
 
-        textView.setText(data.get(position).getRecipeName());
+        //textView.setText(data.get(position).getRecipeName());
 
         container.addView(itemView);
 

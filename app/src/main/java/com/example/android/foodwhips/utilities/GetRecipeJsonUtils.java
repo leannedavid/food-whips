@@ -1,5 +1,7 @@
 package com.example.android.foodwhips.utilities;
 
+import android.util.Log;
+
 import com.example.android.foodwhips.models.GetRecipe;
 
 import org.json.JSONArray;
@@ -37,13 +39,17 @@ public class GetRecipeJsonUtils {
     private static final String GET_SALTY = "Salty";
 
     private static final String GET_RATING = "rating";
-    //do flavors later
+
+    static final String TAG = "GETRECIPEJOSNUTILS";
 
     public static GetRecipe parseJSON(String json) throws JSONException{
         JSONObject main = new JSONObject(json);
 
         //GET RECIPE TIME
-        String time = main.getString(GET_TOTAL_TIME);
+        String time = "";
+        if(!main.isNull(GET_TOTAL_TIME)){
+            time = main.getString(GET_TOTAL_TIME);
+        }
 
         //GET RECIPE IMAGE ARRAY
         JSONArray imagesArray = main.getJSONArray(GET_IMAGES);
