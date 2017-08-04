@@ -32,10 +32,11 @@
 
             <!-- Cuisine field LinearLayout -->
             <LinearLayout
-                android:id="@+id/ingredient_field"
-                android:layout_width="fill_parent"
+                android:id="@+id/cuisine_field"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
 
                 <Spinner
                     android:id="@+id/cuisine_options"
@@ -53,21 +54,24 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/filter_ingredient_1"
+                        android:id="@+id/filter_cuisine_1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/include_ingredient" />
+                        android:text="@string/allow_cuisine" />
 
                     <RadioButton
-                        android:id="@+id/filter_ingredient_2"
+                        android:id="@+id/filter_cuisine_2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/exclude_ingredient" />
+                        android:text="@string/exclude_cuisine" />
 
                 </RadioGroup>
 
 
             </LinearLayout>
+
+            <!-- New layouts are inserted here -->
+
         </LinearLayout>
 
 
@@ -76,10 +80,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_horizontal|bottom"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
             <Button
-                android:id="@+id/ingredient_search_button"
+                android:id="@+id/cuisines_search_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/search_text" />

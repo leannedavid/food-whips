@@ -35,9 +35,10 @@
             <!-- Ingredient field LinearLayout -->
             <LinearLayout
                 android:id="@+id/ingredient_field"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/ingredient_text"
@@ -46,9 +47,7 @@
                     android:layout_weight=".55"
                     android:hint="@string/ingredient_hint"
                     android:textSize="16dp"
-                    android:inputType="text"
-                    android:paddingLeft="10sp">
-                    <!--<requestFocus/>-->
+                    android:inputType="text">
                 </EditText>
 
                 <RadioGroup
@@ -72,34 +71,6 @@
 
                 </RadioGroup>
 
-
-
-                <!--<RadioGroup-->
-                <!--android:id="@+id/filter_button"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="12"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:weightSum="1">-->
-
-                <!--<RadioButton-->
-                <!--android:id="@+id/filter_ingredient_1"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="43dp"-->
-                <!--android:scaleX="0.75"-->
-                <!--android:scaleY="0.75"-->
-                <!--android:text="@string/include_ingredient"-->
-                <!--android:layout_weight="0.51" />-->
-
-                <!--<RadioButton-->
-                <!--android:id="@+id/filter_ingredient_2"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:scaleX="0.75"-->
-                <!--android:scaleY="0.75"-->
-                <!--android:text="@string/exclude_ingredient" />-->
-
-                <!--</RadioGroup>-->
             </LinearLayout>
         </LinearLayout>
 
@@ -109,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_horizontal|bottom"
             android:orientation="horizontal">
 

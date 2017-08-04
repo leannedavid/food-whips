@@ -57,6 +57,15 @@
             </intent-filter>
         </activity>
 
+        <!-- Filter by name activity -->
+        <activity
+            android:name=".activities.NameFilterActivity"
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <!-- Search Results Activity -->
         <activity android:name=".activities.SearchResultsActivity"
                   android:windowSoftInputMode="stateHidden"/>
