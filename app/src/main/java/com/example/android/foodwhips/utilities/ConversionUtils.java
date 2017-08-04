@@ -29,19 +29,20 @@ public class ConversionUtils {
 
     public static String secondsToHrsMins(String timeInSecs){
         String finalTime = "";
-        double time = Double.parseDouble(timeInSecs);
+        double temp = Double.parseDouble(timeInSecs);
+        int time = (int) temp;
         time = Math.round(time/60);
-        finalTime = Double.toString(time) + " minutes";
+        finalTime = Integer.toString(time) + " minutes";
 
         if(time > 60){
-            double hr = time / 60;
-            double min = (time % 60);
+            int hr = time / 60;
+            int min = (time % 60);
 
-            finalTime = Double.toString(hr) +
+            finalTime = Integer.toString(hr) +
                     (hr > 1 ? " hours" : " hour");
 
             if(min >= 1) {
-                 finalTime += " and " + Double.toString(min) +
+                 finalTime += " and " + Integer.toString(min) +
                  (min > 1 ? " minutes" : " minute");
             }
         }

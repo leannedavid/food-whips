@@ -1,8 +1,12 @@
 package com.example.android.foodwhips;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +15,15 @@ import com.example.android.foodwhips.activities.BaseActivity;
 import com.example.android.foodwhips.activities.SearchResultsActivity;
 import com.example.android.foodwhips.adapters.SwipeAdapter;
 import com.example.android.foodwhips.database.DBHelper;
+import com.example.android.foodwhips.models.GetRecipe;
+import com.example.android.foodwhips.utilities.GetRecipeJsonUtils;
+import com.example.android.foodwhips.utilities.NetworkUtils;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity{
     private String search_query;
@@ -20,19 +33,36 @@ public class MainActivity extends BaseActivity{
     private ViewPager viewPager;
     private SwipeAdapter swipeAdapter;
 
+    private Context ctx;
+
+    private String[] imagesFromURL;
     static final String TAG = "mainactivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ctx = this;
+
+        //placeholder only
+//        imagesFromURL = new String[]{
+//          "http://www.tivix.com/uploads/blog_pics/Android-logo.png"
+//        };
+
+        new FetchCarouselView().execute(
+                "French-Lentil-Soup-1096886",
+                "Magic-Custard-Cake-2113595",
+                "Scalloped-Potatoes-2057149"
+        );
+
+        ArrayList<GetRecipe> starter = new ArrayList<>();
 
         //EditText setup
-        mEditView   = (EditText)findViewById(R.id.search_text);
+        mEditView = (EditText)findViewById(R.id.search_text);
 
         //Get the View Pager
         viewPager = (ViewPager) findViewById(R.id.image_carousel);
-        swipeAdapter = new SwipeAdapter(this);
+        swipeAdapter = new SwipeAdapter(this, imagesFromURL, starter);
         viewPager.setAdapter(swipeAdapter);
 
         //Button setup
@@ -54,8 +84,45 @@ public class MainActivity extends BaseActivity{
         helper.getWritableDatabase();
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState){
-        super.onPostCreate(savedInstanceState);
+//    @Override
+//    protected void onPostCreate(Bundle savedInstanceState){
+//        super.onPostCreate(savedInstanceState);
+//    }
+
+    public class FetchCarouselView extends AsyncTask<String, Void, ArrayList<GetRecipe>> {
+        @Override
+        protected ArrayList<GetRecipe> doInBackground(String... recipeId) {
+            ArrayList<GetRecipe> specificRecipe = new ArrayList<>();
+
+            for (int i = 0; i < recipeId.length; i++) {
+                URL recipeUrl = NetworkUtils.buildUrl(recipeId[i], 2);
+                Log.v(TAG, "THIS IS THE " + recipeId[i] + " URL: " + recipeUrl.toString());
+
+                try {
+                    String jsonRecipeDataResponse = NetworkUtils.getResponseFromHttpUrl(recipeUrl);
+                    GetRecipe recipePull = GetRecipeJsonUtils.parseJSON(jsonRecipeDataResponse);
+                    specificRecipe.add(recipePull);
+                }catch(IOException e){
+                    e.printStackTrace();
+                } catch(JSONException e){
+                    e.printStackTrace();
+                }
+            }
+            return specificRecipe;
+        }
+
+        @Override
+        protected void onPostExecute(final ArrayList<GetRecipe> data){
+            super.onPostExecute(data);
+            imagesFromURL = new String[data.size()];
+
+            if(data != null) {
+                for(int i = 0; i < data.size(); i++){
+                    imagesFromURL[i] =  data.get(i).getImgUrl();
+                }
+                SwipeAdapter swipeAdapter = new SwipeAdapter(ctx, imagesFromURL, data);
+                viewPager.setAdapter(swipeAdapter);
+            }
+        }
     }
 }

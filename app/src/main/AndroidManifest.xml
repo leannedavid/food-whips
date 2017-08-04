@@ -37,6 +37,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activities.FavoritesActivity"/>
+
         <!-- Filter by ingredients activity -->
         <activity
             android:name=".IngredientFilterActivity"

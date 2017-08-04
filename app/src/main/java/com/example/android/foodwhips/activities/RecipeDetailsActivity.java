@@ -16,11 +16,13 @@ import android.util.Log;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.foodwhips.MainActivity;
 import com.example.android.foodwhips.R;
+import com.example.android.foodwhips.database.Contract;
 import com.example.android.foodwhips.database.DBHelper;
 import com.example.android.foodwhips.database.DatabaseUtils;
 import com.example.android.foodwhips.fragments.GeneralInfo;
@@ -38,9 +40,9 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
     private TextView mSourceName;
     private TextView mRecipeRate;
 
-    private Button instructionsButton;
-    private Button faveButton;
-    private Button picButton;
+    private ImageButton instructionsButton;
+    private ImageButton faveButton;
+    private ImageButton picButton;
 
     private Cursor cursor;
     private DBHelper helper;
@@ -68,11 +70,6 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_details);
 
-        bundle = this.getIntent().getExtras();
-        String recipeId = bundle.getString("recipe_id");
-        Log.v(TAG, "check if this is sending");
-        Log.v(TAG, "ID IS " + recipeId);
-
         check = true;
 
         mRecipeImage = (ImageView) findViewById(R.id.detail_image);
@@ -80,18 +77,12 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         mSourceName = (TextView) findViewById(R.id.detail_source_name);
         mRecipeRate = (TextView) findViewById(R.id.detail_rating);
 
-        instructionsButton = (Button) findViewById(R.id.instructions_button);
-        faveButton = (Button) findViewById(R.id.favorite_button);
-        picButton = (Button) findViewById(R.id.pic_button);
+        instructionsButton = (ImageButton) findViewById(R.id.instructions_button);
+        faveButton = (ImageButton) findViewById(R.id.favorite_button);
+        picButton = (ImageButton) findViewById(R.id.pic_button);
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
-
-//        mTabHost.addTab(mTabHost.newTabSpec(GENERAL_INFO)
-//                .setIndicator(GENERAL_INFO), GeneralInfo.class, null);
-//
-//        mTabHost.addTab(mTabHost.newTabSpec(INGREDIENT_INFO)
-//                .setIndicator(INGREDIENT_INFO), IngredientsInfo.class, null);
 
         getLoaderManager().initLoader(0, null, this).forceLoad();
     }
@@ -101,7 +92,16 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         super.onStart();
         helper = new DBHelper(this);
         db = helper.getReadableDatabase();
-        cursor = DatabaseUtils.getAll(db);
+
+        bundle = this.getIntent().getExtras();
+        String recipeId = bundle.getString("recipe_id");
+        cursor = DatabaseUtils.returnById(db, recipeId);
+
+        if (cursor.getCount() != 0) {
+            faveButton.setImageResource(R.drawable.ic_fave);
+        } else {
+            faveButton.setImageResource(R.drawable.ic_unfaved);
+        }
     }
 
 
@@ -196,52 +196,50 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
                 }
             });
 
-            cursor = DatabaseUtils.returnById(db, data.getId());
-
             faveButton.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view){
-                    Button fave = (Button) view;
+                    cursor = DatabaseUtils.returnById(db, data.getId());
+                    Log.v(TAG, "PRINTING THE AMOUNT OF ROWS CURSOR HAS: " + cursor.getCount());
 
                     //Must be in the database already for it to mark the column to '0'
-                    if (fave.getText().toString().equals("Un-favorite")){
-                        DatabaseUtils.updateRecipeFaveStatus(db, data.getId(), 0);
-                        faveButton.setText("Favorite");
-                    }
-                    else{ //Two cases when trying to mark a recipe as a favorite
+                    if(cursor != null && (cursor.getCount() > 0)){
+                        //Two cases when trying to mark a stored recipe as a favorite or un-favorite
+                        if(cursor.moveToFirst()) {
+                            Log.v(TAG, "WENT INTO HERE SINCE CURSOR IS NOT NULL" + cursor.getCount());
+                            //Recipe is already in the database, so just update the favorite column to '1'
+                            String faveStatus = cursor.getString(cursor.getColumnIndex(Contract.FOODWHIPS_TABLE.COLUMN_NAME_FAVORITE));
+                            Log.v(TAG, "PRINTING THE FAVESTATUS CURRENTLY: " + faveStatus);
 
-                        //Recipe is already in the database, so just update the favorite column to '1'
-                        if(cursor.equals(data.getId())) {
-                            DatabaseUtils.updateRecipeFaveStatus(db, data.getId(), 1);
+                            if (faveStatus.equals("0")) {
+                                Log.v(TAG, "WENT IN HERE CUZ SETTING UNFAVE TO FAVE");
+                                DatabaseUtils.updateRecipeFaveStatus(db, data.getId(), 1);
+                                faveButton.setImageResource(R.drawable.ic_fave);
+
+                            } else if (faveStatus.equals("1")) {
+                                Log.v(TAG, "WENT IN HERE CUZ SETTING FAVE TO UNFAVE");
+                                DatabaseUtils.updateRecipeFaveStatus(db, data.getId(), 0);
+                                faveButton.setImageResource(R.drawable.ic_unfaved);
+                            }
                         }
-                        else{ //Recipe is not in the database, so add it AND mark favorite column as '1'
-                            DatabaseUtils.addRecipeToDatabase(db, data.getId(), data.getRecipeName(), data.getSourceName(),
-                                    data.getSourceRecipeUrl(), data.getImgUrl(), data.getRating(), data.getTotalTime(),
-                                    data.getServings(), data.printCourses(), data.printCuisines(),
-                                    data.printFlavors(), data.printIngredients(), 1, null);
-                        }
-                        faveButton.setText("Un-favorite");
+                    } else{
+                        Log.v(TAG, "WENT INTO HERE SINCE CURSOR IS NULL.");
+                        //Recipe is not in the database, so add it AND mark favorite column as '1'
+                        DatabaseUtils.addRecipeToDatabase(db, data.getId(), data.getRecipeName(), data.getSourceName(),
+                                data.getSourceRecipeUrl(), data.getImgUrl(), data.getRating(), data.getTotalTime(),
+                                data.getServings(), data.printCourses(), data.printCuisines(),
+                                data.printFlavors(), data.printIngredients(), 1, null);
+                        faveButton.setImageResource(R.drawable.ic_fave);
                     }
                 }
             });
 
-            GeneralInfo gen = new GeneralInfo();
-            gen.setArguments(bundle);
-            IngredientsInfo ing = new IngredientsInfo();
-            ing.setArguments(bundle);
+            mTabHost.clearAllTabs();
 
             mTabHost.addTab(mTabHost.newTabSpec(GENERAL_INFO)
                     .setIndicator(GENERAL_INFO), GeneralInfo.class, bundle);
 
             mTabHost.addTab(mTabHost.newTabSpec(INGREDIENT_INFO)
                     .setIndicator(INGREDIENT_INFO), IngredientsInfo.class, bundle);
-
-//            mTabHost.addTab(mTabHost.newTabSpec(PHOTO_INFO)
-//                    .setIndicator(PHOTO_INFO), PhotoInfo.class, null);
-
-            Log.v(TAG, "SUCCESSFULLY PUT INFO INTO A BUNDLE");
-            Log.v(TAG, "VALUE OF COURSES: " + data.printCourses());
-            Log.v(TAG, "VALUE OF CUISINES: " + data.printCuisines());
-
         }
     }
 

@@ -113,6 +113,6 @@
     <!-- Buttons for specific recipe chosen -->
     <string name="instructions_button">Instructions</string>
     <string name="favorite_button">Favorite</string>
-    <string name="picture_button">Take a Photo</string>
+    <string name="picture_button">Photo</string>
 
 </resources>

@@ -8,15 +8,14 @@
 
     <ImageView
         android:id="@+id/carousel_image"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:src="@drawable/baked_summer_squash"
-        android:layout_weight=".8"/>
+        android:layout_height="250dp"
+        android:layout_weight=".8"
+        android:layout_width="match_parent" />
+
     <TextView
-        android:id="@+id/carousel_text"
+        android:id="@+id/carousel_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="French Onion Soup"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:gravity="center"

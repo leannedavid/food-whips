@@ -106,7 +106,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.drawer_home) {
             startActivity(new Intent(this, MainActivity.class));
         } else if (id == R.id.drawer_favorites) {
-
+            startActivity(new Intent(this, FavoritesActivity.class));
         } else if (id == R.id.drawer_random) {
             String cuisine = cuisines[new Random().nextInt(cuisines.length)];
             String course = cuisines[new Random().nextInt(courses.length)];

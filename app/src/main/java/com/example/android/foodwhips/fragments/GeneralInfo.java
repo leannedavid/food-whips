@@ -45,6 +45,7 @@ public class GeneralInfo extends Fragment{
 
         Log.v(TAG, "DID COURSES COPY?: " + recipe_courses);
         Log.v(TAG, "WHAT IS THE VALUE OF SERVINGS?: " + recipe_servings);
+        Log.v(TAG, "WHAT IS THE VALUE OF TIME?: " + recipe_time);
 
         mTimeTaken = (TextView) view.findViewById(R.id.detail_time_taken);
         mRecipeServings = (TextView) view.findViewById(R.id.detail_servings);
@@ -53,7 +54,7 @@ public class GeneralInfo extends Fragment{
         mFlavors = (TextView) view.findViewById(R.id.detail_flavors);
 
         if (recipe_time != null) {
-            mCourses.setVisibility(View.VISIBLE);
+            mTimeTaken.setVisibility(View.VISIBLE);
             mTimeTaken.setText("Time: " + recipe_time);
         }
 
