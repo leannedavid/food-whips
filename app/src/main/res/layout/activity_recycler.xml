@@ -9,7 +9,8 @@
         android:id="@+id/maxResults"
         android:textSize="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -27,7 +28,8 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:padding="20dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/recycler_layout"

@@ -58,7 +58,7 @@ public class SearchResultsActivity extends BaseActivity {
         recyclerLayout = (LinearLayout) findViewById(R.id.recycler_layout);
 
         Bundle bundle = this.getIntent().getExtras();
-        String searchQuery = bundle.getString("searchQuery");
+        final String searchQuery = bundle.getString("searchQuery");
         String ingredientsQuery = bundle.getString("ingredientsFilter");
         String cuisineQuery = bundle.getString("cuisinesFilter");
         String randomQuery = bundle.getString("randomFilter");
@@ -132,6 +132,7 @@ public class SearchResultsActivity extends BaseActivity {
                     displayList.add(recipeList.get(i));
                 }
                 String hereasshole = search_page + "/3";
+                search_header.setVisibility(View.VISIBLE);
                 search_header.setText(hereasshole);
                 adapter.notifyDataSetChanged();
             }
@@ -149,6 +150,7 @@ public class SearchResultsActivity extends BaseActivity {
                     displayList.add(recipeList.get(i));
                 }
                 String hereasshole = search_page + "/3";
+                search_header.setVisibility(View.VISIBLE);
                 search_header.setText(hereasshole);
                 adapter.notifyDataSetChanged();
             }
@@ -215,10 +217,12 @@ public class SearchResultsActivity extends BaseActivity {
                     }
                 });
 
-
+                mTotalCount.setVisibility(View.VISIBLE);
                 mTotalCount.setText("# of Results: " + recipeList.get(0).getTotalResults());
 
+                search_header.setVisibility(View.VISIBLE);
                 search_header.setText("1/3");
+
                 mRecyclerView.setAdapter(adapter);
             }
         }
