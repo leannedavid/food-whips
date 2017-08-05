@@ -29,7 +29,6 @@ public class SearchResultsActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private RecipeResultsAdapter startAdapter;
     private URL foodsUrl;
-
     private TextView mTotalCount;
 
     private static final String TAG = "SearchResultsActivity";

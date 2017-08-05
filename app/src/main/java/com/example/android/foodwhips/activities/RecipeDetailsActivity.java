@@ -11,6 +11,7 @@ import android.content.Loader;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 
@@ -50,6 +51,8 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
 
     private Bundle bundle;
     private boolean check;
+
+    private String recipeId;
 
     static final String TAG = "recipedetailsactivity";
 
@@ -94,7 +97,7 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         db = helper.getReadableDatabase();
 
         bundle = this.getIntent().getExtras();
-        String recipeId = bundle.getString("recipe_id");
+        recipeId = bundle.getString("recipe_id");
         cursor = DatabaseUtils.returnById(db, recipeId);
 
         if (cursor.getCount() != 0) {
@@ -238,6 +241,22 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
                 }
             });
 
+            picButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Cursor cursor = DatabaseUtils.returnById(db, data.getId());
+                    String photo_uri = "nothing";
+                    if(cursor != null && (cursor.getCount() > 0)) {
+                        //Two cases when trying to mark a stored recipe as a favorite or un-favorite
+                        if (cursor.moveToFirst()) {
+                            photo_uri = cursor.getString(cursor.getColumnIndex(Contract.FOODWHIPS_TABLE.COLUMN_NAME_PHOTO));
+                        }
+                    }
+                    FragmentManager fm = getSupportFragmentManager();
+                    Camera_Fragment cm = Camera_Fragment.newInstance(recipeId, photo_uri);
+                    cm.show(fm, "cameraFragment");
+                }
+            });
 
             mTabHost.clearAllTabs();
 
