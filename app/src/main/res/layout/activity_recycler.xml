@@ -11,12 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <ProgressBar
         android:id="@+id/progressBar"
         android:paddingTop="10dp"
@@ -24,5 +18,29 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
+
+    <TextView
+        android:id="@+id/search_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No results found"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:padding="20dp"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:id="@+id/recycler_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+>>>>>>> 965e1beab869563374c3ef7fc9b37cc15cd507ad
 
 </LinearLayout>
