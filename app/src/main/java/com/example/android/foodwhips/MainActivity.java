@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.android.foodwhips.activities.BaseActivity;
 import com.example.android.foodwhips.activities.SearchResultsActivity;
@@ -45,6 +46,9 @@ public class MainActivity extends BaseActivity{
     private int currentSlide = 0;
     static final String TAG = "mainactivity";
 
+
+    private TextView testView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +56,11 @@ public class MainActivity extends BaseActivity{
         ctx = this;
 
        // placeholder only
-        imagesFromURL = new String[]{
-          "http://www.tivix.com/uploads/blog_pics/Android-logo.png",
-                "http://www.tivix.com/uploads/blog_pics/Android-logo.png",
-                "http://www.tivix.com/uploads/blog_pics/Android-logo.png"
-        };
+//        imagesFromURL = new String[]{
+//          "http://www.tivix.com/uploads/blog_pics/Android-logo.png",
+//                "http://www.tivix.com/uploads/blog_pics/Android-logo.png",
+//                "http://www.tivix.com/uploads/blog_pics/Android-logo.png"
+//        };
 
         recipeIds = new String[]{
                 "French-Lentil-Soup-1096886",
@@ -64,11 +68,11 @@ public class MainActivity extends BaseActivity{
                 "Scalloped-Potatoes-2057149"
         };
 
-//        new FetchCarouselView().execute(
-//                "French-Lentil-Soup-1096886",
-//                "Magic-Custard-Cake-2113595",
-//                "Scalloped-Potatoes-2057149"
-//        );
+        new FetchCarouselView().execute(
+                "French-Lentil-Soup-1096886",
+                "Magic-Custard-Cake-2113595",
+                "Scalloped-Potatoes-2057149"
+        );
 
         ArrayList<GetRecipe> starter = new ArrayList<>();
 
@@ -98,6 +102,9 @@ public class MainActivity extends BaseActivity{
             }
         }, 1000, 4000);
 
+
+        //testView = (TextView) findViewById(R.id.tvPage);
+
         //Button setup
         mButtonSearch = (Button)findViewById(R.id.search_button);
         mButtonSearch.setOnClickListener(new View.OnClickListener() {
@@ -113,8 +120,6 @@ public class MainActivity extends BaseActivity{
 //        ViewPager vpPager = (ViewPager) findViewById(R.id.mainVP);
 //        fragmentPagerAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 //        vpPager.setAdapter(fragmentPagerAdapter);
-
-
 
     }
 

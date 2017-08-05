@@ -6,10 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.android.foodwhips.fragments.FirstFragment;
 
-/**
- * Created by li-en on 8/5/17.
- */
-
 public class TabsPagerAdapter extends FragmentPagerAdapter {
     private static int NUM_ITEMS = 3;
 
@@ -27,11 +23,11 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position){
         switch(position){
             case 0:
-                return FirstFragment.newInstance(0, "Page 1");
+                return FirstFragment.newInstance(0, "Page 1", "onion");
             case 1:
-                return FirstFragment.newInstance(1, "Page 2");
+                return FirstFragment.newInstance(1, "Page 2", "potato");
             case 2:
-                return FirstFragment.newInstance(2, "Page 3");
+                return FirstFragment.newInstance(2, "Page 3", "soup");
             default:
                 return null;
         }

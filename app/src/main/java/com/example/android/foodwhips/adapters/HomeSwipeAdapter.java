@@ -64,6 +64,7 @@ public class HomeSwipeAdapter extends PagerAdapter {
         final View itemView = layoutInflater.inflate(R.layout.swipe_layout, container, false);
         ImageView imageView = (ImageView) itemView.findViewById(R.id.carousel_image);
         TextView titleText = (TextView) itemView.findViewById(R.id.carousel_title);
+        TextView sourceText = (TextView) itemView.findViewById(R.id.carousel_source_title);
         TextView ratingText = (TextView) itemView.findViewById(R.id.carousel_rating);
 
         //Log.v(TAG, "ENTERING SWIPE ADAPTER, VALUE OF POSITION " + position + " IS: " + data.get(position).getRecipeName());
@@ -71,8 +72,9 @@ public class HomeSwipeAdapter extends PagerAdapter {
         Picasso.with(ctx).load(imagesFromURL[position]).into(imageView);
         Log.v(TAG, "VALUE OF POSITION: " + position);
 
-       // titleText.setText(data.get(position).getRecipeName());
-       // ratingText.setText("Rating: " + ConversionUtils.starRating(data.get(position).getRating()));
+        titleText.setText(data.get(position).getRecipeName());
+        sourceText.setText(data.get(position).getSourceName());
+         ratingText.setText("Rating: " + ConversionUtils.starRating(data.get(position).getRating()));
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
