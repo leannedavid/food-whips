@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.android.foodwhips.MainActivity;
 import com.example.android.foodwhips.R;
@@ -28,6 +29,7 @@ public class SearchResultsActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private RecipeResultsAdapter startAdapter;
     private URL foodsUrl;
+
 
     private static final String TAG = "SearchResultsActivity";
 

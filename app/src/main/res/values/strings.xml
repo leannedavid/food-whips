@@ -79,6 +79,16 @@
         <item>Portuguese</item>
     </string-array>
 
+    <string-array name="random_cuisine_arrays">
+        <item>American</item>
+        <item>Italian</item>
+        <item>Asian</item>
+        <item>Mexican</item>
+        <item>French</item>
+        <item>Indian</item>
+        <item>Chinese</item>
+    </string-array>
+
     <!-- List of options for courses -->
     <string-array name="course_array">
         <item>Choose course</item>
@@ -97,19 +107,11 @@
     </string-array>
 
     <string-array name="random_course_array">
-        <item>Choose course</item>
         <item>Main</item>
         <item>Desserts</item>
         <item>Side</item>
         <item>Lunch</item>
         <item>Appetizers</item>
-        <item>Salads</item>
-        <item>Breads</item>
-        <item>Breakfast</item>
-        <item>Soups</item>
-        <item>Beverages</item>
-        <item>Condiments</item>
-        <item>Cocktails</item>
     </string-array>
 
     <!-- List of options for flavors in random -->

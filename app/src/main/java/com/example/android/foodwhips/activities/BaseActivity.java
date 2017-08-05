@@ -49,7 +49,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         super.setContentView(fullView);
 
         //Get the arrays for random
-        cuisines = getResources().getStringArray(R.array.cuisine_arrays);
+        cuisines = getResources().getStringArray(R.array.random_cuisine_arrays);
         courses = getResources().getStringArray(R.array.random_course_array);
         flavors = getResources().getStringArray(R.array.flavor_array);
 
