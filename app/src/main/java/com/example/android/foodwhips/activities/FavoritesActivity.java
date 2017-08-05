@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.android.foodwhips.R;
 import com.example.android.foodwhips.adapters.FavoriteRecipesAdapter;
@@ -21,6 +23,7 @@ public class FavoritesActivity extends BaseActivity
     private DBHelper helper;
     private FavoriteRecipesAdapter adapter;
     private Cursor cursor;
+    private TextView searchHeader;
 
     static final String TAG = "FavoritesActivity";
 
@@ -39,6 +42,7 @@ public class FavoritesActivity extends BaseActivity
         helper = new DBHelper(this);
         db = helper.getReadableDatabase();
         cursor = DatabaseUtils.returnFavorites(db, 1);
+        searchHeader = (TextView)findViewById(R.id.search_header);
         adapter = new FavoriteRecipesAdapter(cursor, this);
         recyclerView.setAdapter(adapter);
     }
@@ -48,6 +52,17 @@ public class FavoritesActivity extends BaseActivity
         super.onStop();
         db.close();
         cursor.close();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(cursor == null | cursor.getCount() == 0){
+            searchHeader.setText("No favorties saved");
+            searchHeader.setVisibility(View.VISIBLE);
+        }else{
+            searchHeader.setVisibility(View.GONE);
+        }
     }
 
     @Override

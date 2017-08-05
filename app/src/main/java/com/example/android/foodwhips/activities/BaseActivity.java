@@ -108,9 +108,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.drawer_favorites) {
             startActivity(new Intent(this, FavoritesActivity.class));
         } else if (id == R.id.drawer_random) {
-            String cuisine = cuisines[new Random().nextInt(cuisines.length)];
-            String course = cuisines[new Random().nextInt(courses.length)];
-            String flavor = cuisines[new Random().nextInt(flavors.length)];
+            String cuisine = "Chinese";//cuisines[new Random().nextInt(cuisines.length)];
+            String course = "Main Dishes";//courses[new Random().nextInt(courses.length)];
+            String flavor = "American";//flavors[new Random().nextInt(flavors.length)];
             URL foodsUrl = NetworkUtils.randomURLBuilder(flavor, cuisine, course);
             Intent switchAct = new Intent(this, SearchResultsActivity.class);
             switchAct.putExtra("randomFilter", foodsUrl.toString());

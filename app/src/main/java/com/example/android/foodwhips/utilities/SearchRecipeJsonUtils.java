@@ -38,11 +38,17 @@ public class SearchRecipeJsonUtils {
             JSONObject match = matches.getJSONObject(i);
 
             //IMAGE URL
-            JSONObject imgObj = match.getJSONObject(RECIPE_IMG);
-            String img = "";
-            if(imgObj != null && imgObj.has(RECIPE_IMG_SIZE_90)) {
-                img = imgObj.getString(RECIPE_IMG_SIZE_90);
+            String img;
+            try{
+                JSONObject imgObj = match.getJSONObject(RECIPE_IMG);
+                img = "";
+                if(imgObj != null && imgObj.has(RECIPE_IMG_SIZE_90)) {
+                    img = imgObj.getString(RECIPE_IMG_SIZE_90);
+                }
+            }catch(JSONException e){
+                img = "http://lh6.ggpht.com/96qipIieKT3rMwc3cwSh_nsQ4eP2UUXpUbb40hEgAKVLZbkyAn6QCvzBip26D_JRkIQkthSRwdnafSlU-TD_ug=s90-c";
             }
+
 
             //RECIPE SOURCE
             String source = match.getString(RECIPE_SOURCE);

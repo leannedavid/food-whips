@@ -43,6 +43,7 @@ public class SearchResultsActivity extends BaseActivity {
     private ArrayList<SearchRecipe> displayList;
     private ArrayList<SearchRecipe> recipeList;
 
+    private int count;
 
     private static final String TAG = "SearchResultsActivity";
 
@@ -119,6 +120,7 @@ public class SearchResultsActivity extends BaseActivity {
 
         search_header.setOnTouchListener(new OnSwipeTouchListener(SearchResultsActivity.this) {
             public void onSwipeRight() {
+                if(count != 0) {
                 search_quantity -= 10;
                 search_start -= 10;
                 search_page -= 1;
@@ -128,15 +130,19 @@ public class SearchResultsActivity extends BaseActivity {
                     search_page = 3;
                 }
                 displayList.clear();
+
                 for(int i = search_start; i < search_quantity; i++){
                     displayList.add(recipeList.get(i));
                 }
+
                 String hereasshole = search_page + "/3";
                 search_header.setVisibility(View.VISIBLE);
                 search_header.setText(hereasshole);
                 adapter.notifyDataSetChanged();
+                }
             }
             public void onSwipeLeft() {
+                if(count != 0) {
                 search_quantity += 10;
                 search_start += 10;
                 search_page += 1;
@@ -145,14 +151,18 @@ public class SearchResultsActivity extends BaseActivity {
                     search_start = 0;
                     search_page = 1;
                 }
+
                 displayList.clear();
+
                 for(int i = search_start; i < search_quantity; i++){
                     displayList.add(recipeList.get(i));
                 }
+
                 String hereasshole = search_page + "/3";
                 search_header.setVisibility(View.VISIBLE);
                 search_header.setText(hereasshole);
                 adapter.notifyDataSetChanged();
+                }
             }
 
         });
@@ -187,8 +197,12 @@ public class SearchResultsActivity extends BaseActivity {
             try {
                 String jsonRecipeDataResponse = NetworkUtils.getResponseFromHttpUrl(searchUrl);
                 recipeList = SearchRecipeJsonUtils.parseJSON(jsonRecipeDataResponse);
-                for(int i = search_start; i < search_quantity; i++) {
-                    displayList.add(recipeList.get(i));
+                count = recipeList.size();
+                Log.v(TAG, "TOTAL RECIPES FOUND: " + count);
+                if(count != 0) {
+                    for(int i = search_start; i < search_quantity; i++) {
+                        displayList.add(recipeList.get(i));
+                    }
                 }
             } catch (IOException e){
                 e.printStackTrace();
@@ -217,11 +231,13 @@ public class SearchResultsActivity extends BaseActivity {
                     }
                 });
 
-                mTotalCount.setVisibility(View.VISIBLE);
-                mTotalCount.setText("# of Results: " + recipeList.get(0).getTotalResults());
-
-                search_header.setVisibility(View.VISIBLE);
-                search_header.setText("1/3");
+                if(count != 0) {
+                    search_header.setVisibility(View.VISIBLE);
+                    search_header.setText("1/3");
+                } else {
+                    search_header.setVisibility(View.VISIBLE);
+                    search_header.setText("No Results Found");
+                }
 
                 mRecyclerView.setAdapter(adapter);
             }

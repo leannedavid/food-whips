@@ -92,7 +92,7 @@
     <!-- List of options for courses -->
     <string-array name="course_array">
         <item>Choose course</item>
-        <item>Main</item>
+        <item>Main Dishes</item>
         <item>Desserts</item>
         <item>Side</item>
         <item>Lunch</item>
@@ -107,7 +107,7 @@
     </string-array>
 
     <string-array name="random_course_array">
-        <item>Main</item>
+        <item>Main Dishes</item>
         <item>Desserts</item>
         <item>Side</item>
         <item>Lunch</item>
