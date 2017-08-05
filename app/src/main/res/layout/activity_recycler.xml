@@ -12,8 +12,27 @@
         android:layout_height="wrap_content"
         android:visibility="invisible" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <TextView
+        android:id="@+id/search_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:text="No results found"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:padding="20dp"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:id="@+id/recycler_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
 </LinearLayout>

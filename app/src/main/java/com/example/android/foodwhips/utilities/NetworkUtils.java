@@ -49,7 +49,6 @@ public final class NetworkUtils {
                     appendQueryParameter(QUERY_PARAM_APP_ID, appid).
                     appendQueryParameter(QUERY_PARAM_APPKEY, appkey).
                     appendQueryParameter(QUERY_PARAM_NAME, search).
-                    appendQueryParameter(QUERY_MAX_RESULTS, Integer.toString(MAX_RESULT_NUM)).
                     build();
         }
 
@@ -206,7 +205,7 @@ public final class NetworkUtils {
 
     // buildURL method for all other filters
     public static URL buildNameUrl(String search, int type, String timeInSeconds,
-           String allowedCourse, String allowedDiet, String allowedHoliday) {
+                                   String allowedCourse, String allowedDiet, String allowedHoliday) {
         search = search.replaceAll("\\s+","+");
         Uri.Builder builder = new Uri.Builder();
 
