@@ -96,13 +96,25 @@
         <item>Cocktails</item>
     </string-array>
 
+    <string-array name="random_course_array">
+        <item>Choose course</item>
+        <item>Main</item>
+        <item>Desserts</item>
+        <item>Side</item>
+        <item>Lunch</item>
+        <item>Appetizers</item>
+        <item>Salads</item>
+        <item>Breads</item>
+        <item>Breakfast</item>
+        <item>Soups</item>
+        <item>Beverages</item>
+        <item>Condiments</item>
+        <item>Cocktails</item>
+    </string-array>
+
     <!-- List of options for flavors in random -->
     <string-array name="flavor_array">
-        <item>Vanilla</item>
-        <item>Chocolate</item>
-        <item>Strawberry</item>
-        <item>Banana</item>
-        <item>Apple</item>
+        <item>Sweet</item>
         <item>Spicy</item>
     </string-array>
 

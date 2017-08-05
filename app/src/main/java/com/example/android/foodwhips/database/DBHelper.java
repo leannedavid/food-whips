@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper{
                 Contract.FOODWHIPS_TABLE.COLUMN_NAME_FLAVORS + " TEXT, " +
                 Contract.FOODWHIPS_TABLE.COLUMN_NAME_INGREDIENTS + " TEXT, " +
                 Contract.FOODWHIPS_TABLE.COLUMN_NAME_FAVORITE + " INTEGER DEFAULT 0, " +
-                Contract.FOODWHIPS_TABLE.COLUMN_NAME_PHOTO + " BLOB" + ");";
+                Contract.FOODWHIPS_TABLE.COLUMN_NAME_PHOTO + " TEXT" + ");";
 
         Log.d(TAG, "Create table SQL: " + queryString);
         db.execSQL(queryString);

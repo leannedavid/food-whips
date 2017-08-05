@@ -98,4 +98,14 @@ public class DatabaseUtils {
                 Contract.FOODWHIPS_TABLE.COLUMN_NAME_RECIPE_ID + " = '" + recipeId + "'",
                 null) > 0;
     }
+
+    //Updates the recipe with the image given
+    public static boolean updateRceipeBlob(SQLiteDatabase db, String recipeId, String blob){
+        ContentValues cv = new ContentValues();
+        cv.put(Contract.FOODWHIPS_TABLE.COLUMN_NAME_PHOTO, blob);
+
+        return db.update(Contract.FOODWHIPS_TABLE.TABLE_NAME, cv,
+                Contract.FOODWHIPS_TABLE.COLUMN_NAME_RECIPE_ID + " = '" + recipeId + "'",
+                null) > 0;
+    }
 }
