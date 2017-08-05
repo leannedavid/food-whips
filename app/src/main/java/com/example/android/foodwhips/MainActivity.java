@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import com.example.android.foodwhips.activities.BaseActivity;
 import com.example.android.foodwhips.activities.SearchResultsActivity;
 import com.example.android.foodwhips.adapters.HomeSwipeAdapter;
+import com.example.android.foodwhips.adapters.TabsPagerAdapter;
 import com.example.android.foodwhips.database.DBHelper;
 import com.example.android.foodwhips.models.GetRecipe;
 import com.example.android.foodwhips.utilities.GetRecipeJsonUtils;
@@ -23,6 +26,8 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends BaseActivity{
     private String search_query;
@@ -31,10 +36,13 @@ public class MainActivity extends BaseActivity{
     private DBHelper helper;
     private ViewPager viewPager;
     private HomeSwipeAdapter swipeAdapter;
+    private FragmentPagerAdapter fragmentPagerAdapter;
 
     private Context ctx;
 
     private String[] imagesFromURL;
+    private String[] recipeIds;
+    private int currentSlide = 0;
     static final String TAG = "mainactivity";
 
     @Override
@@ -43,9 +51,17 @@ public class MainActivity extends BaseActivity{
         setContentView(R.layout.activity_main);
         ctx = this;
 
-        //placeholder only
+       // placeholder only
         imagesFromURL = new String[]{
-          "http://www.tivix.com/uploads/blog_pics/Android-logo.png"
+          "http://www.tivix.com/uploads/blog_pics/Android-logo.png",
+                "http://www.tivix.com/uploads/blog_pics/Android-logo.png",
+                "http://www.tivix.com/uploads/blog_pics/Android-logo.png"
+        };
+
+        recipeIds = new String[]{
+                "French-Lentil-Soup-1096886",
+                "Magic-Custard-Cake-2113595",
+                "Scalloped-Potatoes-2057149"
         };
 
 //        new FetchCarouselView().execute(
@@ -61,8 +77,26 @@ public class MainActivity extends BaseActivity{
 
         //Get the View Pager
         viewPager = (ViewPager) findViewById(R.id.image_carousel);
-        swipeAdapter = new HomeSwipeAdapter(this, imagesFromURL, starter);
+        swipeAdapter = new HomeSwipeAdapter(this, imagesFromURL, starter, recipeIds);
         viewPager.setAdapter(swipeAdapter);
+
+        //Automatically slides the View Pager
+        final Handler handler = new Handler();
+        final Runnable update = new Runnable() {
+            @Override
+            public void run() {
+                if(currentSlide == imagesFromURL.length){ currentSlide = 0; }
+                viewPager.setCurrentItem(currentSlide++, true);
+            }
+        };
+
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, 1000, 4000);
 
         //Button setup
         mButtonSearch = (Button)findViewById(R.id.search_button);
@@ -74,6 +108,14 @@ public class MainActivity extends BaseActivity{
                 startActivity(switchAct);
             }
         });
+
+
+//        ViewPager vpPager = (ViewPager) findViewById(R.id.mainVP);
+//        fragmentPagerAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+//        vpPager.setAdapter(fragmentPagerAdapter);
+
+
+
     }
 
     @Override
@@ -119,7 +161,7 @@ public class MainActivity extends BaseActivity{
                 for(int i = 0; i < data.size(); i++){
                     imagesFromURL[i] =  data.get(i).getImgUrl();
                 }
-                HomeSwipeAdapter swipeAdapter = new HomeSwipeAdapter(ctx, imagesFromURL, data);
+                HomeSwipeAdapter swipeAdapter = new HomeSwipeAdapter(ctx, imagesFromURL, data, recipeIds);
                 viewPager.setAdapter(swipeAdapter);
             }
         }

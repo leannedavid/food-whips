@@ -32,6 +32,7 @@ public class SearchRecipeJsonUtils {
         ArrayList<SearchRecipe> recipeResults = new ArrayList<>();
         JSONObject main = new JSONObject(json);
         JSONArray matches = main.getJSONArray(RECIPE_MATCHES);
+        String totalResults = main.getString(RECIPE_TOTAL_RESULTS);
 
         for(int i = 0; i < matches.length(); i++){
             JSONObject match = matches.getJSONObject(i);
@@ -95,10 +96,11 @@ public class SearchRecipeJsonUtils {
             String[] cuisineList = cuisineArrayList.toArray(new String[cuisineArrayList.size()]);
 
             SearchRecipe recipe = new SearchRecipe(img, source, ingredientsList, id, name, timeTaken, rating,
-                    coursesList, cuisineList);
+                    coursesList, cuisineList, totalResults);
 
             recipeResults.add(recipe);
         }
+
         return recipeResults;
     }
 }

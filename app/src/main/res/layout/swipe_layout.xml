@@ -4,20 +4,47 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
     android:weightSum="1">
 
     <ImageView
         android:id="@+id/carousel_image"
-        android:layout_height="250dp"
-        android:layout_weight=".8"
+        android:adjustViewBounds="true"
+        android:layout_height="183dp"
         android:layout_width="match_parent" />
 
-    <TextView
-        android:id="@+id/carousel_title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_weight=".2"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/carousel_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="HERE IS THE TITLE WOOO"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/carousel_source_title"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Here Is Some Source"
+            android:paddingTop="-15dp"/>
+
+        <TextView
+            android:id="@+id/carousel_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RATING: 	★	★	★	★"
+            android:gravity="center"
+            android:paddingTop="-15dp"/>
+    </LinearLayout>
+
+
 </LinearLayout>

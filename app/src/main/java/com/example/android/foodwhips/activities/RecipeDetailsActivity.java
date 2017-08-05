@@ -167,7 +167,6 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
             Log.v(TAG, "COURSES IS: " + data.getCourses().length + " AND CUISINES IS: " + data.getCuisines().length);
 
             if (data.getTotalTime().length() != 0 && data.getTotalTime() != null ) {
-                Log.v(TAG, "SHOULD NOT GO IN HERE CUZ IT'S NULL BUT IT DID???");
                 bundle.putString(RECIPE_TIME_VALUE, data.getTotalTime());
             }
             bundle.putString(RECIPE_SERVINGS_VALUE, data.getServings());
@@ -238,6 +237,7 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
                     }
                 }
             });
+
 
             mTabHost.clearAllTabs();
 

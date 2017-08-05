@@ -15,9 +15,12 @@ public class SearchRecipe {
     private String[] courses;
     private String[] cuisines;
 
+    private String totalResults;
+
 
     public SearchRecipe(String img, String sourceDisplayName, String[] ingredients, String id,
-                        String recipeName, String timeInSecs, String rating, String[] courses, String[] cuisines) {
+                        String recipeName, String timeInSecs, String rating, String[] courses,
+                        String[] cuisines, String totalResults) {
         this.img = img;
         this.sourceDisplayName = sourceDisplayName;
         this.ingredients = ingredients;
@@ -27,6 +30,7 @@ public class SearchRecipe {
         this.rating = rating;
         this.courses = courses;
         this.cuisines = cuisines;
+        this.totalResults = totalResults;
     }
 
     public String getImg() {
@@ -134,5 +138,13 @@ public class SearchRecipe {
     public boolean isCuisinesEmpty(){
         if (cuisines == null || cuisines.length == 0) { return true; }
         return false;
+    }
+
+    public String getTotalResults(){
+        return totalResults;
+    }
+
+    public void setTotalResults(String newTotal){
+        this.totalResults = newTotal;
     }
 }

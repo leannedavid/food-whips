@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.android.foodwhips.MainActivity;
 import com.example.android.foodwhips.R;
@@ -28,6 +29,8 @@ public class SearchResultsActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private RecipeResultsAdapter startAdapter;
     private URL foodsUrl;
+
+    private TextView mTotalCount;
 
     private static final String TAG = "SearchResultsActivity";
 
@@ -98,6 +101,9 @@ public class SearchResultsActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(startAdapter);
 
+        mTotalCount = (TextView) findViewById(R.id.maxResults);
+       // mTotalCount.setText("INITIALIZING FIRST");
+
         new FetchFoodTask().execute();
 
         Log.v(TAG, "HITTING THE SEARCHRESULTS ACTIVITY WITH QUERY: " + searchQuery);
@@ -144,6 +150,8 @@ public class SearchResultsActivity extends BaseActivity {
                         startActivity(switchAct);
                     }
                 });
+
+                mTotalCount.setText("# of Results: " + recipeList.get(0).getTotalResults());
                 mRecyclerView.setAdapter(adapter);
             }
         }

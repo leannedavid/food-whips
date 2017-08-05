@@ -36,7 +36,7 @@ public final class NetworkUtils {
 
     private final static String QUERY_PARAM_TIME = "maxTotalTimeInSeconds";
 
-    private final static int MAX_RESULT_NUM = 20;
+    private final static int MAX_RESULT_NUM = 5;
 
     // Basic / General URL method
     public static URL buildUrl(String search, int type) {

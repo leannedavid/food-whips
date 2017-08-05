@@ -89,7 +89,6 @@ public class FavoriteRecipesAdapter extends RecyclerView.Adapter<FavoriteRecipes
             }
 
             if(timeTaken.length() > 0 && timeTaken != null) {
-                Log.v(TAG, "CHECKING THE TIME TAKEN LENGTH IN FAVES: " + timeTaken.length());
                 mTimeTakenText.setVisibility(View.VISIBLE);
                 mTimeTakenText.setText("Time: " + timeTaken);
             }

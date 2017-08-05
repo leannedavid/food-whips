@@ -105,8 +105,6 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
             }
 
             if(recipe.getTimeInSecs().length() > 0 && recipe.getTimeInSecs() != null) {
-                Log.v(TAG, "YET APPARENTLY THE LENGTH OF TIME IS: " + recipe.getTimeInSecs().length());
-                Log.v(TAG, "THE VALUE OF TIME IS: " + recipe.getTimeInSecs());
                 mTimeTakenText.setVisibility(View.VISIBLE);
                 mTimeTakenText.setText("Time: " + ConversionUtils.secondsToHrsMins(recipe.getTimeInSecs()));
             }
