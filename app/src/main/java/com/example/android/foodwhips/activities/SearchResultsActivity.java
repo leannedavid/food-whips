@@ -120,48 +120,145 @@ public class SearchResultsActivity extends BaseActivity {
 
         search_header.setOnTouchListener(new OnSwipeTouchListener(SearchResultsActivity.this) {
             public void onSwipeRight() {
-                if(count != 0) {
-                search_quantity -= 10;
-                search_start -= 10;
-                search_page -= 1;
-                if (search_quantity < 10) {
-                    search_quantity = 30;
-                    search_start = 20;
-                    search_page = 3;
-                }
-                displayList.clear();
-
-                for(int i = search_start; i < search_quantity; i++){
-                    displayList.add(recipeList.get(i));
-                }
-
-                String hereasshole = search_page + "/3";
-                search_header.setVisibility(View.VISIBLE);
-                search_header.setText(hereasshole);
-                adapter.notifyDataSetChanged();
+                if(count != 0 && count > 10) {
+                    if(count == 30){
+                        search_quantity -= 10;
+                        search_start -= 10;
+                        search_page -= 1;
+                        if (search_page == 0) {
+                            search_quantity = 30;
+                            search_start = 20;
+                            search_page = 3;
+                        }
+                        displayList.clear();
+                        for(int i = search_start; i < search_quantity; i++){
+                            displayList.add(recipeList.get(i));
+                        }
+                        String hereasshole = search_page + "/3";
+                        search_header.setVisibility(View.VISIBLE);
+                        search_header.setText(hereasshole);
+                        adapter.notifyDataSetChanged();
+                    }else if(count < 30 && count > 20){
+                        search_quantity -= 10;
+                        search_start -= 10;
+                        search_page -= 1;
+                        if(search_page == 0){
+                            search_quantity = 30;
+                            search_start = 20;
+                            search_page = 3;
+                            displayList.clear();
+                            for(int i = search_start; i < count; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }else{
+                            for(int i = search_start; i < search_quantity; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }
+                        String hereasshole = search_page + "/3";
+                        search_header.setVisibility(View.VISIBLE);
+                        search_header.setText(hereasshole);
+                        adapter.notifyDataSetChanged();
+                    }else if(count <= 20 && count > 10){
+                        search_quantity -= 10;
+                        search_start -= 10;
+                        search_page -= 1;
+                        if(search_page == 0){
+                            search_quantity = 20;
+                            search_start = 10;
+                            search_page = 2;
+                            displayList.clear();
+                            for(int i = search_start; i < count; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }else{
+                            displayList.clear();
+                            for(int i = search_start; i < search_quantity; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }
+                        String hereasshole = search_page + "/2";
+                        search_header.setVisibility(View.VISIBLE);
+                        search_header.setText(hereasshole);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
             public void onSwipeLeft() {
-                if(count != 0) {
-                search_quantity += 10;
-                search_start += 10;
-                search_page += 1;
-                if (search_quantity > 30) {
-                    search_quantity = 10;
-                    search_start = 0;
-                    search_page = 1;
-                }
+                if(count != 0 && count > 10) {
+                    if(count == 30){
+                        search_quantity += 10;
+                        search_start += 10;
+                        search_page += 1;
+                        if (search_page== 4) {
+                            search_quantity = 10;
+                            search_start = 0;
+                            search_page = 1;
+                            displayList.clear();
+                            for(int i = search_start; i < search_quantity; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }else{
+                            displayList.clear();
 
-                displayList.clear();
-
-                for(int i = search_start; i < search_quantity; i++){
-                    displayList.add(recipeList.get(i));
-                }
-
-                String hereasshole = search_page + "/3";
-                search_header.setVisibility(View.VISIBLE);
-                search_header.setText(hereasshole);
-                adapter.notifyDataSetChanged();
+                            for(int i = search_start; i < search_quantity; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }
+                        String hereasshole = search_page + "/3";
+                        search_header.setVisibility(View.VISIBLE);
+                        search_header.setText(hereasshole);
+                        adapter.notifyDataSetChanged();
+                    }else if(count > 20 && count < 30){
+                        search_quantity += 10;
+                        search_start += 10;
+                        search_page += 1;
+                        if(search_page == 3){
+                            displayList.clear();
+                            for(int i = search_start; i < count; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }else if (search_page == 4) {
+                            search_quantity = 10;
+                            search_start = 0;
+                            search_page = 1;
+                            displayList.clear();
+                            for(int i = search_start; i < search_quantity; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }else{
+                            displayList.clear();
+                            for(int i = search_start; i < search_quantity; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }
+                        String hereasshole = search_page + "/3";
+                        search_header.setVisibility(View.VISIBLE);
+                        search_header.setText(hereasshole);
+                        adapter.notifyDataSetChanged();
+                    }else if(count > 10 && count <= 20){
+                        search_quantity += 10;
+                        search_start += 10;
+                        search_page += 1;
+                        if(search_page == 2){
+                            displayList.clear();
+                            for(int i = search_start; i < count; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }else{
+                            search_quantity = 10;
+                            search_start = 0;
+                            search_page = 1;
+                            displayList.clear();
+                            for(int i = search_start; i < search_quantity; i++){
+                                displayList.add(recipeList.get(i));
+                            }
+                        }
+                        String hereasshole = search_page + "/2";
+                        search_header.setVisibility(View.VISIBLE);
+                        search_header.setText(hereasshole);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
 
@@ -199,8 +296,20 @@ public class SearchResultsActivity extends BaseActivity {
                 recipeList = SearchRecipeJsonUtils.parseJSON(jsonRecipeDataResponse);
                 count = recipeList.size();
                 Log.v(TAG, "TOTAL RECIPES FOUND: " + count);
-                if(count != 0) {
+                if(count == 30) {
                     for(int i = search_start; i < search_quantity; i++) {
+                        displayList.add(recipeList.get(i));
+                    }
+                } else if(count < 30 && count > 20){
+                    for(int i = search_start; i < search_quantity; i++) {
+                        displayList.add(recipeList.get(i));
+                    }
+                }else if (count <= 20 && count > 10){
+                    for(int i = search_start; i < search_quantity; i++) {
+                        displayList.add(recipeList.get(i));
+                    }
+                }else if(count != 0 && count <= 10){
+                    for(int i = search_start; i < count; i++) {
                         displayList.add(recipeList.get(i));
                     }
                 }
@@ -231,12 +340,21 @@ public class SearchResultsActivity extends BaseActivity {
                     }
                 });
 
-                if(count != 0) {
+                if(count == 30) {
                     search_header.setVisibility(View.VISIBLE);
                     search_header.setText("1/3");
-                } else {
+                } else if(count < 30 && count > 20){
                     search_header.setVisibility(View.VISIBLE);
-                    search_header.setText("No Results Found");
+                    search_header.setText("1/3");
+                }else if (count <= 20 && count > 10){
+                    search_header.setVisibility(View.VISIBLE);
+                    search_header.setText("1/2");
+                }else if(count != 0 && count <= 10){
+                    search_header.setVisibility(View.VISIBLE);
+                    search_header.setText("1/1");
+                }else{
+                    search_header.setVisibility(View.VISIBLE);
+                    search_header.setText("No results found");
                 }
 
                 mRecyclerView.setAdapter(adapter);
