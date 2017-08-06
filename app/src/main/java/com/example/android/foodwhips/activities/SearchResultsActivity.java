@@ -187,6 +187,8 @@ public class SearchResultsActivity extends BaseActivity {
             try {
                 String jsonRecipeDataResponse = NetworkUtils.getResponseFromHttpUrl(searchUrl);
                 recipeList = SearchRecipeJsonUtils.parseJSON(jsonRecipeDataResponse);
+                //Log.v(TAG, "RETURNING THE LENGTH OF THE LIST: " + (recipeList == null));
+
                 for(int i = search_start; i < search_quantity; i++) {
                     displayList.add(recipeList.get(i));
                 }
@@ -219,6 +221,7 @@ public class SearchResultsActivity extends BaseActivity {
 
                 mTotalCount.setVisibility(View.VISIBLE);
                 mTotalCount.setText("# of Results: " + recipeList.get(0).getTotalResults());
+
 
                 search_header.setVisibility(View.VISIBLE);
                 search_header.setText("1/3");

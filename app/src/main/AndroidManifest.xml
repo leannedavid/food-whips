@@ -3,6 +3,7 @@
     package="com.example.android.foodwhips">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -18,7 +19,6 @@
         <!-- Base Activity for all activities -->
         <activity
             android:name=".activities.BaseActivity"
-            android:label="@string/title_activity_base"
             android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme"/>
 
@@ -34,17 +34,20 @@
         <!-- About Activity -->
         <activity
             android:name=".AboutActivity"
+            android:label="@string/about"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.FavoritesActivity"/>
+        <activity android:name=".activities.FavoritesActivity"
+            android:label="@string/favorites_text"/>
 
         <!-- Filter by ingredients activity -->
         <activity
             android:name=".IngredientFilterActivity"
+            android:label="@string/search_ingredients"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -54,6 +57,7 @@
         <!-- Filter by cuisine activity -->
         <activity
             android:name=".CuisineFilterActivity"
+            android:label="@string/search_cuisine"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -63,7 +67,8 @@
         <!-- Filter by name activity -->
         <activity
             android:name=".activities.NameFilterActivity"
-            android:theme="@style/AppTheme" >
+            android:label="@string/search_name"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -71,6 +76,7 @@
 
         <!-- Search Results Activity -->
         <activity android:name=".activities.SearchResultsActivity"
+                  android:label="@string/search_results_text"
                   android:windowSoftInputMode="stateHidden"/>
 
         <!-- Recipe Details Activity -->

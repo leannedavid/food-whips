@@ -164,12 +164,18 @@ public class GetRecipe {
         String list = "";
 
         if(!isFlavorsEmpty()) {
-            list = "Piquant: " + ConversionUtils.decimalsToPercentage(flavors[0]) + ", " +
-                    "Meaty: "  + ConversionUtils.decimalsToPercentage(flavors[1]) + ", " +
-                    "Bitter: " + ConversionUtils.decimalsToPercentage(flavors[2]) + ", " +
-                    "Sweet: "  + ConversionUtils.decimalsToPercentage(flavors[3]) + ", " +
-                    "Sour: "   + ConversionUtils.decimalsToPercentage(flavors[4]) + ", " +
-                    "Salty: "  + ConversionUtils.decimalsToPercentage(flavors[5]);
+            list = "\n" + ConversionUtils.decimalsToPercentage(flavors[0]) + " Piquant\n" +
+                    ConversionUtils.decimalsToPercentage(flavors[1]) + " Meaty\n" +
+                    ConversionUtils.decimalsToPercentage(flavors[2]) + " Bitter\n" +
+                    ConversionUtils.decimalsToPercentage(flavors[3]) + " Sweet\n" +
+                    ConversionUtils.decimalsToPercentage(flavors[4]) + " Sour\n" +
+                    ConversionUtils.decimalsToPercentage(flavors[5]) + " Salty\n";
+//            list = "Piquant: " + ConversionUtils.decimalsToPercentage(flavors[0]) + ", " +
+//                    "Meaty: "  + ConversionUtils.decimalsToPercentage(flavors[1]) + ", " +
+//                    "Bitter: " + ConversionUtils.decimalsToPercentage(flavors[2]) + ", " +
+//                    "Sweet: "  + ConversionUtils.decimalsToPercentage(flavors[3]) + ", " +
+//                    "Sour: "   + ConversionUtils.decimalsToPercentage(flavors[4]) + ", " +
+//                    "Salty: "  + ConversionUtils.decimalsToPercentage(flavors[5]);
         }
         return list;
     }

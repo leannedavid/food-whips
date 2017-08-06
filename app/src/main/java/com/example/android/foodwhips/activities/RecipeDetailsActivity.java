@@ -11,17 +11,14 @@ import android.content.Loader;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.foodwhips.MainActivity;
 import com.example.android.foodwhips.R;
 import com.example.android.foodwhips.database.Contract;
 import com.example.android.foodwhips.database.DBHelper;
@@ -116,30 +113,15 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
 
         if(check){ check = false; }
         else{
-            Log.v(TAG, "WENT INSIDE ELSE STATEMENT IN ONRESUME(): ");
-//            Fragment frg = getSupportFragmentManager().findFragmentByTag(GENERAL_INFO);
-//            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.setAllowOptimization(false);
-//            ft.detach(frg);
-//            ft.attach(frg);
-//            ft.commit();
-        }
-    }
 
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-//        FragmentManager fm = getSupportFragmentManager();
-//
-//        Log.v(TAG, "PRINT NUMBER OF BACKSTACK ENTRIES ON CHILD COUNT: " + mTabHost.getChildCount());
-//
-//        if(fm.getBackStackEntryCount() == 0){
-//           // this.finish();
-//            super.onBackPressed();
-//        }
-//        else{
-//            getFragmentManager().popBackStack();
-//        }
+            Log.v(TAG, "WENT INSIDE ELSE STATEMENT IN ONRESUME(): ");
+            Fragment frg = getSupportFragmentManager().findFragmentByTag(GENERAL_INFO);
+            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setAllowOptimization(false);
+            ft.detach(frg);
+            ft.attach(frg);
+            ft.commit();
+        }
     }
 
     @Override
@@ -148,7 +130,6 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         db.close();
         cursor.close();
     }
-
 
     @Override
     public Loader<GetRecipe> onCreateLoader(int id, final Bundle args){
@@ -191,7 +172,7 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
             new ConversionUtils.FetchImageTask(mRecipeImage).execute(data.getImgUrl());
             mRecipeName.setText(data.getRecipeName().toUpperCase());
             mSourceName.setText(data.getSourceName());
-            mRecipeRate.setText("Rating: " + data.getRating() + "/5");
+            mRecipeRate.setText("Rating: " + ConversionUtils.starRating(data.getRating()));
 
             final String sourceUrl = data.getSourceRecipeUrl();
 

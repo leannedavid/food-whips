@@ -41,8 +41,5 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </LinearLayout>
->>>>>>> 965e1beab869563374c3ef7fc9b37cc15cd507ad
-
 </LinearLayout>

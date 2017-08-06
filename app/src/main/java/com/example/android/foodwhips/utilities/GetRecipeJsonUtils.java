@@ -57,7 +57,7 @@ public class GetRecipeJsonUtils {
         for (int i = 0; i < imagesArray.length(); i++){
             JSONObject imageObj = imagesArray.getJSONObject(i);
             //GET LARGE IMAGE URL
-            img = imageObj.getString(GET_LARGE_IMAGE_URL);
+            img = imageObj.optString(GET_LARGE_IMAGE_URL);
         }
 
         //GET RECIPE NAME
@@ -70,10 +70,10 @@ public class GetRecipeJsonUtils {
 
         for(int i = 0; i < sourceObj.length(); i++){
             //GET SOURCE NAME
-            sourceName = sourceObj.getString(GET_SOURCE_NAME);
+            sourceName = sourceObj.optString(GET_SOURCE_NAME);
 
             //GET SOURCE URL
-            sourceUrl = sourceObj.getString(GET_SOURCE_URL);
+            sourceUrl = sourceObj.optString(GET_SOURCE_URL);
         }
 
         //GET RECIPE ID
@@ -88,7 +88,7 @@ public class GetRecipeJsonUtils {
         String[] ingredientsList = ingredients.toArray(new String[ingredientArrayList.length()]);
 
         //GET NUMBER OF SERVINGS
-        String servings = main.getString(GET_SERVINGS);
+        String servings = main.optString(GET_SERVINGS);
 
         //GET RECIPE ATTRIBUTES
         JSONObject attributes = main.getJSONObject(GET_ATTRIBUTES);

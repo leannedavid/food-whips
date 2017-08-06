@@ -5,20 +5,21 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.foodwhips.activities.BaseActivity;
+import com.example.android.foodwhips.activities.RecipeDetailsActivity;
 import com.example.android.foodwhips.activities.SearchResultsActivity;
 import com.example.android.foodwhips.adapters.HomeSwipeAdapter;
-import com.example.android.foodwhips.adapters.TabsPagerAdapter;
 import com.example.android.foodwhips.database.DBHelper;
 import com.example.android.foodwhips.models.GetRecipe;
+import com.example.android.foodwhips.utilities.ConversionUtils;
 import com.example.android.foodwhips.utilities.GetRecipeJsonUtils;
 import com.example.android.foodwhips.utilities.NetworkUtils;
 
@@ -37,7 +38,6 @@ public class MainActivity extends BaseActivity{
     private DBHelper helper;
     private ViewPager viewPager;
     private HomeSwipeAdapter swipeAdapter;
-    private FragmentPagerAdapter fragmentPagerAdapter;
 
     private Context ctx;
 
@@ -46,8 +46,15 @@ public class MainActivity extends BaseActivity{
     private int currentSlide = 0;
     static final String TAG = "mainactivity";
 
+    private ImageView mImageView;
+    private TextView mRecipeNameText;
+    private TextView mRatingText;
+    private TextView mTimeTakenText;
+    private TextView mCoursesText;
+    private TextView mCuisinesText;
 
-    private TextView testView;
+    private View includedSearchLayout;
+    private Timer swipeTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,17 +70,13 @@ public class MainActivity extends BaseActivity{
 //        };
 
         recipeIds = new String[]{
-                "French-Lentil-Soup-1096886",
-                "Magic-Custard-Cake-2113595",
-                "Scalloped-Potatoes-2057149"
+                "Funeral-Potatoes-2119274",
+                "Pizza-quesadillas-_aka-pizzadillas_-351493",
+                "Grilled-Chicken-Teriyaki-With-Udon-Noodle-Salad-636811",
+                "Pop_s-Asian-American-Grilling-Sauce-607592"
         };
 
-        new FetchCarouselView().execute(
-                "French-Lentil-Soup-1096886",
-                "Magic-Custard-Cake-2113595",
-                "Scalloped-Potatoes-2057149"
-        );
-
+        new FetchCarouselView().execute(recipeIds);
         ArrayList<GetRecipe> starter = new ArrayList<>();
 
         //EditText setup
@@ -89,21 +92,18 @@ public class MainActivity extends BaseActivity{
         final Runnable update = new Runnable() {
             @Override
             public void run() {
-                if(currentSlide == imagesFromURL.length){ currentSlide = 0; }
+                if(currentSlide == imagesFromURL.length - 1){ currentSlide = 0; }
                 viewPager.setCurrentItem(currentSlide++, true);
             }
         };
 
-        Timer swipeTimer = new Timer();
+        swipeTimer = new Timer();
         swipeTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 handler.post(update);
             }
         }, 1000, 4000);
-
-
-        //testView = (TextView) findViewById(R.id.tvPage);
 
         //Button setup
         mButtonSearch = (Button)findViewById(R.id.search_button);
@@ -116,11 +116,14 @@ public class MainActivity extends BaseActivity{
             }
         });
 
+        includedSearchLayout = findViewById(R.id.recommendedRecipes);
 
-//        ViewPager vpPager = (ViewPager) findViewById(R.id.mainVP);
-//        fragmentPagerAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-//        vpPager.setAdapter(fragmentPagerAdapter);
-
+        mImageView = (ImageView) includedSearchLayout.findViewById(R.id.recipe_image);
+        mRecipeNameText = (TextView) includedSearchLayout.findViewById(R.id.recipe_name);
+        mRatingText = (TextView) includedSearchLayout.findViewById(R.id.recipe_rating);
+        mTimeTakenText = (TextView) includedSearchLayout.findViewById(R.id.recipe_time);
+        mCoursesText = (TextView) includedSearchLayout.findViewById(R.id.recipe_courses);
+        mCuisinesText = (TextView) includedSearchLayout.findViewById(R.id.recipe_cuisines);
     }
 
     @Override
@@ -128,6 +131,12 @@ public class MainActivity extends BaseActivity{
         super.onStart();
         helper = new DBHelper(this);
         helper.getWritableDatabase();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        swipeTimer.cancel();
     }
 
 //    @Override
@@ -166,8 +175,35 @@ public class MainActivity extends BaseActivity{
                 for(int i = 0; i < data.size(); i++){
                     imagesFromURL[i] =  data.get(i).getImgUrl();
                 }
+
                 HomeSwipeAdapter swipeAdapter = new HomeSwipeAdapter(ctx, imagesFromURL, data, recipeIds);
                 viewPager.setAdapter(swipeAdapter);
+
+                new ConversionUtils.FetchImageTask(mImageView).execute(data.get(3).getImgUrl());
+
+                mRecipeNameText.setVisibility(View.VISIBLE);
+                mRecipeNameText.setText(data.get(3).getRecipeName().toUpperCase());
+
+                mRatingText.setVisibility(View.VISIBLE);
+                mRatingText.setText("Rating: " + ConversionUtils.starRating(data.get(3).getRating()));
+
+                mTimeTakenText.setVisibility(View.VISIBLE);
+                mTimeTakenText.setText("Time Taken: " + data.get(3).getTotalTime());
+
+                mCoursesText.setVisibility(View.VISIBLE);
+                mCoursesText.setText("Courses: " + data.get(3).printCourses());
+
+                mCuisinesText.setVisibility(View.VISIBLE);
+                mCuisinesText.setText("Cuisines: " + data.get(3).printCuisines());
+
+
+                includedSearchLayout.setOnClickListener(new View.OnClickListener(){
+                    public void onClick(View view) {
+                        Intent switchAct = new Intent(MainActivity.this, RecipeDetailsActivity.class);
+                        switchAct.putExtra("recipe_id", recipeIds[3]);
+                        startActivity(switchAct);
+                    }
+                });
             }
         }
     }

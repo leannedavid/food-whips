@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper{
                 Contract.FOODWHIPS_TABLE._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 Contract.FOODWHIPS_TABLE.COLUMN_NAME_RECIPE_ID + " TEXT NOT NULL UNIQUE, " +
                 Contract.FOODWHIPS_TABLE.COLUMN_NAME_TITLE + " TEXT NOT NULL, " +
-                Contract.FOODWHIPS_TABLE.COLUMN_NAME_SOURCE_NAME + " TEXT NOT NULL, " +
+                Contract.FOODWHIPS_TABLE.COLUMN_NAME_SOURCE_NAME + " TEXT, " +
                 Contract.FOODWHIPS_TABLE.COLUMN_NAME_SOURCE_URL + " TEXT NOT NULL, " +
                 Contract.FOODWHIPS_TABLE.COLUMN_NAME_IMG_URL + " TEXT NOT NULL, " +
                 Contract.FOODWHIPS_TABLE.COLUMN_NAME_RATING + " TEXT, " +

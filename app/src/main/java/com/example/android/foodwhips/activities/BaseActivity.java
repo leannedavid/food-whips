@@ -1,6 +1,7 @@
 package com.example.android.foodwhips.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,10 +10,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.foodwhips.AboutActivity;
@@ -39,7 +43,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private String[] courses;
     private String[] flavors;
 
-
     @Override
     public void setContentView(int layoutResID){
         fullView = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
@@ -56,7 +59,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         //Setup toolbar on the activity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.setTitleTextColor(Color.WHITE);
 
         //Setup navigation drawer in activity
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -82,6 +85,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.information:
                 startActivity(new Intent(this, AboutActivity.class));
@@ -127,5 +131,4 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

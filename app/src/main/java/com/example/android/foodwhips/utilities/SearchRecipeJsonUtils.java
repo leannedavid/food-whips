@@ -45,7 +45,7 @@ public class SearchRecipeJsonUtils {
             }
 
             //RECIPE SOURCE
-            String source = match.getString(RECIPE_SOURCE);
+            String source = main.optString(RECIPE_SOURCE);
 
             //INGREDIENTS
             JSONArray ingredientArrayList = match.getJSONArray(RECIPE_INGREDIENTS);
@@ -68,7 +68,7 @@ public class SearchRecipeJsonUtils {
             }
 
             //RATING OF THE RECIPE
-            String rating = match.getString(RECIPE_RATING);
+            String rating = match.optString(RECIPE_RATING);
 
             //JSON ATTRIBUTES OF RECIPE (COURSES & CUISINES)
             JSONObject attributes = match.getJSONObject(RECIPE_ATTRIBUTES);

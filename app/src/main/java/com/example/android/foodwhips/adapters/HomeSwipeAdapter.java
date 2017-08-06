@@ -69,12 +69,14 @@ public class HomeSwipeAdapter extends PagerAdapter {
 
         //Log.v(TAG, "ENTERING SWIPE ADAPTER, VALUE OF POSITION " + position + " IS: " + data.get(position).getRecipeName());
 
-        Picasso.with(ctx).load(imagesFromURL[position]).into(imageView);
-        Log.v(TAG, "VALUE OF POSITION: " + position);
+        if(position != 3){
+            Picasso.with(ctx).load(imagesFromURL[position]).into(imageView);
+            Log.v(TAG, "VALUE OF POSITION: " + position);
 
-        titleText.setText(data.get(position).getRecipeName());
-        sourceText.setText(data.get(position).getSourceName());
-         ratingText.setText("Rating: " + ConversionUtils.starRating(data.get(position).getRating()));
+            titleText.setText(data.get(position).getRecipeName());
+            sourceText.setText(data.get(position).getSourceName());
+            ratingText.setText("Rating: " + ConversionUtils.starRating(data.get(position).getRating()));
+        }
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -122,6 +122,8 @@
             android:id="@+id/yummly_link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="3dp"
             android:text="@string/yummly_link"
             android:background="@drawable/back"
             android:layout_marginLeft="5dp"

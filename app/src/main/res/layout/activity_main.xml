@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="18dp"
+            android:backgroundTint="#3a8eaf"
             android:textColor="@color/white"
             android:text="@string/search_text"/>
 
@@ -56,10 +57,10 @@
 
 
     <TextView
-        android:id="@+id/idk"
+        android:id="@+id/welcome"
         android:background="#d25d88"
         android:gravity="center"
-        android:padding="12dp"
+        android:padding="9dp"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:text="@string/welcome_page"
@@ -67,57 +68,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<android.support.v4.view.ViewPager-->
-            <!--android:id="@+id/mainVP"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-            <!--<android.support.v4.view.PagerTabStrip-->
-                <!--android:id="@+id/pagerHeader"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:textColor="#000000"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"/>-->
-        <!--</android.support.v4.view.ViewPager>-->
-    <!--</LinearLayout>-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="1">
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:id="@+id/main_app_title"-->
-            <!--android:text="@string/app_name"-->
-            <!--android:textStyle="bold"-->
-            <!--android:fontFamily="serif"-->
-            <!--android:gravity="center"-->
-            <!--android:textSize="40sp"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:layout_weight=".1"/>-->
 
         <!-- Image carousel -->
         <android.support.v4.view.ViewPager
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight=".7"
-            android:id="@+id/image_carousel"
-           />
+            android:layout_weight=".83"
+            android:id="@+id/image_carousel" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/recommended_recipes"
             android:background="#d25d88"
             android:gravity="center"
-            android:padding="12dp"
+            android:padding="9dp"
             android:textSize="20sp"
             android:textColor="@color/white"
             android:textStyle="bold"/>
+
+        <include
+            android:id="@+id/recommendedRecipes"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            layout="@layout/search_results"/>
+
     </LinearLayout>
 </LinearLayout>

@@ -1,8 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:textSize="15sp"
+        android:padding="11dp"
+        android:text="@string/filterNameInstructions"/>
 
     <EditText
         android:id="@+id/search_name_filter_text"
@@ -119,6 +128,8 @@
             android:id="@+id/name_filter_search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/button_color"
+            android:textColor="@color/white"
             android:text="@string/search_text"
             android:gravity="center"/>
     </LinearLayout>

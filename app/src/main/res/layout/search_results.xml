@@ -6,15 +6,15 @@
 
     <ImageView
         android:id="@+id/recipe_image"
+        android:scaleType="fitXY"
         android:layout_width="@dimen/img_width"
         android:layout_height="@dimen/img_height"
         android:src="@drawable/template"
-        android:padding="10dp"
-        />
+        android:padding="10dp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             android:paddingTop="7dp"
+            android:textStyle="bold"
             android:textSize="16dp"/>
 
         <TextView
@@ -31,8 +32,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/search_results_padding"
             android:textSize="@dimen/search_results_details"
-            android:visibility="gone"
-            />
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/recipe_time"
@@ -59,6 +59,4 @@
             android:paddingBottom="10dp"
             android:visibility="gone"/>
     </LinearLayout>
-
-
 </LinearLayout>

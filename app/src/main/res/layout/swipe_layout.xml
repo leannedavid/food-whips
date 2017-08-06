@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/carousel_image"
+        android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:layout_height="183dp"
         android:layout_width="match_parent" />
@@ -16,12 +17,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
         <TextView
             android:id="@+id/carousel_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center_horizontal"
             android:text="HERE IS THE TITLE WOOO"
             android:textStyle="bold"
             android:textColor="@color/black"
