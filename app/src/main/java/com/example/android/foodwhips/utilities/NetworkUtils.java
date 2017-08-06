@@ -26,10 +26,10 @@ public final class NetworkUtils {
 
     /* Query parameters here */
     private final static String QUERY_PARAM_APP_ID = "_app_id";
-    private final static String appid = "";
+    private final static String appid = "ad09ae93";
 
     private final static String QUERY_PARAM_APPKEY = "_app_key";
-    private final static String appkey = "";
+    private final static String appkey = "ca4a3cb230d72671a6fc66eeaddc9238";
 
     private final static String QUERY_PARAM_NAME = "q";
     private final static String QUERY_MAX_RESULTS = "maxResult";
@@ -213,25 +213,25 @@ public final class NetworkUtils {
                 appendQueryParameter(QUERY_PARAM_NAME, search);
 
         if(allowedCourse.length() != 0){
-            if(allowedCourse != "Choose Course") {
+            if(!allowedCourse.equals("Choose Course")) {
                 builder.appendQueryParameter("allowedCourse[]", "course^course-" + allowedCourse.toLowerCase());
             }
         }
 
         if(allowedDiet.length() != 0){
-            if(allowedDiet != "Choose Diet") {
+            if(!allowedDiet.equals("Choose Diet")) {
                 builder.appendQueryParameter("allowedDiet[]", allowedDiet);
             }
         }
 
         if(allowedHoliday.length() != 0){
-            if(allowedHoliday != "Choose Holiday") {
+            if(!allowedHoliday.equals("Choose Holiday")) {
                 builder.appendQueryParameter("allowedHoliday[]", "holiday^holiday-" + allowedHoliday.replaceAll("\\s", "-").toLowerCase());
             }
         }
 
         if(timeInSeconds.length() != 0){
-            if(timeInSeconds == "50+") {
+            if(timeInSeconds.equals("50+")) {
                 builder.appendQueryParameter(QUERY_PARAM_TIME, "10000");
             }
             else {
