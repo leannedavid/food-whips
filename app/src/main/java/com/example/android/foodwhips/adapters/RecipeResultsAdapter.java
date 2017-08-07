@@ -1,9 +1,6 @@
 package com.example.android.foodwhips.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,8 +13,6 @@ import com.example.android.foodwhips.R;
 import com.example.android.foodwhips.models.SearchRecipe;
 import com.example.android.foodwhips.utilities.ConversionUtils;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -99,7 +94,14 @@ public class RecipeResultsAdapter extends RecyclerView.Adapter<RecipeResultsAdap
             new ConversionUtils.FetchImageTask(mFoodImage).execute(recipe.getImg());
             mRecipeNameText.setText(recipe.getRecipeName().toUpperCase());
 
-            if(recipe.getRating() != null) {
+            Log.v(TAG, "WHAT IS THE VALUE OF RECIPE RATING?: " + recipe.getRating() + " AND LENGTH OF RATING: " + recipe.getRating().length());
+
+            if(recipe.getRating().equals("0")){
+                Log.v(TAG, "WENT IN HERE BECAUSE RATING IS 0");
+                mRatingText.setVisibility(View.VISIBLE);
+                mRatingText.setText("Rating: 0 stars");
+            }
+            else if(recipe.getRating() != null) {
                 mRatingText.setVisibility(View.VISIBLE);
                 mRatingText.setText("Rating: " + ConversionUtils.starRating(recipe.getRating()));
             }

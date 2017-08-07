@@ -33,7 +33,7 @@
 
         <!-- About Activity -->
         <activity
-            android:name=".AboutActivity"
+            android:name=".activities.AboutActivity"
             android:label="@string/about"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -46,7 +46,7 @@
 
         <!-- Filter by ingredients activity -->
         <activity
-            android:name=".IngredientFilterActivity"
+            android:name=".activities.IngredientFilterActivity"
             android:label="@string/search_ingredients"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -56,7 +56,7 @@
 
         <!-- Filter by cuisine activity -->
         <activity
-            android:name=".CuisineFilterActivity"
+            android:name=".activities.CuisineFilterActivity"
             android:label="@string/search_cuisine"
             android:theme="@style/AppTheme">
             <intent-filter>

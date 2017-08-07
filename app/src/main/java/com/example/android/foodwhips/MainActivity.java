@@ -62,17 +62,10 @@ public class MainActivity extends BaseActivity{
         setContentView(R.layout.activity_main);
         ctx = this;
 
-       // placeholder only
-//        imagesFromURL = new String[]{
-//          "http://www.tivix.com/uploads/blog_pics/Android-logo.png",
-//                "http://www.tivix.com/uploads/blog_pics/Android-logo.png",
-//                "http://www.tivix.com/uploads/blog_pics/Android-logo.png"
-//        };
-
         recipeIds = new String[]{
                 "Funeral-Potatoes-2119274",
                 "Pizza-quesadillas-_aka-pizzadillas_-351493",
-                "Grilled-Chicken-Teriyaki-With-Udon-Noodle-Salad-636811",
+                "Curried-sweet-potatoes-and-chickpeas-350948",
                 "Pop_s-Asian-American-Grilling-Sauce-607592"
         };
 
@@ -86,6 +79,8 @@ public class MainActivity extends BaseActivity{
         viewPager = (ViewPager) findViewById(R.id.image_carousel);
         swipeAdapter = new HomeSwipeAdapter(this, imagesFromURL, starter, recipeIds);
         viewPager.setAdapter(swipeAdapter);
+
+        imagesFromURL = new String[recipeIds.length];
 
         //Automatically slides the View Pager
         final Handler handler = new Handler();
@@ -138,11 +133,6 @@ public class MainActivity extends BaseActivity{
         super.onPause();
         swipeTimer.cancel();
     }
-
-//    @Override
-//    protected void onPostCreate(Bundle savedInstanceState){
-//        super.onPostCreate(savedInstanceState);
-//    }
 
     public class FetchCarouselView extends AsyncTask<String, Void, ArrayList<GetRecipe>> {
         @Override

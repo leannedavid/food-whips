@@ -95,7 +95,7 @@
 
     <!-- List of options for courses -->
     <string-array name="course_array">
-        <item>Choose course</item>
+        <item>Choose a Course</item>
         <item>Main Dishes</item>
         <item>Desserts</item>
         <item>Side</item>
@@ -126,7 +126,7 @@
 
     <!-- List of options for diets -->
     <string-array name="diet_array">
-        <item>Choose Diet</item>
+        <item>Choose a Diet</item>
         <item>387^Lacto-ovo vegetarian</item>
         <item>388^Lacto vegetarian</item>
         <item>389^Ovo vegetarian</item>
@@ -137,7 +137,7 @@
 
     <!-- List of options for Holidays -->
     <string-array name="holiday_array">
-        <item>Choose Holiday</item>
+        <item>Choose a Holiday</item>
         <item>Christmas</item>
         <item>Thanksgiving</item>
         <item>Summer</item>

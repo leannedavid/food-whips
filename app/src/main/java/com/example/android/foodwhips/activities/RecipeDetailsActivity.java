@@ -8,12 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.app.LoaderManager;
 import android.content.Loader;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-
-
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,6 +20,7 @@ import com.example.android.foodwhips.R;
 import com.example.android.foodwhips.database.Contract;
 import com.example.android.foodwhips.database.DBHelper;
 import com.example.android.foodwhips.database.DatabaseUtils;
+import com.example.android.foodwhips.fragments.Camera_Fragment;
 import com.example.android.foodwhips.fragments.GeneralInfo;
 import com.example.android.foodwhips.fragments.IngredientsInfo;
 import com.example.android.foodwhips.models.GetRecipe;
@@ -93,6 +91,13 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         helper = new DBHelper(this);
         db = helper.getReadableDatabase();
 
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
         bundle = this.getIntent().getExtras();
         recipeId = bundle.getString("recipe_id");
         cursor = DatabaseUtils.returnById(db, recipeId);
@@ -102,11 +107,8 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
         } else {
             faveButton.setImageResource(R.drawable.ic_unfaved);
         }
-    }
 
-    @Override
-    public void onResume(){
-        super.onResume();
+
         FragmentManager fm = getSupportFragmentManager();
         Log.v(TAG, "GETTING BACK STACK ENTRY COUNT: " + fm.getBackStackEntryCount());
         Log.v(TAG, "GETTING CURRENT TAB INDEX: " + mTabHost.getChildCount());
@@ -171,8 +173,22 @@ public class RecipeDetailsActivity extends BaseActivity implements LoaderManager
 
             new ConversionUtils.FetchImageTask(mRecipeImage).execute(data.getImgUrl());
             mRecipeName.setText(data.getRecipeName().toUpperCase());
-            mSourceName.setText(data.getSourceName());
-            mRecipeRate.setText("Rating: " + ConversionUtils.starRating(data.getRating()));
+
+            if(data.getSourceName().length() !=0) {
+                mSourceName.setVisibility(View.VISIBLE);
+                mSourceName.setText(data.getSourceName());
+            }
+
+            Log.v(TAG, "WHAT IS GET RATING?: " + data.getRating() + " AND WHAT IS THE LENGTH: " + data.getRating().length());
+
+            if(data.getRating().equals("0")){
+                Log.v(TAG, "WENT IN HERE BECAUSE RATING IS 0");
+                mRecipeRate.setVisibility(View.VISIBLE);
+                mRecipeRate.setText("Rating: 0 stars");
+            } else if(data.getRating().length() != 0) {
+                mRecipeRate.setVisibility(View.VISIBLE);
+                mRecipeRate.setText("Rating: " + ConversionUtils.starRating(data.getRating()));
+            }
 
             final String sourceUrl = data.getSourceRecipeUrl();
 

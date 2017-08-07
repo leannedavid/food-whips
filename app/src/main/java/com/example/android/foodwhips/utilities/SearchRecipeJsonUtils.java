@@ -46,7 +46,7 @@ public class SearchRecipeJsonUtils {
                     img = imgObj.getString(RECIPE_IMG_SIZE_90);
                 }
             }catch(JSONException e){
-                img = "http://lh6.ggpht.com/96qipIieKT3rMwc3cwSh_nsQ4eP2UUXpUbb40hEgAKVLZbkyAn6QCvzBip26D_JRkIQkthSRwdnafSlU-TD_ug=s90-c";
+                img = "http://i.imgur.com/7qBTtK7.png";
             }
 
 

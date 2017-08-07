@@ -60,6 +60,10 @@ public class GetRecipeJsonUtils {
             img = imageObj.optString(GET_LARGE_IMAGE_URL);
         }
 
+        if(img.equals("")){
+            img = "http://www.kinginnovation.com/images/placeholder.png";
+        }
+
         //GET RECIPE NAME
         String recipeName = main.getString(GET_NAME);
 

@@ -1,4 +1,4 @@
-package com.example.android.foodwhips.activities;
+package com.example.android.foodwhips.fragments;
 
 
 import android.Manifest;

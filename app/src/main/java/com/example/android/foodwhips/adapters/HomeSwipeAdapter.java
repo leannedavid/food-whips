@@ -3,27 +3,21 @@ package com.example.android.foodwhips.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.android.foodwhips.R;
 import com.example.android.foodwhips.activities.RecipeDetailsActivity;
-import com.example.android.foodwhips.activities.SearchResultsActivity;
 import com.example.android.foodwhips.models.GetRecipe;
 import com.example.android.foodwhips.utilities.ConversionUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import android.os.Handler;
 
 /**
  * Created by Ariel on 8/1/2017.
@@ -48,7 +42,7 @@ public class HomeSwipeAdapter extends PagerAdapter {
     @Override
     public int getCount() {
         if (imagesFromURL != null) {
-            return imagesFromURL.length;
+            return imagesFromURL.length - 1;
         }
         return 0;
     }
