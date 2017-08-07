@@ -355,7 +355,7 @@ public class SearchResultsActivity extends BaseActivity {
                     search_header.setText("1/1");
                 }else{
                     search_header.setVisibility(View.VISIBLE);
-                    search_header.setText("No results found");
+                    search_header.setText("No results found.");
                 }
 
                 mRecyclerView.setAdapter(adapter);

@@ -58,7 +58,7 @@ public class FavoritesActivity extends BaseActivity
     public void onResume(){
         super.onResume();
         if(cursor == null | cursor.getCount() == 0){
-            searchHeader.setText("No favorties saved");
+            searchHeader.setText("No favorites saved.");
             searchHeader.setVisibility(View.VISIBLE);
         }else{
             searchHeader.setVisibility(View.GONE);
