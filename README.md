@@ -6,11 +6,15 @@ For: CalStateLA CS 4540 - Android Class (Summer 2017)
 
 
 ### Draft
+<p align="center">
 <img src="readme-photos/ui-draft.png" width="438" height="700">
+</p>
 
 ### Final
+<p align="center">
 <img src="readme-photos/main-page.png" width="397" height="700"> <img src="readme-photos/navigation-drawer.png" width="397" height="700"> <img src="readme-photos/search-results.png" width="397" height="700">
 <img src="readme-photos/recipe-details.png" width="397" height="700"> <img src="readme-photos/filter-form.png" width="397" height="700"> <img src="readme-photos/favorites.png" width="397" height="700">
+</p>
 
 
 ## Idea
