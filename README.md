@@ -6,11 +6,11 @@ For: CalStateLA CS 4540 - Android Class (Summer 2017)
 
 
 ### Draft
-![Screenshot](readme-photos/UI-draft.png)
+<img src="readme-photos/ui-draft.png" width="438" height="700">
 
 ### Final
-![Screenshot](readme-photos/main-page.png) ![Screenshot](readme-photos/navigation-drawer.png) ![Screenshot](readme-photos/search-results.png)
-![Screenshot](readme-photos/recipe-details.png) ![Screenshot](readme-photos/filter-form.png) ![Screenshot](readme-photos/favorites.png)
+<img src="readme-photos/main-page.png" width="397" height="700"> <img src="readme-photos/navigation-drawer.png" width="397" height="700"> <img src="readme-photos/search-results.png" width="397" height="700">
+<img src="readme-photos/recipe-details.png" width="397" height="700"> <img src="readme-photos/filter-form.png" width="397" height="700"> <img src="readme-photos/favorites.png" width="397" height="700">
 
 
 ## Idea
